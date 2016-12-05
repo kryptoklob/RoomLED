@@ -120,6 +120,7 @@
 
         function sendValues() {
             socket.emit('led', { red:r.value, green:g.value, blue:b.value});
+            console.log("Values sent.");
         }
 
     </script>

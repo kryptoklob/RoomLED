@@ -14,7 +14,7 @@ var green = 0;
 var blue = 0;
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
-    socket.emit('led', {value: brightness}); //send the new client the current brightness
+    socket.emit('led', {red:red, blue:blue, green:green}); //send the new client the current brightness
 
     socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
         red = data.red;  //updates brightness from the data object

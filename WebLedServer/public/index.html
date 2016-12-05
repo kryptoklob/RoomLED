@@ -118,7 +118,7 @@
             $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
         });
 
-        function sendValues() {}
+        function sendValues() {
             socket.emit('led', { red:r.value, green:g.value, blue:b.value});
         }
 

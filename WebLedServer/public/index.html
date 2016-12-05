@@ -116,10 +116,11 @@
             b.value = data.blue;
 
             $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
+            console.log("Received data.");
         });
 
         function sendValues() {
-            socket.emit('led', { red:r.value, green:g.value, blue:b.value});
+            socket.emit('led', { red:r.getValue(), green:g.getValue(), blue:b.getValue()});
             console.log("Values sent.");
         }
 

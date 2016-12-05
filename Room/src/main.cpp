@@ -94,10 +94,10 @@ void setByReceive(){
 	char rxdata[3];
 	if (Serial.available() > 0){
 		Serial.readBytes(rxdata, 3);
-		fill_solid(leftLeds, leftNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
-		fill_solid(rightLeds, rightNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
-		fill_solid(backLeds, backNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
-		fill_solid(frontLeds, frontNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(leftLeds, leftNo, CRGB((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(rightLeds, rightNo, CRGB((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(backLeds, backNo, CRGB((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(frontLeds, frontNo, CRGB((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
 		FastLED.show();
 	}
 }

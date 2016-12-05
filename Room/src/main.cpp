@@ -14,7 +14,7 @@ CRGB rightLeds[rightNo];
 
 CRGB allLeds[totalNo];
 
-void setup() { 
+void setup() {
 	FastLED.addLeds<NEOPIXEL, 4>(rightLeds, rightNo);
 	FastLED.addLeds<NEOPIXEL, 5>(frontLeds, frontNo);
 	FastLED.addLeds<NEOPIXEL, 2>(backLeds, backNo);
@@ -94,14 +94,14 @@ void setByReceive(){
 	char rxdata[3];
 	if (Serial.available() > 0){
 		Serial.readBytes(rxdata, 3);
-		fill_solid(leftLeds, leftNo, CHSV((int)rxdata[0], (int)rxdata[1], 255));
-		fill_solid(rightLeds, rightNo, CHSV((int)rxdata[0], (int)rxdata[1], 255));
-		fill_solid(backLeds, backNo, CHSV((int)rxdata[0], (int)rxdata[1], 255));
-		fill_solid(frontLeds, frontNo, CHSV((int)rxdata[0], (int)rxdata[1], 255));
+		fill_solid(leftLeds, leftNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(rightLeds, rightNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(backLeds, backNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
+		fill_solid(frontLeds, frontNo, CHSV((int)rxdata[0], (int)rxdata[1], (int)rxdata[2]));
 		FastLED.show();
 	}
 }
 
-void loop() { 
+void loop() {
 	setByReceive();
 }

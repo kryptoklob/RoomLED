@@ -1,4 +1,4 @@
-\express = require('express');  //web server
+express = require('express');  //web server
 app = express();
 server = require('http').createServer(app);
 io = require('socket.io').listen(server);	//web socket server

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<title>LED Controller</title>
+	<meta name="viewport" content="width=400px" />
+	
+	<script src="socket.io/socket.io.js"></script>
+	<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<input type="range" id= "hue" min="0" max="255" value="50" step="1" oninput="showValue(this.hue)" />
+	<input type="range" id= "sat" min="0" max="255" value="50" step="1" oninput="showValue(this.sat)" />
+	<input type="range" id= "brt" min="0" max="255" value="50" step="1" oninput="showValue(this.brt)" />
+
+	
+	
+	<br><br><span id="outputText">50</span>
+	
+	<script type="text/javascript">
+		var socket = io.connect();
+		
+		socket.on('led', function (data) {
+			document.getElementById("hue").value = data.hue;
+			document.getElementById("sat").value = data.sat;
+			document.getElementById("brt").value = data.brt;
+			document.getElementById("outputText").innerHTML = data.hue + data.sat + data.brt;
+		});
+		
+		function showValue(newValue)
+		{
+			document.getElementById("outputText").innerHTML=newValue;
+			socket.emit('led', { value: newValue });
+		}
+	</script>
+  </body>
+</html>

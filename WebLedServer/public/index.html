@@ -111,9 +111,9 @@
             .data('slider');
 
         socket.on('led', function(data) {
-            $('#R').slider('value', data.red);
-            $('#G').slider('value', data.green);
-            $('#B').slider('value', data.blue);
+            $('#R').slider('setValue', data.red);
+            $('#G').slider('setValue', data.green);
+            $('#B').slider('setValue', data.blue);
 
             $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
             console.log("Received data.");

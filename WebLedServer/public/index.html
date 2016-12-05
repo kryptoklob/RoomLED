@@ -110,7 +110,7 @@
             .on('slide', RGBChange)
             .data('slider');
 
-        socket.on('led'), function(data) {
+        socket.on('led', function(data) {
             r.value = data.red;
             g.value = data.green;
             b.value = data.blue;

@@ -23,3 +23,8 @@
 #R, #G, #B {
 	width: 300px;
 }
+
+.right {
+	text-align: right;
+	float: right;
+}

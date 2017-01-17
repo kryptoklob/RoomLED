@@ -227,7 +227,7 @@ y         Save of LED's to flash                B1                     // Not ye
 #define RIGHTNO 89
 #define FRONTNO 115
 #define BACKNO 115
-#define NUM_LEDS 115//(LEFTNO + RIGHTNO + FRONTNO + BACKNO)
+#define NUM_LEDS (LEFTNO + RIGHTNO + FRONTNO + BACKNO)
 
 // Initialize changeable global variables.
 uint8_t max_bright = 128;                                     // Overall brightness definition. It can be changed on the fly.
@@ -389,10 +389,10 @@ void setup() {
 
   LEDS.setBrightness(max_bright);                             // Set the generic maximum brightness value.
 
-  //LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, LEFTNO); // WS2812B definition
-  //LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, RIGHTNO); // WS2812B definition
-  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, FRONTNO); // WS2812B definition
-  //LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, BACKNO); // WS2812B definition
+  LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, 0, LEFTNO); // WS2812B definition
+  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, LEFTNO, FRONTNO); // WS2812B definition
+  LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, LEFTNO + FRONTNO, RIGHTNO); // WS2812B definition
+  LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, LEFTNO + FRONTNO + RIGHTNO, BACKNO); // WS2812B definition
 
 //  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER >(leds, NUM_LEDS); // APA102 or WS2801 definition
 

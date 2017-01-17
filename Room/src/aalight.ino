@@ -230,7 +230,7 @@ y         Save of LED's to flash                B1                     // Not ye
 #define NUM_LEDS (LEFTNO + RIGHTNO + FRONTNO + BACKNO)
 
 // Initialize changeable global variables.
-uint8_t max_bright = 128;                                     // Overall brightness definition. It can be changed on the fly.
+uint8_t max_bright = 255;                                     // Overall brightness definition. It can be changed on the fly.
 
 struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
 

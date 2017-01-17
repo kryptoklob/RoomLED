@@ -267,7 +267,7 @@ uint8_t thisdelay = 0;                                        // Standard delay
 uint8_t thishue = 0;                                          // Standard hue
 uint8_t thissat = 255;                                        // Standard saturation
 int thisbright = 0;                                           // Standard brightness
-uint8_t thisfade = 50;                                         // Standard fade rate
+uint8_t thisfade = 600;                                         // Standard fade rate
 bool thisdir = 0;                                             // Standard direction
 
 
@@ -314,7 +314,7 @@ bool boolcolours = 1;                                         // True = random, 
 uint8_t numcolours = 2;                                       // Number of colours in the array to display.
 unsigned long colours[10] = {0xff0000, 0x00ff00, 0x0000ff, 0xffffff};  // Just assign the first 3 of these selectable colours.
 uint8_t maxbar = 4;                                           // Maximum # of pixels to turn on in a row
-uint8_t fadeval = 50;                                        // Fade rate
+uint8_t fadeval = 600;                                        // Fade rate
 
 
 // three_sin variables ---------------------------------------------------------------------

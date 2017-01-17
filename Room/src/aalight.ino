@@ -267,7 +267,7 @@ uint8_t thisdelay = 0;                                        // Standard delay
 uint8_t thishue = 0;                                          // Standard hue
 uint8_t thissat = 255;                                        // Standard saturation
 int thisbright = 0;                                           // Standard brightness
-uint8_t thisfade = 224;                                         // Standard fade rate
+uint8_t thisfade = 50;                                         // Standard fade rate
 bool thisdir = 0;                                             // Standard direction
 
 

@@ -7,7 +7,7 @@ server.listen(8080); //start the webserver on port 8080
 app.use(express.static('public')); //tell the server that ./public/ contains the static webpages
 
 var SerialPort = require("serialport");
-var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 115200 });
+var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
 var red = 0;
 var green = 0;

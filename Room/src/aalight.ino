@@ -205,7 +205,7 @@ y         Save of LED's to flash                B1                     // Not ye
 #endif
 
 // choose a valid PinInterrupt pin of your Arduino board
-#define pinIR 2
+#define pinIR 9
 #define IRL_BLOCKING true
 
 // Fixed definitions cannot change on the fly.

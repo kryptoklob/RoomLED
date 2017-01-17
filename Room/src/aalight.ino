@@ -234,7 +234,7 @@ uint8_t max_bright = 128;                                     // Overall brightn
 
 struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
 
-int ledMode = 99;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
+int ledMode = 0;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
 int maxMode;                                                  // Maximum number of modes is set later.
 
 // temporary variables to save latest IR input

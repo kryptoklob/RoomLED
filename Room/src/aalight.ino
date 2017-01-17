@@ -217,7 +217,7 @@ y         Save of LED's to flash                B1                     // Not ye
 //#define NUM_LEDS 20                                            // Number of LED's.
 
 // Since we're using 4 strips, we need 4 pins
-#define LED_DT_LEFT 5
+#define LED_DT_FRONT 5
 #define LED_DT_RIGHT 3
 #define LED_DT_FRONT 4
 #define LED_DT_BACK 2

@@ -30,7 +30,7 @@ Hardware Setup
 
 - 1 (or optionally 2) Arduino UNO or Nano 3.0.
 - Pushbutton to pin 6 and gnd.
-- WS2812B or (preferably) APA102 LED strip with data line connected to pin 12. 
+- WS2812B or (preferably) APA102 LED strip with data line connected to pin 12.
 - The clock line is connected to pin 11.
 - Sparkfun INMP401 MEMS microphone (a mic+opamp) with power connected to Arduino 3.3V supply, output to A5 of Arduino.
 - Connect Arduino 3.3V output to the AREF pin on the Arduino (for the 3.3V MEMS microphone).
@@ -207,7 +207,7 @@ y         Save of LED's to flash                B1                     // Not ye
 // choose a valid PinInterrupt pin of your Arduino board
 #define pinIR 2
 #define IRL_BLOCKING true
- 
+
 // Fixed definitions cannot change on the fly.
 //#define LED_DT 12                                             // Serial data pin for WS2801, WS2811, WS2812B or APA102
 #define LED_CK 11                                             // Serial clock pin for WS2801 or APA102.
@@ -227,7 +227,7 @@ y         Save of LED's to flash                B1                     // Not ye
 #define RIGHTNO 89
 #define FRONTNO 115
 #define BACKNO 115
-#define NUM_LEDS (LEFTNO + RIGHTNO + FRONTNO + BACKNO)
+#define NUM_LEDS 89//(LEFTNO + RIGHTNO + FRONTNO + BACKNO)
 
 // Initialize changeable global variables.
 uint8_t max_bright = 128;                                     // Overall brightness definition. It can be changed on the fly.
@@ -386,16 +386,16 @@ void setup() {
   Serial.setTimeout(SERIAL_TIMEOUT);
 
   attachInterrupt(digitalPinToInterrupt(pinIR), IRLinterrupt<IR_NEC>, CHANGE);    // IR definition
-  
+
   LEDS.setBrightness(max_bright);                             // Set the generic maximum brightness value.
 
   LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, LEFTNO); // WS2812B definition
-  LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, RIGHTNO); // WS2812B definition
-  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, FRONTNO); // WS2812B definition
-  LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, BACKNO); // WS2812B definition
+  //LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, RIGHTNO); // WS2812B definition
+  //LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, FRONTNO); // WS2812B definition
+  //LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, BACKNO); // WS2812B definition
 
 //  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER >(leds, NUM_LEDS); // APA102 or WS2801 definition
-  
+
   set_max_power_in_volts_and_milliamps(5, 500);               //5V, 500mA
 
   random16_set_seed(4832);                                    // Awesome randomizer
@@ -495,12 +495,12 @@ void getirl() {                                               // This is the bui
       case 64770:  change_mode(1,1);    break;                //a3 - change_mode(1);
       case 64515:  change_mode(0,1);    break;                //a4 - change_mode(0);
 
-      case 64260:  change_mode(5,1);    break;                //b1 - 
-      case 64005:  change_mode(6,1);    break;                //b2 - 
-      case 63750:  change_mode(7,1);    break;                //b3 - 
-      case 63495:  change_mode(8,1);    break;                //b4 - 
+      case 64260:  change_mode(5,1);    break;                //b1 -
+      case 64005:  change_mode(6,1);    break;                //b2 -
+      case 63750:  change_mode(7,1);    break;                //b3 -
+      case 63495:  change_mode(8,1);    break;                //b4 -
 
-      case 63240:  change_mode(9,1);    break;                //c1 - 
+      case 63240:  change_mode(9,1);    break;                //c1 -
       case 62985:  thisdelay++;         break;                //c2 - thisdelay++;
       case 62730:  thisdelay--;         break;                //c3 - thisdelay--;
       case 62475:  change_mode(12,1);   break;                //c4
@@ -546,7 +546,7 @@ void IREvent(uint8_t protocol, uint16_t address, uint32_t command) {
 
 void readkeyboard() {                                         // PROCESS HARDWARE SERIAL COMMANDS AND ARGS
   while (Serial.available() > 0) {
-  
+
     inbyte = Serial.read();                                   // READ SINGLE BYTE COMMAND
     Serial.print("Serial read is: ");
     Serial.println(inbyte);
@@ -649,7 +649,7 @@ void readbutton() {                                           // Read the button
 
 
 //---------------------- LED Utility Functions ---------------------------------------------
- 
+
 int wrap(int step) {
   if(step < 0) return NUM_LEDS + step;
   if(step > NUM_LEDS - 1) return step - NUM_LEDS;

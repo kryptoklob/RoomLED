@@ -308,13 +308,13 @@ int twinkrate = 100;
 
 
 // pop_fade variables ----------------------------------------------------------------------
-int ranamount = 50;                                           // The higher the number, lowers the chance for a pixel to light up.
+int ranamount = 20;                                           // The higher the number, lowers the chance for a pixel to light up.
 // uint8_t thisdelay = 50;                                       // Standard delay value.
 bool boolcolours = 1;                                         // True = random, False = array of colours (up to 10)
 uint8_t numcolours = 2;                                       // Number of colours in the array to display.
 unsigned long colours[10] = {0xff0000, 0x00ff00, 0x0000ff, 0xffffff};  // Just assign the first 3 of these selectable colours.
-uint8_t maxbar = 1;                                           // Maximum # of pixels to turn on in a row
-uint8_t fadeval = 224;                                        // Fade rate
+uint8_t maxbar = 4;                                           // Maximum # of pixels to turn on in a row
+uint8_t fadeval = 50;                                        // Fade rate
 
 
 // three_sin variables ---------------------------------------------------------------------

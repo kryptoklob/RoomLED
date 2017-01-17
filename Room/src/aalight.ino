@@ -597,9 +597,10 @@ void readkeyboard() {                                         // PROCESS HARDWAR
         break;
 
       case 111:                                               // "o1 or o2" - DECREASE OR INCREASE MODE by 1
-        thisarg = Serial.parseInt();
-        if (thisarg == 1) ledMode--;
-        if (thisarg == 2) ledMode++;
+        //thisarg = Serial.parseInt();
+        //if (thisarg == 1) ledMode--;
+        //if (thisarg == 2) ledMode++;
+        ledMode++;
         if (ledMode < 0) ledMode = 0;
         change_mode(ledMode, 1);
         break;

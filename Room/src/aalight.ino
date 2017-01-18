@@ -429,7 +429,7 @@ void change_mode(int newMode, int mc){                        // mc stands for '
 
     case  0: if(mc) {fill_solid(leds,NUM_LEDS,CRGB(0,0,0)); LEDS.show();} LEDS.show(); break;              // All off, not animated.
     case  1: if(mc) {fill_solid(leds, NUM_LEDS,CRGB(255,255,255)); LEDS.show();} LEDS.show(); break;              // All on, not animated.
-    case  2: if(mc) {thisdelay=20; twinkrate=NUM_LEDS; thishue=0; thissat=255; thisbright=255; thisfade=64; } twinkle(); break;
+    case  2: if(mc) {thisdelay=20; twinkrate=NUM_LEDS; thishue=0; thissat=255; thisbright=255; thisfade=400; } twinkle(); break;
     case  3: if(mc) {thisdelay=10; thisrot=1; thatrot=1;} two_sin(); break;
     case  4: if(mc) {thisdelay=10; thisrot=0; thisdir=1;} two_sin(); break;
     case  5: if(mc) {thisdelay=10; thatrot=0; thishue=255; thathue=255;} two_sin(); break;

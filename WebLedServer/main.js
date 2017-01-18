@@ -9,9 +9,15 @@ app.use(express.static('public')); //tell the server that ./public/ contains the
 var SerialPort = require("serialport");
 var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
-var red = 0;
-var green = 0;
-var blue = 0;
+var mode = 0
+var hue = 0
+var sat = 0
+var brt = 255
+var dly = 0
+var dir = 1
+var stp = 0
+
+
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
     socket.emit('led', {red:red, blue:blue, green:green}); //send the new client the current brightness

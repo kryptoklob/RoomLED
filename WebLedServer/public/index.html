@@ -57,33 +57,36 @@
           </div>
           <div class="panel-body">
 
-            <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Mode
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-            <li><a href="#">All Off</a></li>
-            <li><a href="#">All On</a></li>
-            <li><a href="#">1-Sin</a></li>
-            <li><a href="#">2-Sin</a></li>
-            <li><a href="#">3-Sin</a></li>
-            <li><a href="#">Confetti</a></li>
-            <li><a href="#">Juggle</a></li>
-            <li><a href="#">Matrix</a></li>
-            <li><a href="#">Noise</a></li>
-            <li><a href="#">Rainbow March</a></li>
-            <li><a href="#">Sinelon</a></li>
-            <li><a href="#">Twinkle</a></li>
-            </ul>
-            </div>
+              <div class="btn-toolbar">
 
-            <div class="dropdown">
-              
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Mode</button>
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul id="dropModes" class="dropdown-menu scrollable-menu" role="menu">
+                    </ul>
+                  </div>
+                </p>
 
-            </div>
 
-<select name='provinces' id='provinces'>
-    <option>------------</option>";
-</select>
+
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default">Choose Version</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul id="dropVersions" class="dropdown-menu scrollable-menu" role="menu">
+                    </ul>
+                  </div>
+                </p>
+
+</div>
+
+
+
+
 
       <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
 
@@ -151,6 +154,46 @@
             socket.emit('led', { red:r.getValue(), green:g.getValue(), blue:b.getValue()});
             console.log("Values sent.");
         }
+
+    </script>
+
+    <script type="text/javascript">
+        var oneSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'];
+        var twoSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10']
+        var threeSinModes = ['v1', 'v2', 'v3'];
+        var confettiModes = ['v1']
+        var sinelonModes = ['v1']
+        var juggleModes = ['v1']
+        var noiseModes = ['v1', 'v2']
+        var rainbowModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']
+        var matrixModes = ['v1', 'v2', 'v3']
+
+        var modes = ['oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix']
+        var modeVersions = {
+            'oneSin'      : oneSinModes,
+            'twoSin'      : twoSinModes,
+            'threeSin'    : threeSinModes,
+            'confetti'     : confettiModes,
+            'sinelon'      : sinelonModes,
+            'juggle'       : juggleModes,
+            'noise'        : noiseModes,
+            'rainbow'      : rainbowModes,
+            'matrix'       : matrixModes
+        };
+
+        $.each(modes, function(i) {
+          $('#dropModes').append('<li><a href="#">'+modes[i]+'</a></li>');
+        });
+
+        $('#dropModes').on('click', 'li a', function() {
+          $('#dropVersions').html('');
+          var showVersions = modeVersions[$(this).text()];
+          $.each(showVersions, function(i) {
+            $('#dropVersions').append('<li><a href="#">'+showVersions[i]+'</a></li>');
+          });
+        });
+
+
 
     </script>
   </body>

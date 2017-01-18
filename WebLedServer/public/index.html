@@ -1,200 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Bootstrap 101 Template</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!-- Boostrap-Slider -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/css/bootstrap-slider.css" />
-    <!-- Custom CSS-->
-    <link rel="stylesheet" href="css/style.css" />
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- Boostrap-Slider -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/css/bootstrap-slider.css" />
+  <!-- Custom CSS-->
+  <link rel="stylesheet" href="css/style.css" />
 
 
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
 
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">RoomLEDControl</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Control</a></li>
-            <li><a href="FAQ.html">What is this?</a></li>
 
-          </ul>
 
-<div class="right">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">RoomLEDControl</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Control</a></li>
+        <li><a href="FAQ.html">What is this?</a></li>
+
+      </ul>
+
+      <div class="right">
         <ul class="nav navbar-nav">
-              <li><a href="https://www.linkedin.com/in/ditchfieldcaleb">About Me</a></li>
-              <li><a href="https://github.com/ditchfieldcaleb/RoomLED">The Code</a></li>
-         </ul>
-</div>
-        </div>
-      </nav>
+          <li><a href="https://www.linkedin.com/in/ditchfieldcaleb">About Me</a></li>
+          <li><a href="https://github.com/ditchfieldcaleb/RoomLED">The Code</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
 
-      <div class="row">
-          <div class="col-sm-0 col-md-2 col-lg-3">
-          </div>
-          <div class="col-sm-12 col-md-8 col-lg-6">
+  <div class="row">
+    <div class="col-sm-0 col-md-2 col-lg-3">
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-6">
       <div class="panel panel-default">
-          <div class="panel-heading">
-              <h2>Control My Lights!</h2>
+        <div class="panel-heading">
+          <h2>Control My Lights!</h2>
+        </div>
+        <div class="panel-body">
+          <div class="btn-toolbar">
+            <div class="dropdown btn-group">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="mode">Choose Mode</span>
+              </button>
+              <div id="dropModes" class="dropdown-menu" aria-labelledby="Choose Mode">
+              </div>
+            </div>
+
+            <div class="dropdown btn-group">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="version">Choose Version</span>
+              </button>
+              <div id="dropVersions" class="dropdown-menu" aria-labelledby="Choose Version">
+              </div>
+            </div>
           </div>
-          <div class="panel-body">
-
-              <div class="btn-toolbar">
-
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Mode</button>
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul id="dropModes" class="dropdown-menu scrollable-menu" role="menu">
-                    </ul>
-                  </div>
-                </p>
 
 
 
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default">Choose Version</button>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul id="dropVersions" class="dropdown-menu scrollable-menu" role="menu">
-                    </ul>
-                  </div>
-                </p>
+          <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
 
-</div>
+          <br>
+          <center><div id="{PLAYER_DIV_ID}"></div></center>
+          <script type="text/javascript">
+          var options = {
+            width: 854,
+            height: 480,
+            channel: "gt_segfault",
+          };
+          var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
+          player.setVolume(0.5);
+          player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
+          </script>
+
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col-sm-0 col-md-2 col-lg-3">
+    </div>
+  </div>
 
 
 
+  <script src="socket.io/socket.io.js"></script>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/bootstrap-slider.js"></script>
 
 
-      <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
-
-      <br>
-  <center><div id="{PLAYER_DIV_ID}"></div></center>
   <script type="text/javascript">
-      var options = {
-          width: 854,
-          height: 480,
-          channel: "gt_segfault",
-      };
-      var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
-      player.setVolume(0.5);
-      player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
+  var socket = io.connect();
+
+  var RGBChange = function() {
+    $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
+    sendValues();
+  };
+
+  var r = $('#R').slider()
+  .on('slide', RGBChange)
+  .data('slider');
+  var g = $('#G').slider()
+  .on('slide', RGBChange)
+  .data('slider');
+  var b = $('#B').slider()
+  .on('slide', RGBChange)
+  .data('slider');
+
+  socket.on('led', function(data) {
+    $('#R').slider('setValue', data.red);
+    $('#G').slider('setValue', data.green);
+    $('#B').slider('setValue', data.blue);
+
+    $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
+    console.log("Received data.");
+  });
+
+  function sendValues() {
+    socket.emit('led', { red:r.getValue(), green:g.getValue(), blue:b.getValue()});
+    console.log("Values sent.");
+  }
+
   </script>
 
-        </div>
+  <script type="text/javascript">
+  var oneSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'];
+  var twoSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10']
+  var threeSinModes = ['v1', 'v2', 'v3'];
+  var confettiModes = ['v1']
+  var sinelonModes = ['v1']
+  var juggleModes = ['v1']
+  var noiseModes = ['v1', 'v2']
+  var rainbowModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']
+  var matrixModes = ['v1', 'v2', 'v3']
 
+  var modes = ['oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix']
+  var modeVersions = {
+    'oneSin'      : oneSinModes,
+    'twoSin'      : twoSinModes,
+    'threeSin'    : threeSinModes,
+    'confetti'     : confettiModes,
+    'sinelon'      : sinelonModes,
+    'juggle'       : juggleModes,
+    'noise'        : noiseModes,
+    'rainbow'      : rainbowModes,
+    'matrix'       : matrixModes
+  };
 
-    </div>
-</div>
-<div class="col-sm-0 col-md-2 col-lg-3">
-</div>
-</div>
+  $.each(modes, function(i) {
+    $('#dropModes').append('<li><a href="#">'+modes[i]+'</a></li>');
+  });
 
+  $('#dropModes').on('click', 'li a', function() {
+    $('#dropVersions').html('');
+    var showVersions = modeVersions[$(this).text()];
+    $.each(showVersions, function(i) {
+      $('#dropVersions').append('<li><a href="#">'+showVersions[i]+'</a></li>');
+    });
 
+    $("#dropVersions a").click(function(){
+      $("#version").text($(this).text());
+    });
+  });
 
-    <script src="socket.io/socket.io.js"></script>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/bootstrap-slider.js"></script>
-
-
-    <script type="text/javascript">
-        var socket = io.connect();
-
-        var RGBChange = function() {
-            $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-            sendValues();
-        };
-
-        var r = $('#R').slider()
-            .on('slide', RGBChange)
-            .data('slider');
-        var g = $('#G').slider()
-            .on('slide', RGBChange)
-            .data('slider');
-        var b = $('#B').slider()
-            .on('slide', RGBChange)
-            .data('slider');
-
-        socket.on('led', function(data) {
-            $('#R').slider('setValue', data.red);
-            $('#G').slider('setValue', data.green);
-            $('#B').slider('setValue', data.blue);
-
-            $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-            console.log("Received data.");
-        });
-
-        function sendValues() {
-            socket.emit('led', { red:r.getValue(), green:g.getValue(), blue:b.getValue()});
-            console.log("Values sent.");
-        }
-
-    </script>
-
-    <script type="text/javascript">
-        var oneSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'];
-        var twoSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10']
-        var threeSinModes = ['v1', 'v2', 'v3'];
-        var confettiModes = ['v1']
-        var sinelonModes = ['v1']
-        var juggleModes = ['v1']
-        var noiseModes = ['v1', 'v2']
-        var rainbowModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']
-        var matrixModes = ['v1', 'v2', 'v3']
-
-        var modes = ['oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix']
-        var modeVersions = {
-            'oneSin'      : oneSinModes,
-            'twoSin'      : twoSinModes,
-            'threeSin'    : threeSinModes,
-            'confetti'     : confettiModes,
-            'sinelon'      : sinelonModes,
-            'juggle'       : juggleModes,
-            'noise'        : noiseModes,
-            'rainbow'      : rainbowModes,
-            'matrix'       : matrixModes
-        };
-
-        $.each(modes, function(i) {
-          $('#dropModes').append('<li><a href="#">'+modes[i]+'</a></li>');
-        });
-
-        $('#dropModes').on('click', 'li a', function() {
-          $('#dropVersions').html('');
-          var showVersions = modeVersions[$(this).text()];
-          $.each(showVersions, function(i) {
-            $('#dropVersions').append('<li><a href="#">'+showVersions[i]+'</a></li>');
-          });
-        });
+  $("#dropModes a").click(function(){
+    $("#mode").text($(this).text());
+  });
 
 
 
-    </script>
-  </body>
+
+  </script>
+</body>
 </html>

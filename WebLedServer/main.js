@@ -13,7 +13,7 @@ var mode = 0;
 var modeName = "allOff";
 var version = 1;
 
-app.get("/notification",function(request, response){
+app.head("/notification",function(request, response){
   // Turn off led's at T-0
   serialPort.write("m");
   serialPort.write("0");
@@ -37,7 +37,6 @@ app.get("/notification",function(request, response){
 }, 600);
 
   response.writeHead(200, {"Content-Type": "application/json"});
-  response.write("Notiication successful.");
 });
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects

@@ -40,8 +40,8 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 
         console.log("Writing 'm'");
         serialPort.write("m");
-        console.log("Writing '"+(mode+version-1).toString()+"'");
-        serialPort.write((mode+version-1).toString());
+        console.log("Writing '"+(Number(mode)+Number(version)-1).toString()+"'");
+        serialPort.write((Number(mode)+Number(version)-1).toString());
         io.sockets.emit('led', {mode:mode, version:version}); //sends the updated brightness to all connected clients
     });
 });

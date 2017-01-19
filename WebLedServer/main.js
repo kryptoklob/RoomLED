@@ -14,7 +14,7 @@ var modeName = "allOff";
 var version = 1;
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
-    socket.emit('led', {mode:mode, version:version}); //send the new client the current brightness
+    socket.emit('led', {mode:modeName, version:version}); //send the new client the current brightness
 
     socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
 

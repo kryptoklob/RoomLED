@@ -177,9 +177,16 @@
                 console.log("Button disabled.");
             }
             for ($i = numModes[mode]; $i > 0; $i--){
-                $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
+                $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", false);
                 console.log("Button enabled.");
             }
+
+            // Set the correct version active.
+            for ($i = 1; $i < Object.keys(numModes).length; $i++) {
+                $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
+                console.log("Button deactivated.");
+            }
+            $(".versionDiv > label:nth-child("+version+")").toggleClass("active", true);
 
 
             console.log("Received data.");
@@ -228,7 +235,7 @@
                 version = "1";
                 for ($i = 2; $i < Object.keys(numModes).length; $i++) {
                     $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
-                    console.log("Button disabled.");
+                    console.log("Button deactivated.");
                 }
                 $(".versionDiv > label:first-child").toggleClass("active", true);
 

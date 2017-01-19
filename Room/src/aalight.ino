@@ -266,7 +266,7 @@ int thisarg;                                                  // Serial input ar
 uint8_t thisdelay = 0;                                        // Standard delay
 uint8_t thishue = 0;                                          // Standard hue
 uint8_t thissat = 255;                                        // Standard saturation
-int thisbright = 0;                                           // Standard brightness
+int thisbright = 255;                                           // Standard brightness
 uint8_t thisfade = 600;                                         // Standard fade rate
 bool thisdir = 0;                                             // Standard direction
 
@@ -280,7 +280,7 @@ uint8_t bgclr = 0;
 uint8_t bgbri = 0;
 
 // Two_sin variables-------------------------------------------------------------------------
-uint8_t wavebright = 128;                                     // You can change the brightness of the waves/bars rolling across the screen. Best to make them not as bright as the sparkles.
+uint8_t wavebright = 255;                                     // You can change the brightness of the waves/bars rolling across the screen. Best to make them not as bright as the sparkles.
 //uint8_t thishue = 0;                                          // You can change the starting hue value for the first wave.
 uint8_t thathue = 140;                                        // You can change the starting hue for other wave.
 uint8_t thisrot = 0;                                          // You can change how quickly the hue rotates for this wave. Currently 0.

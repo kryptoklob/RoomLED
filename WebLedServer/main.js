@@ -35,6 +35,9 @@ app.get("/notification",function(request, response){
     serialPort.write("m");
     serialPort.write((Number(mode)+Number(version)-1).toString());
 }, 600);
+
+  response.writeHead(200, {"Content-Type": "application/json"});
+  response.write("Notiication successful.");
 });
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects

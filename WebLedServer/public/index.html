@@ -226,6 +226,13 @@
             $(this).click(function(){
                 mode = this.children[0].id;
                 version = "1";
+                for ($i = 2; $i < Object.keys(numModes).length; $i++) {
+                    $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
+                    console.log("Button disabled.");
+                }
+                $(".versionDiv > label:first-child").toggleClass("active", true);
+
+
                 sendValues();
             });
         });

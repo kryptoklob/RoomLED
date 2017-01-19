@@ -323,6 +323,7 @@
 
         $('.versionDiv > label').each(function(){
             $(this.click(function(){
+                console.log($(this));
                 version = $(this).children[0].id.substring(1);
                 sendValues();
             }));

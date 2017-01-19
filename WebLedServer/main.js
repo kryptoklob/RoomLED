@@ -37,6 +37,7 @@ app.head("/notification",function(request, response){
 }, 600);
 
   response.writeHead(200, {"Content-Type": "application/json"});
+  response.set("Connection", "close");
 });
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects

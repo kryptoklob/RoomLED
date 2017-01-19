@@ -322,8 +322,7 @@
         });
 
         $('.versionDiv > label').each(function(){
-            $(this.click(function(){
-                console.log("LOOK AT ME");
+            $(this).click(function(){
                 version = $(this).children[0].id.substring(1);
                 sendValues();
             }));

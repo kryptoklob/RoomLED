@@ -15,24 +15,24 @@ var version = 1;
 
 app.get("/notification",function(request, response){
   // Turn off led's at T-0
-  serialport.write("m");
+  serialPort.write("m");
   serialPort.write("0");
 
   // Flash them back at T+200ms
   setTimeout(function() {
-    serialport.write("m");
-    serialport.write("1");
+    serialPort.write("m");
+    serialPort.write("1");
 }, 200);
 
   // Flash off at T+400ms
   setTimeout(function() {
-    serialport.write("m");
-    serialport.write("0");
+    serialPort.write("m");
+    serialPort.write("0");
 }, 400);
 
   // Return to previously scheduled programming at T+600ms
   setTimeout(function() {
-    serialport.write("m");
+    serialPort.write("m");
     serialPort.write((Number(mode)+Number(version)-1).toString());
 }, 600);
 });

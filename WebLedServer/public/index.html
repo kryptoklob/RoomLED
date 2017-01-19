@@ -323,7 +323,7 @@
 
         $('.versionDiv > label').each(function(){
             $(this).click(function(){
-                version = $(this).children[0].id.substring(1);
+                version = $(this).children()[0].id.substring(1);
                 sendValues();
             });
         });

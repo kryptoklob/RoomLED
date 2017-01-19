@@ -1,197 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Bootstrap 101 Template</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
 
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <!-- Boostrap-Slider -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/css/bootstrap-slider.css" />
-  <!-- Custom CSS-->
-  <link rel="stylesheet" href="css/style.css" />
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Boostrap-Slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/css/bootstrap-slider.css" />
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="css/style.css" />
 
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
 
 
-  <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">RoomLEDControl</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Control</a></li>
+                <li><a href="FAQ.html">What is this?</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://www.linkedin.com/in/ditchfieldcaleb">About Me</a></li>
+                <li><a href="https://github.com/ditchfieldcaleb/RoomLED">The Code</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">RoomLEDControl</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Control</a></li>
-        <li><a href="FAQ.html">What is this?</a></li>
-
-      </ul>
-
-      <div class="right">
-        <ul class="nav navbar-nav">
-          <li><a href="https://www.linkedin.com/in/ditchfieldcaleb">About Me</a></li>
-          <li><a href="https://github.com/ditchfieldcaleb/RoomLED">The Code</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-  <div class="row">
-    <div class="col-sm-0 col-md-2 col-lg-3">
-    </div>
-    <div class="col-sm-12 col-md-8 col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2>Control My Lights!</h2>
-        </div>
-        <div class="panel-body">
-          <div class="btn-toolbar">
-            <div class="dropdown btn-group">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="mode">Choose Mode</span>
-              </button>
-              <div id="dropModes" class="dropdown-menu" aria-labelledby="Choose Mode">
-              </div>
+        <div class="row">
+            <div class="hidden-sm-down col-md-2 col-lg-3">
             </div>
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        LED Control
+                    </div>
 
-            <div class="dropdown btn-group">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span id="version">Choose Version</span>
-              </button>
-              <div id="dropVersions" class="dropdown-menu" aria-labelledby="Choose Version">
-              </div>
+                    <div class="panel-body">
+                        <div class="text-center well well-sm">
+                            <div class="modeDiv btn-group hidden-xs btn-group-sm btn-group-justified" role="group" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="allOff" autocomplete="off">All Off
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="allOn" autocomplete="off">All On
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="oneSin" autocomplete="off">One-Sin
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="twoSin" autocomplete="off">Two-Sin
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="threeSin" autocomplete="off">Three-Sin
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="confetti" autocomplete="off">Confetti
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="juggle" autocomplete="off">Juggle
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="matrix" autocomplete="off">Matrix
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="noise" autocomplete="off">Noise
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="noise" autocomplete="off">Pop-Fade
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="rainbow" autocomplete="off">Rainbow
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="sinelon" autocomplete="off">Sinelon
+                                </label>
+                                <label class="btn btn-success">
+                                    <input type="radio" name="options" id="twinkle" autocomplete="off">Twinkle
+                                </label>
+                            </div>
+
+                            <div class="versionDiv btn-group hidden-xs btn-group-sm btn-group-justified" data-toggle="buttons">
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v1" autocomplete="off">v1
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v2" autocomplete="off">v2
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v3" autocomplete="off">v3
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v4" autocomplete="off">v4
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v5" autocomplete="off">v5
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v6" autocomplete="off">v6
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v7" autocomplete="off">v7
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v8" autocomplete="off">v8
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v9" autocomplete="off">v9
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="v10" autocomplete="off">v10
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="http://www.twitch.tv/gt_segfault/embed"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm-down col-md-2 col-lg-3">
+                </div>
             </div>
-          </div>
-
-
-
-          <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
-
-          <br>
-          <center><div id="{PLAYER_DIV_ID}"></div></center>
-          <script type="text/javascript">
-          var options = {
-            width: 854,
-            height: 480,
-            channel: "gt_segfault",
-          };
-          var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
-          player.setVolume(0.5);
-          player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
-          </script>
-
         </div>
 
 
-      </div>
-    </div>
-    <div class="col-sm-0 col-md-2 col-lg-3">
-    </div>
-  </div>
+
+        <script src="socket.io/socket.io.js"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/bootstrap-slider.js"></script>
 
 
+        <script type="text/javascript">
+        var socket = io.connect();
+        var mode;
+        var version;
 
-  <script src="socket.io/socket.io.js"></script>
+        var RGBChange = function() {
+            $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
+            sendValues();
+        };
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.3/bootstrap-slider.js"></script>
+        var r = $('#R').slider()
+        .on('slide', RGBChange)
+        .data('slider');
+        var g = $('#G').slider()
+        .on('slide', RGBChange)
+        .data('slider');
+        var b = $('#B').slider()
+        .on('slide', RGBChange)
+        .data('slider');
 
+        socket.on('led', function(data) {
+            mode = data.mode;
+            version = data.version;
 
-  <script type="text/javascript">
-  var socket = io.connect();
+            // Set active mode buttons
+            for ($i = 1; $i < 13; $i++) {
+                $(".modeDiv > label:nth-child("+$i+")").toggleClass("active", false);
+                console.log("Buttons un-activated.");
+            }
 
-  var RGBChange = function() {
-    $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-    sendValues();
-  };
-
-  var r = $('#R').slider()
-  .on('slide', RGBChange)
-  .data('slider');
-  var g = $('#G').slider()
-  .on('slide', RGBChange)
-  .data('slider');
-  var b = $('#B').slider()
-  .on('slide', RGBChange)
-  .data('slider');
-
-  socket.on('led', function(data) {
-    $('#R').slider('setValue', data.red);
-    $('#G').slider('setValue', data.green);
-    $('#B').slider('setValue', data.blue);
-
-    $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-    console.log("Received data.");
-  });
-
-  function sendValues() {
-    socket.emit('led', { red:r.getValue(), green:g.getValue(), blue:b.getValue()});
-    console.log("Values sent.");
-  }
-
-  </script>
-
-  <script type="text/javascript">
-  var oneSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'];
-  var twoSinModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10']
-  var threeSinModes = ['v1', 'v2', 'v3'];
-  var confettiModes = ['v1']
-  var sinelonModes = ['v1']
-  var juggleModes = ['v1']
-  var noiseModes = ['v1', 'v2']
-  var rainbowModes = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']
-  var matrixModes = ['v1', 'v2', 'v3']
-
-  var modes = ['oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix']
-  var modeVersions = {
-    'oneSin'      : oneSinModes,
-    'twoSin'      : twoSinModes,
-    'threeSin'    : threeSinModes,
-    'confetti'     : confettiModes,
-    'sinelon'      : sinelonModes,
-    'juggle'       : juggleModes,
-    'noise'        : noiseModes,
-    'rainbow'      : rainbowModes,
-    'matrix'       : matrixModes
-  };
-
-  $.each(modes, function(i) {
-    $('#dropModes').append('<li><a href="#">'+modes[i]+'</a></li>');
-  });
-
-  $('#dropModes').on('click', 'li a', function() {
-    $('#dropVersions').html('');
-    var showVersions = modeVersions[$(this).text()];
-    $.each(showVersions, function(i) {
-      $('#dropVersions').append('<li><a href="#">'+showVersions[i]+'</a></li>');
-    });
-
-    $("#dropVersions a").click(function(){
-      $("#version").text($(this).text());
-    });
-  });
-
-  $("#dropModes a").click(function(){
-    $("#mode").text($(this).text());
-  });
+            $("#mode").parent().toggleClass("active", true);
 
 
+            // Set version buttons enabled/disabled
+            for ($i = 10; $i > numModes[mode]; $i--) {
+                $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
+                console.log("Button disabled.");
+            }
+            for ($i = numModes[mode]; $i > 0; $i--){
+                $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
+                console.log("Button enabled.");
+            }
 
 
-  </script>
-</body>
-</html>
+            console.log("Received data.");
+        });
+
+        function sendValues() {
+            socket.emit('led', {mode:mode, version:version});
+            console.log("Values sent.");
+        }
+
+        var numModes = {};
+        numModes.allOn = 1;
+        numModes.allOff= 1;
+        numModes.oneSin = 6;
+        numModes.twoSin = 10;
+        numModes.threeSin = 3;
+        numModes.confetti = 1;
+        numModes.sinelon = 1;
+        numModes.juggle = 1;
+        numModes.noise = 2;
+        numModes.rainbow = 6;
+        numModes.matrix = 3;
+        numModes.twinkle = 1;
+        numModes.popFade = 6;
+
+        var modes = ['allOff', 'allOn', 'oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix', 'twinkle', 'popFade']
+
+        $('.modeDiv > label').each(function(){
+            console.log("Click handler added.");
+            $(this).click(function(){
+                console.log("Click detected on" + this);
+                for ($i = 10; $i > numModes[this.children[0].id]; $i--) {
+                    $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
+                    console.log("Button disabled.");
+                }
+                for ($i = numModes[this.children[0].id]; $i > 0; $i--){
+                    $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
+                    console.log("Button enabled.");
+                }
+            });
+        });
+
+        $('.modeDiv > label').each(function(){
+            $(this).click(function(){
+                mode = this.children[0].id;
+                version = "1";
+                sendValues();
+            });
+        });
+
+        $('.versionDiv > label').each(function(){
+            $(this.click(function(){
+                version = this.children[0].id.substring(1);
+                sendValues();
+            }));
+        });
+
+        </script>
+    </body>
+    </html>

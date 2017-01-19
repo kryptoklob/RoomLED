@@ -9,31 +9,37 @@ app.use(express.static('public')); //tell the server that ./public/ contains the
 var SerialPort = require("serialport");
 var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
-var mode = 0
-var hue = 0
-var sat = 0
-var brt = 255
-var dly = 0
-var dir = 1
-var stp = 0
-
-
+var mode = 0;
+var version = 1;
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
-    socket.emit('led', {red:red, blue:blue, green:green}); //send the new client the current brightness
+    socket.emit('led', {mode:mode, version:version}); //send the new client the current brightness
 
     socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
-        red = data.red;  //updates brightness from the data object
-        green = data.green;
-        blue = data.blue;
-        var buf = new Buffer(3); //creates a new 3-byte buffer
-        buf.writeUInt8(red, 0); //writes the pwm value to the buffer
-	    buf.writeUInt8(green, 1);
-	    buf.writeUInt8(blue, 2);
-        serialPort.write(buf); //transmits the buffer to the arduino
 
+        console.log("Receved data:\n");
+        console.log(data);
 
-        io.sockets.emit('led', {red:red, blue:blue, green:green}); //sends the updated brightness to all connected clients
+        if (data.mode == "allOff") mode = 0;
+        else if (data.mode == "allOn") mode = 1;
+        else if (data.mode == "twinkle") mode = 2;
+        else if (data.mode == "twoSin") mode = 3;
+        else if (data.mode == "matrix") mode = 13;
+        else if (data.mode == "oneSin") mode = 16;
+        else if (data.mode == "popFade") mode = 22;
+        else if (data.mode == "threeSin") mode = 28;
+        else if (data.mode == "rainbow") mode = 31;
+        else if (data.mode == "noise") mode = 37;
+        else if (data.mode == "confetti") mode = 39;
+        else if (data.mode == "sinelon") mode = 40;
+        else if (data.mode == "juggle") mode = 41;
+        else {
+            console.log("Received bad data.");
+            return;
+        version = data.version;
+
+        serialPort.write(mode+version-1);
+        io.sockets.emit('led', {mode:mode, version:version}); //sends the updated brightness to all connected clients
     });
 });
 

@@ -13,8 +13,32 @@ var mode = 0;
 var modeName = "allOff";
 var version = 1;
 
+app.get("/notification",function(request, response){
+  // Turn off led's at T-0
+  serialport.write("m");
+  serialPort.write("0");
+
+  // Flash them back at T+200ms
+  setTimeout(function() {
+    serialport.write("m");
+    serialport.write("1");
+}, 200);
+
+  // Flash off at T+400ms
+  setTimeout(function() {
+    serialport.write("m");
+    serialport.write("0");
+}, 400);
+
+  // Return to previously scheduled programming at T+600ms
+  setTimeout(function() {
+    serialport.write("m");
+    serialPort.write((Number(mode)+Number(version)-1).toString());
+}, 600);
+});
+
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
-    socket.emit('led', {mode:modeName, version:version}); //send the new client the current brightness
+    socket.emit('led', {mode:modeName, version:version}); //send the new client current mode & version info
 
     socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
 

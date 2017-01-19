@@ -10,6 +10,7 @@ var SerialPort = require("serialport");
 var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
 var mode = 0;
+var modeName = "allOff";
 var version = 1;
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
@@ -19,6 +20,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 
         console.log("Receved data:\n");
         console.log(data);
+        modeName = data.mode;
 
         if (data.mode == "allOff") mode = 0;
         else if (data.mode == "allOn") mode = 1;
@@ -42,7 +44,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
         serialPort.write("m");
         console.log("Writing '"+(Number(mode)+Number(version)-1).toString()+"'");
         serialPort.write((Number(mode)+Number(version)-1).toString());
-        io.sockets.emit('led', {mode:mode, version:version}); //sends the updated brightness to all connected clients
+        io.sockets.emit('led', {mode:modeName, version:version}); //sends the updated brightness to all connected clients
     });
 });
 

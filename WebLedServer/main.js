@@ -43,4 +43,4 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
     });
 });
 
-console.log("running");
+console.log("Running...\n");

@@ -158,21 +158,6 @@
         var mode;
         var version;
 
-        var RGBChange = function() {
-            $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')');
-            sendValues();
-        };
-
-        var r = $('#R').slider()
-        .on('slide', RGBChange)
-        .data('slider');
-        var g = $('#G').slider()
-        .on('slide', RGBChange)
-        .data('slider');
-        var b = $('#B').slider()
-        .on('slide', RGBChange)
-        .data('slider');
-
         socket.on('led', function(data) {
             mode = data.mode;
             version = data.version;

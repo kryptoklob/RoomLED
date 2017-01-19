@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
         else if (data.mode == "juggle") mode = 41;
         else {
             console.log("Received bad data.");
-            return;
+            return;}
         version = data.version;
 
         serialPort.write(mode+version-1);

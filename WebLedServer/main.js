@@ -38,8 +38,10 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             return;}
         version = data.version;
 
+        console.log("Writing 'm'");
         serialPort.write("m");
-        serialPort.write(mode+version-1);
+        console.log("Writing '"+(mode+version-1).toString()+"'");
+        serialPort.write((mode+version-1).toString());
         io.sockets.emit('led', {mode:mode, version:version}); //sends the updated brightness to all connected clients
     });
 });

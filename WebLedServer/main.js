@@ -1,4 +1,5 @@
 express = require('express');  //web server
+tinycolor = require('tinycolor2');
 app = express();
 server = require('http').createServer(app);
 io = require('socket.io').listen(server);	//web socket server
@@ -67,7 +68,22 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             console.log("Received bad data.");
             return;}
         version = data.version;
-        color = data.color;
+
+        if (color != data.color){
+            color = data.color;
+
+            // Get color info
+            colorTiny = tinycolor(color).toHsv();
+
+            serialPort.write("b");
+            serialPort.write(color.v * 255);
+
+            serialPort.write("h");
+            serialPort.write(color.h * 255);
+
+            serialPort.write("t");
+            serialPort.write(color.s * 255);
+        }
 
         console.log("Writing 'm'");
         serialPort.write("m");

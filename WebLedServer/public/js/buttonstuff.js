@@ -54,6 +54,7 @@ $(document).ready(function () {
     // Set the version mode, text, and color
     $("#modeText").text(mode);
     $("#versionText").text(version);
+    $("#colorText").css('background-color', color);
     console.log("Values sent:");
     console.log("mode:"+mode);
     console.log("version:"+version);
@@ -61,6 +62,7 @@ $(document).ready(function () {
 
   $("#flat").on("change.spectrum", function(e, tinycolor) {
     color = tinycolor.toHexString();
+    sendValues();
   });
 
   var numModes = {};

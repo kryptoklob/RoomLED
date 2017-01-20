@@ -1,112 +1,119 @@
 $(document).ready(function () {
 
-var socket = io.connect();
-var mode;
-var version;
+  var socket = io.connect();
+  var mode;
+  var version;
 
-socket.on('led', function(data) {
-  mode = data.mode;
-  version = data.version;
+  socket.on('led', function(data) {
+    mode = data.mode;
+    version = data.version;
+    color = data.color;
 
-  // Set the version mode, text, and color
-  $("#modeText").text(mode);
-  $("#versionText").text(version);
+    // Set the version mode, text, and color
+    $("#modeText").text(mode);
+    $("#versionText").text(version);
 
-  // Set active mode buttons
-  for ($i = 1; $i < 13; $i++) {
-    $(".modeDiv > label:nth-child("+$i+")").toggleClass("active", false);
-    console.log("Buttons un-activated.");
-  }
+    $("#flat").spectrum("set", color);
 
-  for ($i = 1; $i < 10; $i++) {
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
-  }
+    // Set active mode buttons
+    for ($i = 1; $i < 13; $i++) {
+      $(".modeDiv > label:nth-child("+$i+")").toggleClass("active", false);
+      console.log("Buttons un-activated.");
+    }
 
-  $("#"+mode).parent().toggleClass("active", true);
+    for ($i = 1; $i < 10; $i++) {
+      $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
+    }
 
-
-  // Set version buttons enabled/disabled
-  for ($i = 10; $i > numModes[mode]; $i--) {
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
-    console.log("Button disabled.");
-  }
-  for ($i = numModes[mode]; $i > 0; $i--){
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", false);
-    console.log("Button enabled.");
-  }
-
-  // Set the correct version active.
-  for ($i = 1; $i < Object.keys(numModes).length; $i++) {
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
-    console.log("Button deactivated.");
-  }
-  $(".versionDiv > label:nth-child("+version+")").toggleClass("active", true);
+    $("#"+mode).parent().toggleClass("active", true);
 
 
-  console.log("Received data.");
-});
-
-function sendValues() {
-  socket.emit('led', {mode:mode, version:version});
-  // Set the version mode, text, and color
-  $("#modeText").text(mode);
-  $("#versionText").text(version);
-  console.log("Values sent:");
-  console.log("mode:"+mode);
-  console.log("version:"+version);
-}
-
-var numModes = {};
-numModes.allOn = 1;
-numModes.allOff= 1;
-numModes.oneSin = 6;
-numModes.twoSin = 10;
-numModes.threeSin = 3;
-numModes.confetti = 1;
-numModes.sinelon = 1;
-numModes.juggle = 1;
-numModes.noise = 2;
-numModes.rainbow = 6;
-numModes.matrix = 3;
-numModes.twinkle = 1;
-numModes.popFade = 6;
-
-var modes = ['allOff', 'allOn', 'oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix', 'twinkle', 'popFade']
-
-$('.modeDiv > label').each(function(){
-  console.log("Click handler added.");
-  $(this).click(function(){
-    console.log("Click detected on" + this);
-    for ($i = 10; $i > numModes[this.children[0].id]; $i--) {
+    // Set version buttons enabled/disabled
+    for ($i = 10; $i > numModes[mode]; $i--) {
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
       console.log("Button disabled.");
     }
-    for ($i = numModes[this.children[0].id]; $i > 0; $i--){
-      $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
+    for ($i = numModes[mode]; $i > 0; $i--){
+      $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", false);
       console.log("Button enabled.");
     }
-  });
-});
 
-$('.modeDiv > label').each(function(){
-  $(this).click(function(){
-    mode = this.children[0].id;
-    version = "1";
-    for ($i = 2; $i < Object.keys(numModes).length; $i++) {
+    // Set the correct version active.
+    for ($i = 1; $i < Object.keys(numModes).length; $i++) {
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
       console.log("Button deactivated.");
     }
+    $(".versionDiv > label:nth-child("+version+")").toggleClass("active", true);
 
-    $(".versionDiv > label:first-child").toggleClass("active", true);
 
-    sendValues();
+    console.log("Received data.");
   });
-});
 
-$('.versionDiv > label').each(function(){
-  $(this).click(function(){
-    version = $(this).children()[0].id.substring(1);
-    sendValues();
+  function sendValues() {
+    socket.emit('led', {mode:mode, version:version});
+    // Set the version mode, text, and color
+    $("#modeText").text(mode);
+    $("#versionText").text(version);
+    console.log("Values sent:");
+    console.log("mode:"+mode);
+    console.log("version:"+version);
+  }
+
+  $("#flat").on("change.spectrum", function(e, tinycolor) {
+    color = tinycolor.toHexString();
   });
-});
+
+  var numModes = {};
+  numModes.allOn = 1;
+  numModes.allOff= 1;
+  numModes.oneSin = 6;
+  numModes.twoSin = 10;
+  numModes.threeSin = 3;
+  numModes.confetti = 1;
+  numModes.sinelon = 1;
+  numModes.juggle = 1;
+  numModes.noise = 2;
+  numModes.rainbow = 6;
+  numModes.matrix = 3;
+  numModes.twinkle = 1;
+  numModes.popFade = 6;
+
+  var modes = ['allOff', 'allOn', 'oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix', 'twinkle', 'popFade']
+
+  $('.modeDiv > label').each(function(){
+    console.log("Click handler added.");
+    $(this).click(function(){
+      console.log("Click detected on" + this);
+      for ($i = 10; $i > numModes[this.children[0].id]; $i--) {
+        $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
+        console.log("Button disabled.");
+      }
+      for ($i = numModes[this.children[0].id]; $i > 0; $i--){
+        $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
+        console.log("Button enabled.");
+      }
+    });
+  });
+
+  $('.modeDiv > label').each(function(){
+    $(this).click(function(){
+      mode = this.children[0].id;
+      version = "1";
+      for ($i = 2; $i < Object.keys(numModes).length; $i++) {
+        $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
+        console.log("Button deactivated.");
+      }
+
+      $(".versionDiv > label:first-child").toggleClass("active", true);
+
+      sendValues();
+    });
+  });
+
+  $('.versionDiv > label').each(function(){
+    $(this).click(function(){
+      version = $(this).children()[0].id.substring(1);
+      sendValues();
+    });
+  });
 });

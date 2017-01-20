@@ -80,14 +80,14 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             console.log("Writing '"+(colorTiny.v * 255).toString()+"'");
             serialPort.write((colorTiny.v * 255).toString());
 
-            console.log("Writing 'b'");
+            console.log("Writing 'h'");
             serialPort.write("h");
-            console.log("Writing '"+(colorTiny.v * 255).toString()+"'");
+            console.log("Writing '"+(colorTiny.h * 255).toString()+"'");
             serialPort.write((colorTiny.h * 255).toString());
 
-            console.log("Writing 'b'");
+            console.log("Writing 't'");
             serialPort.write("t");
-            console.log("Writing '"+(colorTiny.v * 255).toString()+"'");
+            console.log("Writing '"+(colorTiny.s * 255).toString()+"'");
             serialPort.write((colorTiny.s * 255).toString());
         }
 

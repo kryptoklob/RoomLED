@@ -78,6 +78,12 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
         io.sockets.emit('led', {mode:modeName, version:version}); //sends the updated brightness to all connected clients
         console.log("\n\n");
 
+        if (mode == 1){
+            setTimeout(function(){
+                serialPort.write("a");
+            })
+        }
+
         if (color != data.color){
             color = data.color;
 
@@ -89,20 +95,20 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
                 serialPort.write("b");
                 console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
                 serialPort.write((Math.round(colorTiny.v * 10)).toString())
-            }, 200);
+            }, 400);
 
             setTimeout(function(){
                 console.log("Writing 'h'");
                 serialPort.write("h");
                 console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
                 serialPort.write((Math.round(colorTiny.h)).toString());
-            }, 400);
+            }, 600);
             setTimeout(function(){
                 console.log("Writing 't'");
                 serialPort.write("t");
                 console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
                 serialPort.write((Math.round(colorTiny.s*255)).toString());
-            }, 600);
+            }, 800);
         }
     });
 });

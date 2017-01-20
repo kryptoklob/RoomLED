@@ -41,7 +41,7 @@ app.head("/notification",function(request, response){
         if (mode == 1) {
             colorTiny = tinycolor(color).toHsv();
             serialPort.write("a");
-            serialPort.write(Math.round(colorTiny.h)).toString());
+            serialPort.write(Math.round(colorTiny.h).toString());
         }
     }, 600);
 

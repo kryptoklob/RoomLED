@@ -15,9 +15,6 @@ var modeName = "allOff";
 var version = 1;
 var color = "#000000";
 
-serialPort.write("b");
-serialPort.write("10");
-
 app.head("/notification",function(request, response){
     // Turn off led's at T-0
     serialPort.write("m");

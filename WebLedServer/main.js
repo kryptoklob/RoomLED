@@ -77,18 +77,18 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 
             console.log("Writing 'b'");
             serialPort.write("b");
-            console.log("Writing '"+(colorTiny.v * 255).toString()+"'");
-            serialPort.write("10")
+            console.log("Writing '"+(colorTiny.v * 10).toString()+"'");
+            serialPort.write((colorTiny.v * 10).toString())
 
             console.log("Writing 'h'");
             serialPort.write("h");
-            console.log("Writing '"+(colorTiny.h).toString()+"'");
-            serialPort.write((colorTiny.h).toString());
+            console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
+            serialPort.write((Math.round(colorTiny.h)).toString());
 
             console.log("Writing 't'");
             serialPort.write("t");
-            console.log("Writing '"+(colorTiny.s).toString()+"'");
-            serialPort.write((colorTiny.s).toString());
+            console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
+            serialPort.write((Math.round(colorTiny.s*255).toString());
         }
 
         console.log("Writing 'm'");

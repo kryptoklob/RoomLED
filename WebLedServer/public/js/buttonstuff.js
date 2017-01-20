@@ -44,6 +44,9 @@ socket.on('led', function(data) {
 
 function sendValues() {
   socket.emit('led', {mode:mode, version:version});
+  // Set the version mode, text, and color
+  $("#modeText").text(mode);
+  $("#versionText").text(version);
   console.log("Values sent.");
 }
 

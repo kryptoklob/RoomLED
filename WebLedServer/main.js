@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
                 color = data.color;
                 colorTiny = tinycolor(color).toHsv();
                 serialPort.write("a");
-                serialPort.write(Math.round(colorTiny.h)).toString());
+                serialPort.write(Math.round(colorTiny.h).toString());
             })
         }
 

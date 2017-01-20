@@ -51,7 +51,7 @@ $(document).ready(function () {
   });
 
   function sendValues() {
-    socket.emit('led', {mode:mode, version:version});
+    socket.emit('led', {mode:mode, version:version, color:color});
     // Set the version mode, text, and color
     $("#modeText").text(mode);
     $("#versionText").text(version);

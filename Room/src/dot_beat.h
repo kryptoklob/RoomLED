@@ -16,3 +16,5 @@ void dot_beat() {
 
   nscale8(leds,NUM_LEDS,fadeval);                             // Fade the entire array. Or for just a few LED's, use  nscale8(&leds[2], 5, fadeval);
 } // dot_beat()
+
+#endif

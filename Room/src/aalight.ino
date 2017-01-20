@@ -257,7 +257,7 @@ Button myBtn(buttonPin, true, true, 50);                      // Declare the but
 
 // Serial definition
 #define SERIAL_BAUDRATE 57600                                 // Or 115200.
-#define SERIAL_TIMEOUT 5
+#define SERIAL_TIMEOUT 50
 
 byte inbyte;                                                  // Serial input byte
 int thisarg;                                                  // Serial input argument

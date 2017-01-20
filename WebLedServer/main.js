@@ -69,6 +69,15 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
         return;}
         version = data.version;
 
+
+
+        console.log("Writing 'm'");
+        serialPort.write("m");
+        console.log("Writing '"+(Number(mode)+Number(version)-1).toString()+"'");
+        serialPort.write((Number(mode)+Number(version)-1).toString());
+        io.sockets.emit('led', {mode:modeName, version:version}); //sends the updated brightness to all connected clients
+        console.log("\n\n");
+
         if (color != data.color){
             color = data.color;
 
@@ -90,13 +99,6 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
             serialPort.write((Math.round(colorTiny.s*255)).toString());
         }
-
-        console.log("Writing 'm'");
-        serialPort.write("m");
-        console.log("Writing '"+(Number(mode)+Number(version)-1).toString()+"'");
-        serialPort.write((Number(mode)+Number(version)-1).toString());
-        io.sockets.emit('led', {mode:modeName, version:version}); //sends the updated brightness to all connected clients
-        console.log("\n\n");
     });
 });
 

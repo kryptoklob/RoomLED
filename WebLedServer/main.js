@@ -15,6 +15,9 @@ var modeName = "allOff";
 var version = 1;
 var color = "#000000";
 
+serialPort.write("b");
+serialPort.write("10");
+
 app.head("/notification",function(request, response){
     // Turn off led's at T-0
     serialPort.write("m");
@@ -108,14 +111,6 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
                 console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
                 serialPort.write((Math.round(colorTiny.h)).toString());
             }, 600);
-
-            setTimeout(function(){
-                console.log("Writing 'b'");
-                serialPort.write("b");
-                console.log("Writing '10'");
-                serialPort.write("10");
-            }, 400);
-
 
             setTimeout(function(){
                 console.log("Writing 't'");

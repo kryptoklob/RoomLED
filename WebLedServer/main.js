@@ -75,14 +75,20 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             // Get color info
             colorTiny = tinycolor(color).toHsv();
 
+            console.log("Writing 'b'");
             serialPort.write("b");
-            serialPort.write(colorTiny.v * 255);
+            console.log("Writing '"+(colorTiny.v * 255).toString()+"'")
+            serialPort.write(colorTiny.v * 255).toString());
 
+            console.log("Writing 'b'");
             serialPort.write("h");
-            serialPort.write(colorTiny.h * 255);
+            console.log("Writing '"+(colorTiny.v * 255).toString()+"'")
+            serialPort.write(colorTiny.h * 255).toString());
 
+            console.log("Writing 'b'");
             serialPort.write("t");
-            serialPort.write(colorTiny.s * 255);
+            console.log("Writing '"+(colorTiny.v * 255).toString()+"'")
+            serialPort.write(colorTiny.s * 255).toString());
         }
 
         console.log("Writing 'm'");

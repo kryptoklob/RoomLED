@@ -86,8 +86,8 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 
             console.log("Writing 'b'");
             serialPort.write("b");
-            console.log("Writing '"+(colorTiny.v * 10).toString()+"'");
-            serialPort.write((colorTiny.v * 10).toString())
+            console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
+            serialPort.write((Math.round(colorTiny.v * 10)).toString())
 
             console.log("Writing 'h'");
             serialPort.write("h");

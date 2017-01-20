@@ -308,7 +308,7 @@ int twinkrate = 500;
 
 
 // pop_fade variables ----------------------------------------------------------------------
-int ranamount = 20;                                           // The higher the number, lowers the chance for a pixel to light up.
+int ranamount = 200;                                           // The higher the number, lowers the chance for a pixel to light up.
 // uint8_t thisdelay = 50;                                       // Standard delay value.
 bool boolcolours = 1;                                         // True = random, False = array of colours (up to 10)
 uint8_t numcolours = 2;                                       // Number of colours in the array to display.

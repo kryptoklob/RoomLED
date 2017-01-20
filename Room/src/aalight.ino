@@ -292,12 +292,12 @@ int8_t thatspeed = 4;                                         // You can change 
 uint8_t allfreq = 32;                                         // You can change the frequency, thus overall width of bars.
 int thisphase = 0;                                            // Phase change value gets calculated.
 int thatphase = 0;                                            // Phase change value gets calculated.
-uint8_t thiscutoff = 192;                                     // You can change the cutoff value to display this wave. Lower value = longer wave.
-uint8_t thatcutoff = 192;                                     // You can change the cutoff value to display that wave. Lower value = longer wave.
+uint8_t thiscutoff = 100;                                     // You can change the cutoff value to display this wave. Lower value = longer wave.
+uint8_t thatcutoff = 100;                                     // You can change the cutoff value to display that wave. Lower value = longer wave.
 
 
 // Twinkle variables -----------------------------------------------------------------------
-int twinkrate = 100;
+int twinkrate = 500;
 
 
 // One_sin variables -----------------------------------------------------------------------
@@ -473,6 +473,7 @@ void change_mode(int newMode, int mc){                        // mc stands for '
     case 40: if(mc) {thisdelay=20; thishue = 50;} sinelon(); break;
     case 41: if(mc) {thisdelay=10;} juggle(); break;
     case 42: if(mc) {thisdelay=20;} dot_beat(); break;
+    case 43: if(mc) {thisdelay=20;} lightnings(); break;
 
     // DEMO MODE
     case 99: demo_modeA(); break;

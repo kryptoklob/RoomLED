@@ -17,7 +17,7 @@ $(document).ready(function () {
     //$("#flat").spectrum("set", color);
 
     // Set active mode buttons
-    for ($i = 1; $i < 13; $i++) {
+    for ($i = 1; $i < 14; $i++) {
       $(".modeDiv > label:nth-child("+$i+")").toggleClass("active", false);
       console.log("Buttons un-activated.");
     }
@@ -80,8 +80,9 @@ $(document).ready(function () {
   numModes.matrix = 3;
   numModes.twinkle = 1;
   numModes.popFade = 6;
+  numModes.dotBeat = 1;
 
-  var modes = ['allOff', 'allOn', 'oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix', 'twinkle', 'popFade']
+  var modes = ['allOff', 'allOn', 'oneSin', 'twoSin', 'threeSin', 'confetti', 'sinelon', 'juggle', 'noise', 'rainbow', 'matrix', 'twinkle', 'popFade', 'dotBeat']
 
   $('.modeDiv > label').each(function(){
     console.log("Click handler added.");

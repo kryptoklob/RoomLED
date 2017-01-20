@@ -72,6 +72,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
     else if (data.mode == "confetti") mode = 39;
     else if (data.mode == "sinelon") mode = 40;
     else if (data.mode == "juggle") mode = 41;
+    else if (data.mode == "dotBeat") mode = 42;
     else {
         console.log("Received bad data.");
         return;}

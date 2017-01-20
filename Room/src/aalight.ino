@@ -370,6 +370,9 @@ int8_t hxyinc = 3;       //3
 #include "sinelon.h"
 #include "juggle.h"
 #include "demo_modeA.h"
+#include "dot_beat.h"
+#include "lightnings.h"
+
 
 /*------------------------------------------------------------------------------------------
 --------------------------------------- Start of code --------------------------------------

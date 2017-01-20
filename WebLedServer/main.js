@@ -70,13 +70,14 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
         version = data.version;
 
 
-
-        console.log("Writing 'm'");
-        serialPort.write("m");
-        console.log("Writing '"+(Number(mode)+Number(version)-1).toString()+"'");
-        serialPort.write((Number(mode)+Number(version)-1).toString());
-        io.sockets.emit('led', {mode:modeName, version:version}); //sends the updated brightness to all connected clients
-        console.log("\n\n");
+        if (mode != 1){
+            console.log("Writing 'm'");
+            serialPort.write("m");
+            console.log("Writing '"+(Number(mode)+Number(version)-1).toString()+"'");
+            serialPort.write((Number(mode)+Number(version)-1).toString());
+            io.sockets.emit('led', {mode:modeName, version:version, color: color}); //sends the updated brightness to all connected clients
+            console.log("\n\n");
+        }
 
         if (mode == 1){
             setTimeout(function(){

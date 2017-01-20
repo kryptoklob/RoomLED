@@ -66,12 +66,12 @@ $('.modeDiv > label').each(function(){
     console.log("Click detected on" + this);
     for ($i = 10; $i > numModes[this.children[0].id]; $i--) {
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
-      $(".versionDiv > label:nth-child("+$i+")").prop('disabled', "true");
+      $(".versionDiv > label:nth-child("+$i+")").attr('disabled', "true");
       console.log("Button disabled.");
     }
     for ($i = numModes[this.children[0].id]; $i > 0; $i--){
       $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
-      $(".versionDiv > label:nth-child("+$i+")").removeProp('disabled');
+      $(".versionDiv > label:nth-child("+$i+")").removeAttr('disabled');
       console.log("Button enabled.");
     }
   });
@@ -83,7 +83,7 @@ $('.modeDiv > label').each(function(){
     version = "1";
     for ($i = 2; $i < Object.keys(numModes).length; $i++) {
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
-      $(".versionDiv > label:nth-child("+$i+")").prop('disabled', "true");
+      $(".versionDiv > label:nth-child("+$i+")").attr('disabled', "true");
       console.log("Button deactivated.");
     }
 

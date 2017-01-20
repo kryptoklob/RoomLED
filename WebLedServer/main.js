@@ -76,13 +76,13 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             colorTiny = tinycolor(color).toHsv();
 
             serialPort.write("b");
-            serialPort.write(color.v * 255);
+            serialPort.write(colorTiny.v * 255);
 
             serialPort.write("h");
-            serialPort.write(color.h * 255);
+            serialPort.write(colorTiny.h * 255);
 
             serialPort.write("t");
-            serialPort.write(color.s * 255);
+            serialPort.write(colorTiny.s * 255);
         }
 
         console.log("Writing 'm'");

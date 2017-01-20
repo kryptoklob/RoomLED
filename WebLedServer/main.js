@@ -12,6 +12,7 @@ var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 var mode = 0;
 var modeName = "allOff";
 var version = 1;
+var color = "#000000";
 
 app.head("/notification",function(request, response){
   // Turn off led's at T-0
@@ -41,7 +42,7 @@ app.head("/notification",function(request, response){
 });
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
-    socket.emit('led', {mode:modeName, version:version}); //send the new client current mode & version info
+    socket.emit('led', {mode:modeName, version:version, color:color}); //send the new client current mode & version info
 
     socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
 
@@ -66,6 +67,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             console.log("Received bad data.");
             return;}
         version = data.version;
+        color = data.color;
 
         console.log("Writing 'm'");
         serialPort.write("m");

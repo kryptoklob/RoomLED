@@ -12,6 +12,7 @@ $(document).ready(function () {
     // Set the version mode, text, and color
     $("#modeText").text(mode);
     $("#versionText").text(version);
+    $("#colorText").css('background-color', color);
 
     $("#flat").spectrum("set", color);
 

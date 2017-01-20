@@ -34,9 +34,17 @@ app.head("/notification",function(request, response){
 
     // Return to previously scheduled programming at T+600ms
     setTimeout(function() {
-        serialPort.write("m");
-        serialPort.write((Number(mode)+Number(version)-1).toString());
+        if (mode != 1) {
+            serialPort.write("m");
+            serialPort.write((Number(mode)+Number(version)-1).toString());
+        }
+        if (mode == 1) {
+            colorTiny = tinycolor(color).toHsv();
+            serialPort.write("a");
+            serialPort.write(Math.round(colorTiny.h)).toString());
+        }
     }, 600);
+
 
     response.writeHead(200, {"Content-Type": "application/json"});
     response.end();
@@ -81,22 +89,18 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 
         if (mode == 1){
             setTimeout(function(){
+                color = data.color;
+                colorTiny = tinycolor(color).toHsv();
                 serialPort.write("a");
+                serialPort.write(Math.round(colorTiny.h)).toString());
             })
         }
 
-        if (color != data.color){
+        if (color != data.color && mode != 1){
             color = data.color;
 
             // Get color info
             colorTiny = tinycolor(color).toHsv();
-
-            setTimeout(function(){
-                console.log("Writing 'b'");
-                serialPort.write("b");
-                console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
-                serialPort.write((Math.round(colorTiny.v * 10)).toString())
-            }, 400);
 
             setTimeout(function(){
                 console.log("Writing 'h'");
@@ -104,6 +108,15 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
                 console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
                 serialPort.write((Math.round(colorTiny.h)).toString());
             }, 600);
+
+            setTimeout(function(){
+                console.log("Writing 'b'");
+                serialPort.write("b");
+                console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
+                serialPort.write((Math.round(colorTiny.v * 10)).toString());
+            }, 400);
+
+
             setTimeout(function(){
                 console.log("Writing 't'");
                 serialPort.write("t");

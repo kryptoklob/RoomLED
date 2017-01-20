@@ -18,6 +18,10 @@ socket.on('led', function(data) {
     console.log("Buttons un-activated.");
   }
 
+  for ($i = 1; $i < 10; $i++) {
+    $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
+  }
+
   $("#"+mode).parent().toggleClass("active", true);
 
 
@@ -47,7 +51,9 @@ function sendValues() {
   // Set the version mode, text, and color
   $("#modeText").text(mode);
   $("#versionText").text(version);
-  console.log("Values sent.");
+  console.log("Values sent:");
+  console.log("mode:"+mode);
+  console.log("version:"+version);
 }
 
 var numModes = {};

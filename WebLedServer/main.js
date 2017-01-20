@@ -112,8 +112,8 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             setTimeout(function(){
                 console.log("Writing 'b'");
                 serialPort.write("b");
-                console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
-                serialPort.write((Math.round(colorTiny.v * 10)).toString());
+                console.log("Writing '10'");
+                serialPort.write("10");
             }, 400);
 
 

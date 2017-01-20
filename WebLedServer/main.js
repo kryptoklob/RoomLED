@@ -84,20 +84,25 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             // Get color info
             colorTiny = tinycolor(color).toHsv();
 
-            console.log("Writing 'b'");
-            serialPort.write("b");
-            console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
-            serialPort.write((Math.round(colorTiny.v * 10)).toString())
+            setTimeout(function(){
+                console.log("Writing 'b'");
+                serialPort.write("b");
+                console.log("Writing '"+(Math.round(colorTiny.v * 10)).toString()+"'");
+                serialPort.write((Math.round(colorTiny.v * 10)).toString())
+            }, 200);
 
-            console.log("Writing 'h'");
-            serialPort.write("h");
-            console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
-            serialPort.write((Math.round(colorTiny.h)).toString());
-
-            console.log("Writing 't'");
-            serialPort.write("t");
-            console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
-            serialPort.write((Math.round(colorTiny.s*255)).toString());
+            setTimeout(function(){
+                console.log("Writing 'h'");
+                serialPort.write("h");
+                console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
+                serialPort.write((Math.round(colorTiny.h)).toString());
+            }, 400);
+            setTimeout(function(){
+                console.log("Writing 't'");
+                serialPort.write("t");
+                console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
+                serialPort.write((Math.round(colorTiny.s*255)).toString());
+            }, 600);
         }
     });
 });

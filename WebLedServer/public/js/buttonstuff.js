@@ -14,7 +14,7 @@ $(document).ready(function () {
     $("#versionText").text(version);
     $("#colorText").css('background-color', color);
 
-    $("#flat").spectrum("set", color);
+    //$("#flat").spectrum("set", color);
 
     // Set active mode buttons
     for ($i = 1; $i < 13; $i++) {

@@ -47,12 +47,6 @@
         </div>
     </nav>
 
-    <video controls id="video" width="300px">
-        <source src="http://ditchfieldcaleb.com:81/webcam.ogg" />
-        Your browser doesn't appear to support the HTML5 <code>&lt;video&gt;</code> element.
-    </video>
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="hidden-sm-down col-md-2 col-lg-3">
@@ -191,6 +185,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="text-center panel panel-info panel-square panel-no-border">
+                                    <div class="panel-heading">
+                                        <h3 id="videoStatus" class="panel-title">Video (Checking Status...)</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <video controls  id="video">
+                                            <source src="http://ditchfieldcaleb.com:81/webcam.ogg">
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,5 +215,6 @@
     <script src="js/colorpicker.js"></script>
     <script src="js/buttonstuff.js"></script>
     <script src='js/spectrum.js'></script>
+    <script src='js/video-not-loading.js'></script>
 </body>
 </html>

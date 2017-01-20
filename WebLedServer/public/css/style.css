@@ -5,3 +5,7 @@
 .versionDiv {
   background-color: rgb(0,153,204);
 }
+
+video {
+    width: 100%
+}

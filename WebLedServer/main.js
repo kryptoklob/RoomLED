@@ -88,7 +88,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
             console.log("Writing 't'");
             serialPort.write("t");
             console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
-            serialPort.write((Math.round(colorTiny.s*255).toString());
+            serialPort.write((Math.round(colorTiny.s*255)).toString());
         }
 
         console.log("Writing 'm'");

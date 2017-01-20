@@ -8,6 +8,10 @@ socket.on('led', function(data) {
   mode = data.mode;
   version = data.version;
 
+  // Set the version mode, text, and color
+  $("#modeText").text(mode);
+  $("#versionText").text(version);
+
   // Set active mode buttons
   for ($i = 1; $i < 13; $i++) {
     $(".modeDiv > label:nth-child("+$i+")").toggleClass("active", false);

@@ -14,6 +14,8 @@
   <!-- Custom CSS-->
   <link rel="stylesheet" href="css/style.css" />
   <link rel='stylesheet' href='css/spectrum.css' />
+  <link rel='stylesheet' href='css/equal-height-columns.css' />
+  <link rel='stylesheet' href='css/better-buttons.css' />
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -50,187 +52,142 @@
       <div class="hidden-sm-down col-md-2 col-lg-3">
       </div>
       <div class="col-sm-12 col-md-8 col-lg-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            LED Control
+        <div class="well well-sm">
+          <br/>
+          <div class="container-fluid">
+            <div class="text-center panel panel-info panel-square panel-no-border">
+              <div class="panel-heading">
+                <h3 class="panel-title">Choose Mode</h3>
+              </div>
+              <div class="panel-body">
+                <div class="modeDiv" data-toggle="buttons" >
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="allOff" autocomplete="off">All Off
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="allOn" autocomplete="off">All On
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="oneSin" autocomplete="off">One-Sin
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="twoSin" autocomplete="off">Two-Sin
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="threeSin" autocomplete="off">Three-Sin
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="confetti" autocomplete="off">Confetti
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="juggle" autocomplete="off">Juggle
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="matrix" autocomplete="off">Matrix
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="noise" autocomplete="off">Noise
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="noise" autocomplete="off">Pop-Fade
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off">Rainbow
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="sinelon" autocomplete="off">Sinelon
+                  </label>
+                  <label class="btn btn-success sharp">
+                    <input type="radio" name="options" id="twinkle" autocomplete="off">Twinkle
+                  </label>
+                </div>
+                <br/>
+                <div class="versionDiv" data-toggle="buttons">
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v1" autocomplete="off">v1
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v2" autocomplete="off">v2
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v3" autocomplete="off">v3
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v4" autocomplete="off">v4
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v5" autocomplete="off">v5
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v6" autocomplete="off">v6
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v7" autocomplete="off">v7
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v8" autocomplete="off">v8
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v9" autocomplete="off">v9
+                  </label>
+                  <label class="btn btn-primary sharp">
+                    <input type="radio" name="options" id="v10" autocomplete="off">v10
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="panel-body">
-            <div class="hidden-sm hidden-xs text-center well well-sm">
-              <div class="modeDiv btn-group btn-group-sm btn-group-justified" role="group" data-toggle="buttons">
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="allOff" autocomplete="off">All Off
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="allOn" autocomplete="off">All On
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="oneSin" autocomplete="off">One-Sin
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="twoSin" autocomplete="off">Two-Sin
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="threeSin" autocomplete="off">Three-Sin
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="confetti" autocomplete="off">Confetti
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="juggle" autocomplete="off">Juggle
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="matrix" autocomplete="off">Matrix
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="noise" autocomplete="off">Noise
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="noise" autocomplete="off">Pop-Fade
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="rainbow" autocomplete="off">Rainbow
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="sinelon" autocomplete="off">Sinelon
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="twinkle" autocomplete="off">Twinkle
-                </label>
-              </div>
-
-              <div class="versionDiv btn-group btn-group-sm btn-group-justified" data-toggle="buttons">
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v1" autocomplete="off">v1
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v2" autocomplete="off">v2
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v3" autocomplete="off">v3
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v4" autocomplete="off">v4
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v5" autocomplete="off">v5
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v6" autocomplete="off">v6
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v7" autocomplete="off">v7
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v8" autocomplete="off">v8
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v9" autocomplete="off">v9
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v10" autocomplete="off">v10
-                </label>
-              </div>
-            </div>
-
-            <div class="hidden-md hidden-lg hidden-xl text-center well well-sm">
-              <div class="modeDiv btn-group-vertical" role="group" data-toggle="buttons">
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="allOff" autocomplete="off">All Off
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="allOn" autocomplete="off">All On
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="oneSin" autocomplete="off">One-Sin
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="twoSin" autocomplete="off">Two-Sin
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="threeSin" autocomplete="off">Three-Sin
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="confetti" autocomplete="off">Confetti
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="juggle" autocomplete="off">Juggle
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="matrix" autocomplete="off">Matrix
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="noise" autocomplete="off">Noise
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="noise" autocomplete="off">Pop-Fade
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="rainbow" autocomplete="off">Rainbow
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="sinelon" autocomplete="off">Sinelon
-                </label>
-                <label class="btn btn-success">
-                  <input type="radio" name="options" id="twinkle" autocomplete="off">Twinkle
-                </label>
-              </div>
-
-              <div class="versionDiv btn-group-vertical" data-toggle="buttons">
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v1" autocomplete="off">v1
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v2" autocomplete="off">v2
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v3" autocomplete="off">v3
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v4" autocomplete="off">v4
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v5" autocomplete="off">v5
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v6" autocomplete="off">v6
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v7" autocomplete="off">v7
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v8" autocomplete="off">v8
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v9" autocomplete="off">v9
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="v10" autocomplete="off">v10
-                </label>
-              </div>
-            </div>
-
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center well well-sm">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="text-center panel panel-info panel-square panel-no-border">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Set Color</h3>
+                  </div>
+                  <div class="panel-body">
                     <input type='text' id="flat" />
+                  </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center well well-sm">
-                    <h5>Current Mode: All Off</h5>
-                    <h5>Current Version: 1</h5>
-                    <h5>Current Color: HSV(100,100,100)</h5>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="text-center panel panel-info panel-square panel-no-border">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Status</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <p class="text-left">Mode:</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <strong><p class="text-right">All On</p></strong>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <p class="text-left">Version:</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <strong><p class="text-right font-weight-bold">1</p></strong>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <p class="text-left">Current Color:</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <p class="text-right">whee color</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
-
-            <!--
-            <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="http://www.twitch.tv/gt_segfault/embed"></iframe>
-          </div>-->
+          </div>
         </div>
-      </div>
-      <div class="hidden-sm-down col-md-2 col-lg-3">
       </div>
     </div>
   </div>

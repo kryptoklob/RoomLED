@@ -22,6 +22,10 @@ Signal wires (and ground, for a common ground) from the LED strips are hooked in
 
 A RasPi running a default Ubuntu image is attached to my switch via ethernet, and runs a Node web server hosting ditchfieldcaleb.com. It communicates with web clients via sockets.io for mode synchronization, and sends commands to the Uno via serial (over a physical USB cable).
 
+## Do It Yourself
+
+If you want to do something like this, feel free to re-use my code. You'll have to make some changes, especially in /room/aalight.ino, as far as LED pins on the Arduino. However, most of this code is pretty re-usable if you have the same setup as me - RasPi, Arduino, LED strips.
+
 ## Attribution
 
 I learned quite a lot while building this project. I had not worked with Node before this, and it was extremly helpful as it made socket programming pretty much pain-free. It certainly would have taken much longer without the help of other DIY-built libraries to assist with LED patterns and control schemes.

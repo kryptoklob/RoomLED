@@ -8,7 +8,7 @@ I didn't really know anything about microcontrollers or IOT-based systems at thi
 
 ## The Set-Up
 
-The project consists of 3 major components: the physical LED strips themelves, the Ardruino Uno, and the RasPi.
+The project consists of 3 major components: the physical LED strips themelves, the Arduino Uno, and the RasPi.
 
 ### LED Strips - WS2801B
 

@@ -22,6 +22,10 @@ Signal wires (and ground, for a common ground) from the LED strips are hooked in
 
 A RasPi running a default Ubuntu image is attached to my switch via ethernet, and runs a Node web server hosting ditchfieldcaleb.com. It communicates with web clients via sockets.io for mode synchronization, and sends commands to the Uno via serial (over a physical USB cable).
 
+## Why Do You Have So Many Commits?
+
+I do most of this coding in Atom on Windows, then I pull changes to the server with Git. If I make typos, I fix them and then re-push to Git from Windows, and pull again on the server.
+
 ## Do It Yourself
 
 If you want to do something like this, feel free to re-use my code. You'll have to make some changes, especially in /room/aalight.ino, as far as LED pins on the Arduino. However, most of this code is pretty re-usable if you have the same setup as me - RasPi, Arduino, LED strips.

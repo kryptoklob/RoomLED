@@ -12,7 +12,7 @@ The project consists of 3 major components: the physical LED strips themelves, t
 
 ### LED Strips - WS2801B
 
-40 feet of WS2801B led strips are attached to the border of my ceiling, wrapping all the way around the room. Power and ground are hooked up at every wall intersection, with power, ground, and signal wires snaking behind furniture. Power is hooked up to an old PC power supply on the 5V rail, since 500+ LED's pull a good 20A or so of power - far too much for a simple wall-plug, and certainly too much for the Arduino itslef.
+40 feet of WS2801B led strips are attached to the border of my ceiling, wrapping all the way around the room. Power and ground are hooked up at every wall intersection, with power, ground, and signal wires snaking behind furniture. Power is hooked up to an old PC power supply on the 5V rail, since 500+ LED's pull a good 20A or so of power - far too much for a simple wall-plug, and certainly too much for the Arduino itself.
 
 ### Microcontroller - Arduino Uno
 

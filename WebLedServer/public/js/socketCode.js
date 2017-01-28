@@ -48,22 +48,7 @@ socket.on('led', function(data) {
   }
 
   // Set the correct version active.
-  for ($i = 1; $i < modes.length; $i++) {
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
-    console.log("Button deactivated.");
-  }
   $(".versionDiv > label:nth-child("+currentVersion+")").toggleClass("active", true);
-
-  // Disable the version buttons
-  for ($i = 10; $i > modeObject['versions']; $i--) {
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
-    console.log("Button disabled.");
-  }
-  // Enable the version buttons
-  for ($i = modeObject['versions']; $i > 0; $i--){
-    $(".versionDiv > label:nth-child("+$i+")").toggleClass('disabled', false);
-    console.log("Button enabled.");
-  }
 
   console.log("Received data.");
 });

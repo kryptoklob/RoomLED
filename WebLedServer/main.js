@@ -54,6 +54,8 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
     socket.emit('led', {mode:modeName, version:version, color:color}); //send the new client current mode & version info
 
     socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
+      socket.emit('led', {mode:modeName, version:version, color:color});
+
 
     console.log("Receved data:\n");
     console.log(data);

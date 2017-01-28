@@ -11,7 +11,7 @@ socket.on('led', function(data) {
   currentMode = data.mode;
   currentVersion = data.version;
   currentColor = data.color;
-  modeObject = $.grep(modes, function(e){ return e.id == currentMode; })[0];
+  modeObject = $.grep(modes, function(e){ return e.name == currentMode; })[0];
 
   // Set the version, mode, color text
   $("#modeText").text(currentMode);
@@ -36,13 +36,13 @@ socket.on('led', function(data) {
   $("#"+currentMode).parent().toggleClass("active", true);
 
   // Disable unavailable version buttons
-  for ($i = 10; $i > modeObject[currentMode]; $i--) {
+  for ($i = 10; $i > modeObject[versions]; $i--) {
     $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
     console.log("Button disabled.");
   }
 
   // Enable available version buttons
-  for ($i = modeObject[currentMode]; $i > 0; $i--){
+  for ($i = modeObject[versions]; $i > 0; $i--){
     $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", false);
     console.log("Button enabled.");
   }

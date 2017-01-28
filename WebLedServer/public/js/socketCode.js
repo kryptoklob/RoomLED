@@ -38,13 +38,13 @@ $(document).ready(function () {
     $("#"+currentMode).parent().toggleClass("active", true);
 
     // Disable unavailable version buttons
-    for ($i = 10; $i > modesObject[currentMode]; $i--) {
+    for ($i = 10; $i > modeObject[currentMode]; $i--) {
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
       console.log("Button disabled.");
     }
 
     // Enable available version buttons
-    for ($i = modesObject[currentMode]; $i > 0; $i--){
+    for ($i = modeObject[currentMode]; $i > 0; $i--){
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", false);
       console.log("Button enabled.");
     }

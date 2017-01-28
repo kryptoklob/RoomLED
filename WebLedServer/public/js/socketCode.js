@@ -59,22 +59,22 @@ $(document).ready(function () {
     console.log("Received data.");
   });
 
-  // Send data to server.
-  function sendValues() {
-    socket.emit('led', {mode:currentMode, version:currentVersion, color:currentColor});
-    // Set the version mode, text, and color
-    $("#modeText").text(currentMode);
-    $("#versionText").text(currentVersion);
-    $("#colorText").css('background-color', currentColor);
-    console.log("Values sent:");
-    console.log("mode:"+currentMode);
-    console.log("version:"+currentVersion);
-    console.log("color:"+currentColor);
-  }
-
   // If we choose a new color, send it to the server.
   $("#flat").on("change.spectrum", function(e, tinycolor) {
     color = tinycolor.toHexString();
     sendValues();
   });
 });
+
+// Send data to server.
+function sendValues() {
+  socket.emit('led', {mode:currentMode, version:currentVersion, color:currentColor});
+  // Set the version mode, text, and color
+  $("#modeText").text(currentMode);
+  $("#versionText").text(currentVersion);
+  $("#colorText").css('background-color', currentColor);
+  console.log("Values sent:");
+  console.log("mode:"+currentMode);
+  console.log("version:"+currentVersion);
+  console.log("color:"+currentColor);
+}

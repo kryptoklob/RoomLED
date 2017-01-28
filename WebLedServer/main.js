@@ -3,7 +3,7 @@ tinycolor = require('tinycolor2');
 app = express();
 server = require('http').createServer(app);
 io = require('socket.io').listen(server);	//web socket server
-modesFile = require('./public/js/modes')
+//modesFile = require('./public/js/modes')
 
 
 server.listen(8080); //start the webserver on port 8080
@@ -12,7 +12,24 @@ app.use(express.static('public')); //tell the server that ./public/ contains the
 var SerialPort = require("serialport");
 var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
-var modes = modesFile.modes;
+//var modes = modesFile.modes;
+var modes = [
+  { name: "All Off", baseID: 0, versions: 1 },
+  { name: "All On", baseID: 1, versions: 1 },
+  { name: "One-Sin", baseID: 16, versions: 6 },
+  { name: "Two-Sin", baseID: 3, versions: 10 },
+  { name: "Three-Sin", baseID: 28, versions: 3 },
+  { name: "Confetti", baseID: 39, versions: 1 },
+  { name: "Sinelon", baseID: 40, versions: 1 },
+  { name: "Juggle", baseID: 41, versions: 1 },
+  { name: "Noise", baseID: 37, versions: 2 },
+  { name: "Rainbow", baseID: 31, versions: 6 },
+  { name: "Matrix", baseID: 13, versions: 3 },
+  { name: "Twinkle", baseID: 2, versions: 1 },
+  { name: "Pop-Fade", baseID: 22, versions: 6 },
+  { name: "Dot-Beat", baseID: 42, versions: 1 },
+  { name: "Lightnings", baseID: 43, versions: 1 }
+]
 var modeNumber = 0;
 var modeName = "allOff";
 var modeObject;

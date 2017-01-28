@@ -20,4 +20,4 @@ var modes = [
   { name: "Lightnings", baseID: 43, versions: 1 }
 ]
 
-module.exports.modes = modes;
+//module.exports.modes = modes;

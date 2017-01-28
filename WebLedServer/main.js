@@ -96,7 +96,6 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
     console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
     serialPort.write((Math.round(colorTiny.s*255)).toString());
   }, 800);
-}
 });
 });
 

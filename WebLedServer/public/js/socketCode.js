@@ -36,13 +36,13 @@ socket.on('led', function(data) {
   $("#"+currentMode).parent().toggleClass("active", true);
 
   // Disable unavailable version buttons
-  for ($i = 10; $i > modeObject[versions]; $i--) {
+  for ($i = 10; $i > modeObject['versions']; $i--) {
     $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", true);
     console.log("Button disabled.");
   }
 
   // Enable available version buttons
-  for ($i = modeObject[versions]; $i > 0; $i--){
+  for ($i = modeObject['versions']; $i > 0; $i--){
     $(".versionDiv > label:nth-child("+$i+")").toggleClass("disabled", false);
     console.log("Button enabled.");
   }

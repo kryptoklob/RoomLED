@@ -11,7 +11,7 @@ socket.on('led', function(data) {
   currentMode = data.mode;
   currentVersion = data.version;
   currentColor = data.color;
-  modeObject = $.grep(modes, function(e){ return e.id == currentMode; });
+  modeObject = $.grep(modes, function(e){ return e.id == currentMode; })[0];
 
   // Set the version, mode, color text
   $("#modeText").text(currentMode);

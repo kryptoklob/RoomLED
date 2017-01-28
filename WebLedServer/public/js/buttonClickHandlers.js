@@ -19,6 +19,12 @@ $(document).ready(function () {
     });
   });**/
 
+  // If we choose a new color, send it to the server.
+  $("#flat").on("change.spectrum", function(e, tinycolor) {
+    color = tinycolor.toHexString();
+    sendValues();
+  });
+
   $('.modeDiv > label').each(function(){
     $(this).click(function(){
       currentMode = this.children[0].id;

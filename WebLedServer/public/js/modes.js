@@ -19,3 +19,5 @@ var modes = [
   { name: "Dot-Beat", baseID: 42, versions: 1 },
   { name: "Lightnings", baseID: 43, versions: 1 }
 ]
+
+module.exports.modes = modes;

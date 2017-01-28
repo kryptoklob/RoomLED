@@ -54,7 +54,7 @@ $(document).ready(function () {
       $(".versionDiv > label:nth-child("+$i+")").toggleClass("active", false);
       console.log("Button deactivated.");
     }
-    $(".versionDiv > label:nth-child("+version+")").toggleClass("active", true);
+    $(".versionDiv > label:nth-child("+currentVersion+")").toggleClass("active", true);
 
     console.log("Received data.");
   });

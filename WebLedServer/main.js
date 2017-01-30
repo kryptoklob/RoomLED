@@ -31,7 +31,7 @@ var modes = [
   { name: "Lightnings", baseID: 43, versions: 1 }
 ]
 var modeNumber = 0;
-var modeName = "allOff";
+var modeName = "All On";
 var modeObject;
 var version = 1;
 var color = "#000000";

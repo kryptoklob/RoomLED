@@ -1,43 +1,34 @@
-express = require('express');  //web server
+// Server framework.
+express = require('express');
+
+// Color utililties.
 tinycolor = require('tinycolor2');
+
+// Create the server.
 app = express();
 server = require('http').createServer(app);
-io = require('socket.io').listen(server);	//web socket server
-//modesFile = require('./public/js/modes')
+io = require('socket.io').listen(server);
+
+// Quick & dirty way to import the modes files also used client-side.
 var fs = require('fs');
 eval(fs.readFileSync('./public/js/modes.js')+'');
 
+// Server setup.
+server.listen(8080);
+app.use(express.static('public'));
 
-server.listen(8080); //start the webserver on port 8080
-app.use(express.static('public')); //tell the server that ./public/ contains the static webpages
-
+// Connects to the Arduino Serial port via USB.
 var SerialPort = require("serialport");
 var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
-//var modes = modesFile.modes;
-/**var modes = [
-  { name: "All Off", baseID: 0, versions: 1 },
-  { name: "All On", baseID: 1, versions: 1 },
-  { name: "One-Sin", baseID: 16, versions: 6 },
-  { name: "Two-Sin", baseID: 3, versions: 10 },
-  { name: "Three-Sin", baseID: 28, versions: 3 },
-  { name: "Confetti", baseID: 39, versions: 1 },
-  { name: "Sinelon", baseID: 40, versions: 1 },
-  { name: "Juggle", baseID: 41, versions: 1 },
-  { name: "Noise", baseID: 37, versions: 2 },
-  { name: "Rainbow", baseID: 31, versions: 6 },
-  { name: "Matrix", baseID: 13, versions: 3 },
-  { name: "Twinkle", baseID: 2, versions: 1 },
-  { name: "Pop-Fade", baseID: 22, versions: 6 },
-  { name: "Dot-Beat", baseID: 42, versions: 1 },
-  { name: "Lightnings", baseID: 43, versions: 1 }
-];**/
+// Global var initial assignments.
 var modeNumber = 1;
 var modeName = "All On";
 var modeObject;
 var version = 1;
 var color = "#000000";
 
+// Notification flash.
 app.head("/notification",function(request, response){
   // Turn off led's at T-0
   serialPort.write("m");
@@ -68,54 +59,61 @@ app.head("/notification",function(request, response){
     }
   }, 600);
 
-
   response.writeHead(200, {"Content-Type": "application/json"});
   response.end();
 });
 
-io.sockets.on('connection', function (socket) { //gets called whenever a client connects
+// On connection from a client:
+io.sockets.on('connection', function (socket) {
+
+  // Send client
   socket.emit('led', {mode:modeName, version:version, color:color}); //send the new client current mode & version info
 
-  socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
-  socket.emit('led', {mode:modeName, version:version, color:color});
+  // On "LED" events from clients:
+  socket.on('led', function (data) {
+    // Send LED event to all clients.
+    socket.emit('led', {mode:modeName, version:version, color:color});
 
-  console.log("Receved data:\n");
-  console.log(data);
+    // Log received data.
+    console.log("Receved data:\n");
+    console.log(data);
 
-  modeName = data.mode;
-  version = data.version;
-  color = data.color;
+    // Set global vars.
+    modeName = data.mode;
+    version = data.version;
+    color = data.color;
 
-  // Get mode #
-  modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
-  modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
+    // Get mode #
+    modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
+    modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
 
-  // Write mode to Arduino.
+    // Write mode to Arduino.
+    console.log("Writing 'm'");
+    serialPort.write("m");
+    console.log("Writing '" + modeNumber + "'");
+    serialPort.write(modeNumber.toString());
+    io.sockets.emit('led', {mode:modeName, version:version, color: color});
+    console.log("\n\n");
 
-  console.log("Writing 'm'");
-  serialPort.write("m");
-  console.log("Writing '" + modeNumber + "'");
-  serialPort.write(modeNumber.toString());
-  io.sockets.emit('led', {mode:modeName, version:version, color: color});
-  console.log("\n\n");
+    // Get color info
+    colorTiny = tinycolor(color).toHsv();
 
-  // Get color info
-  colorTiny = tinycolor(color).toHsv();
+    // Write color info to Arduino. Timeout functions are to prevent us from
+    // writing again within the socket communication threshold.
+    setTimeout(function(){
+      console.log("Writing 'h'");
+      serialPort.write("h");
+      console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
+      serialPort.write((Math.round(colorTiny.h)).toString());
+    }, 600);
 
-  setTimeout(function(){
-    console.log("Writing 'h'");
-    serialPort.write("h");
-    console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
-    serialPort.write((Math.round(colorTiny.h)).toString());
-  }, 600);
-
-  setTimeout(function(){
-    console.log("Writing 't'");
-    serialPort.write("t");
-    console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
-    serialPort.write((Math.round(colorTiny.s*255)).toString());
-  }, 800);
-});
+    setTimeout(function(){
+      console.log("Writing 't'");
+      serialPort.write("t");
+      console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
+      serialPort.write((Math.round(colorTiny.s*255)).toString());
+    }, 800);
+  });
 });
 
 console.log("Running...\n");

@@ -29,8 +29,8 @@ var modes = [
   { name: "Pop-Fade", baseID: 22, versions: 6 },
   { name: "Dot-Beat", baseID: 42, versions: 1 },
   { name: "Lightnings", baseID: 43, versions: 1 }
-]
-var modeNumber = 0;
+];
+var modeNumber = 1;
 var modeName = "All On";
 var modeObject;
 var version = 1;
@@ -85,7 +85,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
   color = data.color;
 
   // Get mode #
-  modeObject = modes.filter(function(value){ return value.name == modeName;})
+  modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
   modeNumber = modeObject['baseID'] + version - 1;
 
   // Write mode to Arduino.

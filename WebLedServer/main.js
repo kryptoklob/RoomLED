@@ -86,7 +86,7 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 
   // Get mode #
   modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
-  modeNumber = modeObject['baseID'] + version - 1;
+  modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
 
   // Write mode to Arduino.
 

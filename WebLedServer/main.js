@@ -4,6 +4,8 @@ app = express();
 server = require('http').createServer(app);
 io = require('socket.io').listen(server);	//web socket server
 //modesFile = require('./public/js/modes')
+var fs = require('fs');
+eval(fs.readFileSync('./public/js/modes.js')+'');
 
 
 server.listen(8080); //start the webserver on port 8080
@@ -13,7 +15,7 @@ var SerialPort = require("serialport");
 var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
 //var modes = modesFile.modes;
-var modes = [
+/**var modes = [
   { name: "All Off", baseID: 0, versions: 1 },
   { name: "All On", baseID: 1, versions: 1 },
   { name: "One-Sin", baseID: 16, versions: 6 },
@@ -29,7 +31,7 @@ var modes = [
   { name: "Pop-Fade", baseID: 22, versions: 6 },
   { name: "Dot-Beat", baseID: 42, versions: 1 },
   { name: "Lightnings", baseID: 43, versions: 1 }
-];
+];**/
 var modeNumber = 1;
 var modeName = "All On";
 var modeObject;

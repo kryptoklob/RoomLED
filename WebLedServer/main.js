@@ -65,14 +65,14 @@ function setMode(){
     serialPort.write("h");
     console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
     serialPort.write((Math.round(colorTiny.h)).toString());
-  }, 600);
+}, 300);
 
   setTimeout(function(){
     console.log("Writing 't'");
     serialPort.write("t");
     console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
     serialPort.write((Math.round(colorTiny.s*255)).toString());
-  }, 800);
+}, 600);
 }
 
 // On connection from a client:

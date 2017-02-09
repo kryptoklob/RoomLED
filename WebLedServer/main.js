@@ -43,7 +43,7 @@ app.head("/api/:command",function(request, response){
 
 function setMode(){
   // Send LED event to all clients.
-  socket.emit('led', {mode:modeName, version:version, color:color});
+  //socket.emit('led', {mode:modeName, version:version, color:color});
 
   // Write mode to Arduino.
   console.log("Writing 'm'");

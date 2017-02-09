@@ -33,7 +33,6 @@ app.head("/api/:command",function(request, response){
   var command = request.params.id;
 
   modeNumber = 0;
-  modeName = command;
 
   setMode();
 
@@ -44,6 +43,9 @@ app.head("/api/:command",function(request, response){
 function setMode(){
   // Send LED event to all clients.
   //socket.emit('led', {mode:modeName, version:version, color:color});
+  // Get mode number.
+  modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
+  modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
 
   // Write mode to Arduino.
   console.log("Writing 'm'");
@@ -92,10 +94,6 @@ io.sockets.on('connection', function (socket) {
     modeName = data.mode;
     version = data.version;
     color = data.color;
-
-    // Get mode number.
-    modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
-    modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
 
     // Set mode.
     setMode();

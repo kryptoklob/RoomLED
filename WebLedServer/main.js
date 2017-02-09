@@ -100,6 +100,6 @@ io.sockets.on('connection', function (socket) {
     // Set mode.
     setMode();
   });
+});
 
   console.log("Running...\n");
-});

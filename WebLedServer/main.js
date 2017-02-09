@@ -71,9 +71,7 @@ function setMode(){
     console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
     serialPort.write((Math.round(colorTiny.s*255)).toString());
   }, 800);
-});
 }
-
 
 // On connection from a client:
 io.sockets.on('connection', function (socket) {

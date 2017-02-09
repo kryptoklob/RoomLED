@@ -28,48 +28,60 @@ var modeObject;
 var version = 1;
 var color = "#000000";
 
-// Notification flash.
-app.head("/notification",function(request, response){
-  // Turn off led's at T-0
-  serialPort.write("m");
-  serialPort.write("0");
+// API!
+app.head("/api/:command",function(request, response){
+  var command = request.params.id;
 
-  // Flash them back at T+200ms
-  setTimeout(function() {
-    serialPort.write("m");
-    serialPort.write("1");
-  }, 200);
+  modeNumber = 0;
+  modeName = command;
 
-  // Flash off at T+400ms
-  setTimeout(function() {
-    serialPort.write("m");
-    serialPort.write("0");
-  }, 400);
-
-  // Return to previously scheduled programming at T+600ms
-  setTimeout(function() {
-    if (mode != 1) {
-      serialPort.write("m");
-      serialPort.write((Number(mode)+Number(version)-1).toString());
-    }
-    if (mode == 1) {
-      colorTiny = tinycolor(color).toHsv();
-      serialPort.write("a");
-      serialPort.write(Math.round(colorTiny.h).toString());
-    }
-  }, 600);
+  setMode();
 
   response.writeHead(200, {"Content-Type": "application/json"});
   response.end();
 });
 
+function setMode(){
+  // Send LED event to all clients.
+  socket.emit('led', {mode:modeName, version:version, color:color});
+
+  // Write mode to Arduino.
+  console.log("Writing 'm'");
+  serialPort.write("m");
+  console.log("Writing '" + modeNumber + "'");
+  serialPort.write(modeNumber.toString());
+  io.sockets.emit('led', {mode:modeName, version:version, color: color});
+  console.log("\n\n");
+
+  // Get color info
+  colorTiny = tinycolor(color).toHsv();
+
+  // Write color info to Arduino. Timeout functions are to prevent us from
+  // writing again within the socket communication threshold.
+  setTimeout(function(){
+    console.log("Writing 'h'");
+    serialPort.write("h");
+    console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
+    serialPort.write((Math.round(colorTiny.h)).toString());
+  }, 600);
+
+  setTimeout(function(){
+    console.log("Writing 't'");
+    serialPort.write("t");
+    console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
+    serialPort.write((Math.round(colorTiny.s*255)).toString());
+  }, 800);
+});
+}
+
+
 // On connection from a client:
 io.sockets.on('connection', function (socket) {
 
-  // Send client
-  socket.emit('led', {mode:modeName, version:version, color:color}); //send the new client current mode & version info
+  // Update the client with the new info (and push an update to other clients)
+  socket.emit('led', {mode:modeName, version:version, color:color});
 
-  // On "LED" events from clients:
+  // On "LED" events from clients: (aka commands)
   socket.on('led', function (data) {
     // Send LED event to all clients.
     socket.emit('led', {mode:modeName, version:version, color:color});
@@ -83,37 +95,12 @@ io.sockets.on('connection', function (socket) {
     version = data.version;
     color = data.color;
 
-    // Get mode #
+    // Get mode number.
     modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
     modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
 
-    // Write mode to Arduino.
-    console.log("Writing 'm'");
-    serialPort.write("m");
-    console.log("Writing '" + modeNumber + "'");
-    serialPort.write(modeNumber.toString());
-    io.sockets.emit('led', {mode:modeName, version:version, color: color});
-    console.log("\n\n");
-
-    // Get color info
-    colorTiny = tinycolor(color).toHsv();
-
-    // Write color info to Arduino. Timeout functions are to prevent us from
-    // writing again within the socket communication threshold.
-    setTimeout(function(){
-      console.log("Writing 'h'");
-      serialPort.write("h");
-      console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
-      serialPort.write((Math.round(colorTiny.h)).toString());
-    }, 600);
-
-    setTimeout(function(){
-      console.log("Writing 't'");
-      serialPort.write("t");
-      console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
-      serialPort.write((Math.round(colorTiny.s*255)).toString());
-    }, 800);
+    // Set mode.
+    setMode();
   });
-});
 
-console.log("Running...\n");
+  console.log("Running...\n");

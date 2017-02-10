@@ -3,8 +3,8 @@
 // Each mode has a certain number of presets aka "versions"
 
 var modes = [
-  { name: "All Off", baseID: 0, versions: 1 },
-  { name: "All On", baseID: 1, versions: 1 },
+  { name: "AllOff", baseID: 0, versions: 1 },
+  { name: "AllOn", baseID: 1, versions: 1 },
   { name: "One-Sin", baseID: 16, versions: 6 },
   { name: "Two-Sin", baseID: 3, versions: 10 },
   { name: "Three-Sin", baseID: 28, versions: 3 },

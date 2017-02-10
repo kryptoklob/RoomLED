@@ -34,11 +34,14 @@ app.head("/api/:command",function(request, response){
   console.log("Command received via API: " + modeName);
 
   version = 1;
+  
+  response.writeHead(200, {"Content-Type": "application/json"});
+  response.end();
+
 
   setMode();
 
-  response.writeHead(200, {"Content-Type": "application/json"});
-  response.end();
+
 });
 
 function setMode(){

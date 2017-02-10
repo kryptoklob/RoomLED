@@ -23,7 +23,7 @@ var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
 
 // Global var initial assignments.
 var modeNumber = 1;
-var modeName = "All On";
+var modeName = "AllOn";
 var modeObject;
 var version = 1;
 var color = "#000000";

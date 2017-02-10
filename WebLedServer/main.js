@@ -30,8 +30,8 @@ var color = "#000000";
 
 // API!
 app.head("/api/:command",function(request, response){
-  var modeName = request.params.id;
-  console.log("Command received via API: " + request.parama.id);
+  var modeName = request.params.command;
+  console.log("Command received via API: " + request.params.command);
 
   version = 1;
 

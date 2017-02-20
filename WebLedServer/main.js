@@ -61,15 +61,22 @@ function setMode(){
 
   // Get color info
   colorTiny = tinycolor(color).toHsv();
-  console.log("Converted Color: " + colorTiny.toString());
+  colorTiny = colorTiny.toHsv();
+  console.log("Converted Color: " + colorTiny);
 
   // Write color info to Arduino. Timeout functions are to prevent us from
   // writing again within the socket communication threshold.
+
+  // ! Important !
+  // The arduino color library uses 255 as max hue. The tinycolor library Usesd
+  // 360 as the max hue. Thus we need to normalize to 255 when sending colors!
   setTimeout(function(){
     console.log("Writing 'h'");
     serialPort.write("h");
-    console.log("Writing '"+(Math.round(colorTiny.h)).toString()+"'");
-    serialPort.write((Math.round(colorTiny.h)).toString());
+    // Convert from base-360 to base-255
+    var hueToWrite = Math.round((colorTiny.h * 255) / 360);
+    console.log("Writing '"+ hueToWrite.toString()+"'");
+    serialPort.write(hueToWrite.toString());
 }, 300);
 
   setTimeout(function(){

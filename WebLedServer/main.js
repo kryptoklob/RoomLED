@@ -51,14 +51,6 @@ function setMode(){
   modeObject = modes.filter(function(value){ return value.name == modeName;})[0]
   modeNumber = Number(modeObject['baseID']) + Number(version) - 1;
 
-  // Write mode to Arduino.
-  console.log("Writing 'm'");
-  serialPort.write("m");
-  console.log("Writing '" + modeNumber + "'");
-  serialPort.write(modeNumber.toString());
-  io.sockets.emit('led', {mode:modeName, version:version, color: color});
-  console.log("\n\n");
-
   // Get color info
   colorTiny = tinycolor(color).toHsv();
   console.log("Converted Color: " + colorTiny);
@@ -84,6 +76,14 @@ function setMode(){
     console.log("Writing '"+(Math.round(colorTiny.s*255)).toString()+"'");
     serialPort.write((Math.round(colorTiny.s*255)).toString());
 }, 600);
+
+    // Write mode to Arduino - note this is AFTER color so the mode takes effect.
+    console.log("Writing 'm'");
+    serialPort.write("m");
+    console.log("Writing '" + modeNumber + "'");
+    serialPort.write(modeNumber.toString());
+    io.sockets.emit('led', {mode:modeName, version:version, color: color});
+    console.log("\n\n");
 }
 
 // On connection from a client:

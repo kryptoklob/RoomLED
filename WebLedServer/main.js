@@ -61,7 +61,6 @@ function setMode(){
 
   // Get color info
   colorTiny = tinycolor(color).toHsv();
-  colorTiny = colorTiny.toHsv();
   console.log("Converted Color: " + colorTiny);
 
   // Write color info to Arduino. Timeout functions are to prevent us from

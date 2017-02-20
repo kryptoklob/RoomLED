@@ -34,7 +34,7 @@ app.head("/api/:command",function(request, response){
   console.log("Command received via API: " + modeName);
 
   version = 1;
-  
+
   response.writeHead(200, {"Content-Type": "application/json"});
   response.end();
 
@@ -61,6 +61,7 @@ function setMode(){
 
   // Get color info
   colorTiny = tinycolor(color).toHsv();
+  console.log("Converted Color: " + colorTiny.toString());
 
   // Write color info to Arduino. Timeout functions are to prevent us from
   // writing again within the socket communication threshold.

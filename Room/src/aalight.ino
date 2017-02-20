@@ -297,7 +297,7 @@ uint8_t thatcutoff = 100;                                     // You can change 
 
 
 // Twinkle variables -----------------------------------------------------------------------
-int twinkrate = 500;
+int twinkrate = 50;
 
 
 // One_sin variables -----------------------------------------------------------------------

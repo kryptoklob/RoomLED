@@ -24,21 +24,7 @@ unsigned int sample = 0;
 unsigned long oldtime = 0;
 unsigned long newtime = 0;
 
-void doRipple() {
-
-  EVERY_N_MILLISECONDS(1000) {
-    peakspersec = peakcount;                                  // Count the peaks per second. This value will become the foreground hue.
-    peakcount = 0;                                            // Reset the counter every second.
-  }
-
-  getPeak();
-
-  EVERY_N_MILLISECONDS(20) {
-   ripple();
-  }
-
-   FastLED.show();
-}
+uint8_t colour;
 
 void getPeak() {                                            // Rolling average counter - means we don't have to go through an array each time.
 
@@ -46,7 +32,7 @@ void getPeak() {                                            // Rolling average c
   int tmp = analogRead(MIC_PIN) - 512;
   sample = abs(tmp);
 
-  int potin = map(analogRead(POT_PIN), 0, 1023, 0, 60);
+  int potin = 0// map(analogRead(POT_PIN), 0, 1023, 0, 60);
 
   samplesum = samplesum + sample - samplearray[samplecount];  // Add the new sample and remove the oldest sample in the array
   sampleavg = samplesum / NSAMPLES;                           // Get an average
@@ -96,6 +82,24 @@ void ripple() {
 
 } // ripple()
 
+
+
+
+void doRipple() {
+
+  EVERY_N_MILLISECONDS(1000) {
+    peakspersec = peakcount;                                  // Count the peaks per second. This value will become the foreground hue.
+    peakcount = 0;                                            // Reset the counter every second.
+  }
+
+  getPeak();
+
+  EVERY_N_MILLISECONDS(20) {
+   ripple();
+  }
+
+   FastLED.show();
+}
 
 
 

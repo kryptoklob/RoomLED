@@ -252,7 +252,7 @@ Button myBtn(buttonPin, true, true, 50);                      // Declare the but
 
 // Microphone pin definition
 #define MIC_PIN 5                                             // Analog (not digital) port for microphone
-#define DC_OFFSET  32                                         // DC offset in mic signal - if unusure, leave 0
+#define DC_OFFSET  0//32                                         // DC offset in mic signal - if unusure, leave 0
 
 
 // Serial definition

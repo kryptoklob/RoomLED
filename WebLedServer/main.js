@@ -14,7 +14,7 @@ var fs = require('fs');
 eval(fs.readFileSync('./public/js/modes.js')+'');
 
 // Server setup.
-server.listen(8080);
+server.listen(8081);
 app.use(express.static('public'));
 
 // Connects to the Arduino Serial port via USB.

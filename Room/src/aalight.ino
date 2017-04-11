@@ -364,7 +364,7 @@ int8_t hxyinc = 3;       //3
 #include "dot_beat.h"
 #include "lightnings.h"
 #include "soundmems.h"
-#include "soundRipple.h"
+#include "soundamp.h"
 
 
 /*------------------------------------------------------------------------------------------
@@ -463,8 +463,8 @@ void change_mode(int newMode, int mc){                        // mc stands for '
     case 41: if(mc) {thisdelay=10;} juggle(); break;
     case 42: if(mc) {thisdelay=20;} dot_beat(); break;
     case 43: if(mc) {thisdelay=20;} lightnings(); break;
-    case 44: if(mc) {thisdelay=20;} soundmems(); break;
-    case 45: if(mc) {thisdelay=0;} doRipple(); break;
+    case 44: if(mc) {thisdelay=0;} soundmems(); break;
+    case 45: if(mc) {thisdelay=0;} soundamp(); break;
 
     // DEMO MODE
     case 99: demo_modeA(); break;
@@ -580,8 +580,3 @@ int wrap(int step) {
 
 
 
-void fill_solid_HSV(uint8_t ahue, uint8_t asat, uint8_t abright) {  // Set all LED's to an HSV value.
-  for(int i = 0 ; i < NUM_LEDS; i++ ) {
-    leds[i] = CHSV(ahue, asat, abright);
-  }
-}  // fill_solid_HSV()

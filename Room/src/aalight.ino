@@ -364,6 +364,7 @@ int8_t hxyinc = 3;       //3
 #include "demo_modeA.h"
 #include "dot_beat.h"
 #include "lightnings.h"
+#include "soundmems.h"
 
 
 /*------------------------------------------------------------------------------------------

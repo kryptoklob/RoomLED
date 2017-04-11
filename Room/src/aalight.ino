@@ -197,7 +197,6 @@ y         Save of LED's to flash                B1                     // Not ye
 #define AALIGHT_VERSION 100
 
 #include "FastLED.h"                                          // FastLED library. Preferably the latest copy of FastLED 2.1.
-#include "Button.h"                                           // Button library. Includes press, long press, double press detection.
 
 #if FASTLED_VERSION < 3001000
 #error "Requires FastLED 3.1 or later; check github for latest code."
@@ -239,7 +238,7 @@ const int buttonPin = 6;                                      // Digital pin use
 
 // int buttonState = 0;
 // int lastButtonState = 0;
-Button myBtn(buttonPin, true, true, 50);                      // Declare the button
+//Button myBtn(buttonPin, true, true, 50);                      // Declare the button
 
 
 // Microphone pin definition
@@ -404,7 +403,6 @@ void setup() {
 
 //------------------MAIN LOOP---------------------------------------------------------------
 void loop() {
-  readbutton();                                               // Button press increases the ledMode up to last contiguous mode and then starts over at 0.
   readkeyboard();                                             // Get keyboard input.
   change_mode(ledMode, 0);                                    // Strobe, don't set it.
   show_at_max_brightness_for_power();                         // Power managed display of LED's.
@@ -568,18 +566,6 @@ void readkeyboard() {                                         // PROCESS HARDWAR
   } // while Serial.available
 } // readkeyboard()
 
-
-void readbutton() {                                           // Read the button and increase the mode
-  myBtn.read();
-  if(myBtn.wasReleased()) {
-    ledMode = ledMode > maxMode ? 0 : ledMode+1;              // Reset to 0 only during a mode change
-    change_mode(ledMode, 1);
-  }
-  if(myBtn.pressedFor(1000)) {
-    ledMode = 255;
-    change_mode(ledMode, 1);
-  }
-} // readbutton()
 
 
 //---------------------- LED Utility Functions ---------------------------------------------

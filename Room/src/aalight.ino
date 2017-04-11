@@ -198,15 +198,10 @@ y         Save of LED's to flash                B1                     // Not ye
 
 #include "FastLED.h"                                          // FastLED library. Preferably the latest copy of FastLED 2.1.
 #include "Button.h"                                           // Button library. Includes press, long press, double press detection.
-#include "IRLremote.h"
 
 #if FASTLED_VERSION < 3001000
 #error "Requires FastLED 3.1 or later; check github for latest code."
 #endif
-
-// choose a valid PinInterrupt pin of your Arduino board
-#define pinIR 9
-#define IRL_BLOCKING true
 
 // Fixed definitions cannot change on the fly.
 //#define LED_DT 12                                             // Serial data pin for WS2801, WS2811, WS2812B or APA102
@@ -237,10 +232,7 @@ struct CRGB leds[NUM_LEDS];                                   // Initialize our 
 int ledMode = 0;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
 int maxMode;                                                  // Maximum number of modes is set later.
 
-// temporary variables to save latest IR input
-uint8_t IRProtocol = 0;
-uint16_t IRAddress = 0;
-uint32_t IRCommand = 0;
+
 
 // Pushbutton pin definition
 const int buttonPin = 6;                                      // Digital pin used for debounced pushbutton
@@ -388,8 +380,6 @@ void setup() {
   Serial.begin(SERIAL_BAUDRATE);                              // SETUP HARDWARE SERIAL (USB)
   Serial.setTimeout(SERIAL_TIMEOUT);
 
-  attachInterrupt(digitalPinToInterrupt(pinIR), IRLinterrupt<IR_NEC>, CHANGE);    // IR definition
-
   LEDS.setBrightness(max_bright);                             // Set the generic maximum brightness value.
 
   LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, 0, LEFTNO); // WS2812B definition
@@ -413,7 +403,6 @@ void setup() {
 
 //------------------MAIN LOOP---------------------------------------------------------------
 void loop() {
-  getirl();
   readbutton();                                               // Button press increases the ledMode up to last contiguous mode and then starts over at 0.
   readkeyboard();                                             // Get keyboard input.
   change_mode(ledMode, 0);                                    // Strobe, don't set it.
@@ -486,69 +475,6 @@ void change_mode(int newMode, int mc){                        // mc stands for '
 
 
 //----------------- Hardware Support Functions ---------------------------------------------
-
-
-
-void getirl() {                                               // This is the built-in IR function that just selects a mode.
-  uint8_t oldSREG = SREG;
-//  cli();
-  if (IRProtocol) {                                              // This is the built-in IR function that just selects a mode.
-    Serial.print("Command:");
-    Serial.println(IRCommand);
-    switch(IRCommand) {
-      case 65280:  max_bright++;        break;                //a1 - max_bright++;
-      case 65025:  max_bright--;        break;                //a2 - max_bright--;
-      case 64770:  change_mode(1,1);    break;                //a3 - change_mode(1);
-      case 64515:  change_mode(0,1);    break;                //a4 - change_mode(0);
-
-      case 64260:  change_mode(5,1);    break;                //b1 -
-      case 64005:  change_mode(6,1);    break;                //b2 -
-      case 63750:  change_mode(7,1);    break;                //b3 -
-      case 63495:  change_mode(8,1);    break;                //b4 -
-
-      case 63240:  change_mode(9,1);    break;                //c1 -
-      case 62985:  thisdelay++;         break;                //c2 - thisdelay++;
-      case 62730:  thisdelay--;         break;                //c3 - thisdelay--;
-      case 62475:  change_mode(12,1);   break;                //c4
-
-      case 62220:  change_mode(13,1);   break;                //d1
-      case 61965:  ledMode--; change_mode(ledMode,1); break;  //d2 - change_mode(ledMode--);
-      case 61710:  ledMode++; change_mode(ledMode,1); break;  //d3 - change_mode(ledMode++);
-      case 61455:  change_mode(16,1);   break;                //d4
-
-      case 61200:  change_mode(17,1);   break;                //e1 -
-      case 60945:  thisdir = 1;         break;                //e2 - thisdir = 1;
-      case 60690:  thisdir = 0;         break;                //e3 - thisdir = 0;
-      case 60435:  change_mode(20,1);   break;                //e4
-
-      case 60180:  change_mode(21,1);   break;                //f1
-      case 59925:  thishue-=5;          break;                //f2 - thishue--;
-      case 59670:  thishue+=5;          break;                //f3 - thishue++;
-      case 59415:  change_mode(99,1);   break;                //f4
-
-      default:                          break;                // We could do something by default
-    } // switch
-    // reset variable to not read the same value twice
-    IRProtocol = 0;
-  } // if IRLavailable()
-  SREG = oldSREG;
-} // getir()
-
-
-void IREvent(uint8_t protocol, uint16_t address, uint32_t command) {
-  // called when directly received a valid IR signal.
-  // do not use Serial inside, it can crash your program!
-
-  // dont update value if blocking is enabled
-  if (IRL_BLOCKING && !IRProtocol) {
-    // update the values to the newest valid input
-    IRProtocol = protocol;
-    IRAddress = address;
-    IRCommand = command;
-  }
-}
-
-
 
 void readkeyboard() {                                         // PROCESS HARDWARE SERIAL COMMANDS AND ARGS
   while (Serial.available() > 0) {

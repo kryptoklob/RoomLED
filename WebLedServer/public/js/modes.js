@@ -17,7 +17,8 @@ var modes = [
   { name: "Twinkle", baseID: 2, versions: 1 },
   { name: "Pop-Fade", baseID: 22, versions: 6 },
   { name: "Dot-Beat", baseID: 42, versions: 1 },
-  { name: "Lightnings", baseID: 43, versions: 1 }
+  { name: "Lightnings", baseID: 43, versions: 1 },
+  { name: "Sound-Test", baseID: 44, versions: 1 }
 ]
 
 //module.exports.modes = modes;

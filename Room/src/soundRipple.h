@@ -32,7 +32,7 @@ void getPeak() {                                            // Rolling average c
   int tmp = analogRead(MIC_PIN) - 512;
   sample = abs(tmp);
 
-  int potin = 0// map(analogRead(POT_PIN), 0, 1023, 0, 60);
+  int potin = 0;// map(analogRead(POT_PIN), 0, 1023, 0, 60);
 
   samplesum = samplesum + sample - samplearray[samplecount];  // Add the new sample and remove the oldest sample in the array
   sampleavg = samplesum / NSAMPLES;                           // Get an average

@@ -1,3 +1,5 @@
+#include Arduino.h
+
 /*
 
 aalight led lighting effects for FastLED.
@@ -577,6 +579,3 @@ int wrap(int step) {
   if(step > NUM_LEDS - 1) return step - NUM_LEDS;
   return step;
 } // wrap()
-
-
-

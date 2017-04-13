@@ -1,26 +1,25 @@
-#ifndef _HEADERFILE_H
-#define _HEADERFILE_H
-#include "headerfile.h"
-#endif
-
+#include <stdint.h>
 
 // Initialize changeable global variables.
 uint8_t max_bright = 255;                                     // Overall brightness definition. It can be changed on the fly.
-
-struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
-
-int ledMode = 0;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
-int maxMode;                                                  // Maximum number of modes is set later.
-byte inbyte;                                                  // Serial input byte
-int thisarg;                                                  // Serial input argument
 
 // Generic variables
 uint8_t thisdelay = 0;                                        // Standard delay
 uint8_t thishue = 0;                                          // Standard hue
 uint8_t thissat = 255;                                        // Standard saturation
-int thisbright = 255;                                           // Standard brightness
-uint8_t thisfade = 255;                                         // Standard fade rate
+uint8_t thisbright = 255;                                     // Standard brightness
+uint8_t thisfade = 255;                                       // Standard fade rate
 bool thisdir = 0;                                             // Standard direction
+
+
+struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
+
+int ledMode = 0;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
+int maxMode;                                                  // Maximum number of modes is set later.
+uint8_t inbyte;                                                  // Serial input byte
+int thisarg;                                                  // Serial input argument
+
+
 
 // Matrix variables
 

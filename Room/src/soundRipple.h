@@ -85,7 +85,7 @@ void ripple() {
 
 
 
-void doRipple() {
+void soundripple() {
   while (true) {
   EVERY_N_MILLISECONDS(1000) {
     peakspersec = peakcount;                                  // Count the peaks per second. This value will become the foreground hue.

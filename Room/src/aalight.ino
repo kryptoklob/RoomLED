@@ -354,7 +354,6 @@ int8_t hxyinc = 3;       //3
 #include "matrix.h"
 #include "noise16.h"
 #include "one_sin.h"
-#include "pop_fade.h"
 #include "rainbow_march.h"
 #include "three_sin.h"
 #include "twinkle.h"
@@ -362,7 +361,6 @@ int8_t hxyinc = 3;       //3
 #include "confetti.h"
 #include "sinelon.h"
 #include "juggle.h"
-#include "demo_modeA.h"
 #include "dot_beat.h"
 #include "lightnings.h"
 #include "soundmems.h"
@@ -444,12 +442,6 @@ void change_mode(int newMode, int mc){                        // mc stands for '
     case 19: if(mc) {thisdelay=20; allfreq=16; bgbri=0;} one_sin(); break;
     case 20: if(mc) {thisdelay=20; thiscutoff=96; bgclr=200; bgbri=20;} one_sin(); break;
     case 21: if(mc) {thisdelay=20; thiscutoff=128; wavebright=64;} one_sin(); break;
-    case 22: if(mc) {thisdelay=40; colours[0]=0xffffff; numcolours=1; boolcolours=0; maxbar=1;} pop_fade(); break;
-    case 23: if(mc) {thisdelay=40; colours[1]=0xff0000; numcolours=2; boolcolours=0; maxbar=4;} pop_fade(); break;
-    case 24: if(mc) {thisdelay=40; fadeval=192;} pop_fade(); break;
-    case 25: if(mc) {thisdelay=40; boolcolours=1; maxbar=1;} pop_fade(); break;
-    case 26: if(mc) {thisdelay=40; fadeval=128;} pop_fade(); break;
-    case 27: if(mc) {thisdelay=40; colours[2]= 0x0000ff; boolcolours=0; numcolours=3; fadeval=192; maxbar=6;} pop_fade(); break;
     case 28: if(mc) {thisdelay=20; mul1=20; mul2=25; mul3=22;} three_sin(); break;
     case 29: if(mc) {thisdelay=20; mul1=5; mul2=8; mul3=7;} three_sin(); break;
     case 30: if(mc) {thisdelay=20; lvl1=220; lvl2=220; lvl3=220;} three_sin(); break;
@@ -471,7 +463,7 @@ void change_mode(int newMode, int mc){                        // mc stands for '
     case 46: if(mc) {thisdelay=0;} soundripple(); break;
 
     // DEMO MODE
-    case 99: demo_modeA(); break;
+    case 99: ; break;
 
   } // switch newMode
 

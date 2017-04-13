@@ -15,7 +15,6 @@ var modes = [
   { name: "Rainbow", baseID: 31, versions: 6 },
   { name: "Matrix", baseID: 13, versions: 3 },
   { name: "Twinkle", baseID: 2, versions: 1 },
-  { name: "Dot-Beat", baseID: 42, versions: 1 },
   { name: "Lightnings", baseID: 43, versions: 1 },
   { name: "Sound-Test", baseID: 44, versions: 1 },
   { name: "Sound-Amplitude", baseID: 45, versions: 1 },

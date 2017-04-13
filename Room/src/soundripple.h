@@ -1,3 +1,8 @@
+#ifndef _ARDUINO_H
+#define _ARDUINO_H
+#include "Arduino.h"
+#endif
+
 #ifndef SOUNDRIPPLE_H
 #define SOUNDRIPPLE_H
 
@@ -7,9 +12,10 @@
 //uint8_t colour;                                               // Ripple colour is randomized.
 int center = 0;                                               // Center of the current ripple.
 int step = -1;                                                // -1 is the initializing step.
-uint8_t myfade = 255;                                         // Starting brightness.
 #define maxsteps 16                                           // Case statement wouldn't allow a variable.
 int peakspersec = 0;
+
+
 int peakcount = 0;
 
 // Samples
@@ -24,15 +30,13 @@ unsigned int sample = 0;
 unsigned long oldtime = 0;
 unsigned long newtime = 0;
 
-uint8_t colour;
-
 void getPeak() {                                            // Rolling average counter - means we don't have to go through an array each time.
 
   newtime = millis();
   int tmp = analogRead(MIC_PIN) - 512;
   sample = abs(tmp);
 
-  int potin = 50;// map(analogRead(POT_PIN), 0, 1023, 0, 60);
+  int potin = 50;
 
   samplesum = samplesum + sample - samplearray[samplecount];  // Add the new sample and remove the oldest sample in the array
   sampleavg = samplesum / NSAMPLES;                           // Get an average
@@ -74,8 +78,8 @@ void ripple() {
       break;
 
     default:                                                  // Middle of the ripples.
-      leds[(center + step + NUM_LEDS) % NUM_LEDS] += CHSV(colour, 255, myfade/step*2);       // Simple wrap from Marc Miller.
-      leds[(center - step + NUM_LEDS) % NUM_LEDS] += CHSV(colour, 255, myfade/step*2);
+      leds[(center + step + NUM_LEDS) % NUM_LEDS] += CHSV(colour, 255, thisfade/step*2);       // Simple wrap from Marc Miller.
+      leds[(center - step + NUM_LEDS) % NUM_LEDS] += CHSV(colour, 255, thisfade/step*2);
       step ++;                                                // Next step.
       break;
   } // switch step

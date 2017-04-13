@@ -365,7 +365,7 @@ int8_t hxyinc = 3;       //3
 #include "lightnings.h"
 #include "soundmems.h"
 #include "soundamp.h"
-#include "soundripple.h"
+//#include "soundripple.h"
 
 
 /*------------------------------------------------------------------------------------------
@@ -460,7 +460,7 @@ void change_mode(int newMode, int mc){                        // mc stands for '
     case 43: if(mc) {thisdelay=20;} lightnings(); break;
     case 44: if(mc) {thisdelay=0;} soundmems(); break;
     case 45: if(mc) {thisdelay=0;} soundamp(); break;
-    case 46: if(mc) {thisdelay=0;} soundripple(); break;
+    //case 46: if(mc) {thisdelay=0;} soundripple(); break;
 
     // DEMO MODE
     case 99: ; break;

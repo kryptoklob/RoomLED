@@ -1,23 +1,28 @@
+#ifndef VARIABLES_H
+#define VARIABLES_H
+
 #include <stdint.h>
 
-// Initialize changeable global variables.
 uint8_t max_bright = 255;                                     // Overall brightness definition. It can be changed on the fly.
 
 // Generic variables
 uint8_t thisdelay = 0;                                        // Standard delay
+
 uint8_t thishue = 0;                                          // Standard hue
+
 uint8_t thissat = 255;                                        // Standard saturation
 uint8_t thisbright = 255;                                     // Standard brightness
 uint8_t thisfade = 255;                                       // Standard fade rate
+/*
 bool thisdir = 0;                                             // Standard direction
-
+*/
 
 struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
 
-int ledMode = 0;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
-int maxMode;                                                  // Maximum number of modes is set later.
+uint8_t ledMode = 0;                                             // Starting mode is typically 0. Use 99 if no controls available. ###### CHANGE ME #########
+uint8_t maxMode;                                                  // Maximum number of modes is set later.
 uint8_t inbyte;                                                  // Serial input byte
-int thisarg;                                                  // Serial input argument
+uint8_t thisarg;                                                  // Serial input argument
 
 
 
@@ -60,7 +65,7 @@ int ranamount = 200;                                           // The higher the
 // uint8_t thisdelay = 50;                                       // Standard delay value.
 bool boolcolours = 1;                                         // True = random, False = array of colours (up to 10)
 uint8_t numcolours = 2;                                       // Number of colours in the array to display.
-unsigned long colours[10] = {0xff0000, 0x00ff00, 0x0000ff, 0xffffff};  // Just assign the first 3 of these selectable colours.
+unsigned long colours[4] = {0xff0000, 0x00ff00, 0x0000ff, 0xffffff};  // Just assign the first 3 of these selectable colours.
 uint8_t maxbar = 4;                                           // Maximum # of pixels to turn on in a row
 uint8_t fadeval = 255;                                        // Fade rate
 
@@ -105,3 +110,29 @@ int8_t hxyinc = 3;       //3
 // uint8_t wavebright= 128;                                      // Usesd by qsub to set a fixed value to LED's depending on their current value
 
 uint8_t colour;
+
+int center = 0;                                               // Center of the current ripple.
+int step = -1;                                                // -1 is the initializing step.
+#define maxsteps 1                                          // Case statement wouldn't allow a variable.
+int peakspersec = 0;
+
+
+int peakcount = 0;
+
+// Samples
+#define NSAMPLES 64
+unsigned int samplearray[NSAMPLES];
+unsigned long samplesum = 0;
+unsigned int sampleavg = 0;
+
+int samplecount = 0;
+unsigned int sample = 0;
+
+unsigned long oldtime = 0;
+unsigned long newtime = 0;
+
+unsigned long currentMillis = 0;                              // Used for timing between detections
+unsigned long previousMillis = 0;
+unsigned long interval = 60;                                  // 60ms interval seems reasonable
+
+#endif

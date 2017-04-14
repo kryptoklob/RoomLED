@@ -1,34 +1,10 @@
-#ifndef _ARDUINO_H
-#define _ARDUINO_H
-#include "Arduino.h"
-#endif
-
 #ifndef SOUNDRIPPLE_H
 #define SOUNDRIPPLE_H
 
+#include "Arduino.h"
+#include "headerfile.h"
 
 
-// Ripple variables
-//uint8_t colour;                                               // Ripple colour is randomized.
-int center = 0;                                               // Center of the current ripple.
-int step = -1;                                                // -1 is the initializing step.
-#define maxsteps 16                                           // Case statement wouldn't allow a variable.
-int peakspersec = 0;
-
-
-int peakcount = 0;
-
-// Samples
-#define NSAMPLES 64
-unsigned int samplearray[NSAMPLES];
-unsigned long samplesum = 0;
-unsigned int sampleavg = 0;
-
-int samplecount = 0;
-unsigned int sample = 0;
-
-unsigned long oldtime = 0;
-unsigned long newtime = 0;
 
 void getPeak() {                                            // Rolling average counter - means we don't have to go through an array each time.
 
@@ -36,7 +12,7 @@ void getPeak() {                                            // Rolling average c
   int tmp = analogRead(MIC_PIN) - 512;
   sample = abs(tmp);
 
-  int potin = 50;
+  int potin = 0;
 
   samplesum = samplesum + sample - samplearray[samplecount];  // Add the new sample and remove the oldest sample in the array
   sampleavg = samplesum / NSAMPLES;                           // Get an average
@@ -63,7 +39,7 @@ void ripple() {
   switch (step) {
 
     case -1:                                                  // Initialize ripple variables.
-      center = random(NUM_LEDS);
+      center = LEFTNO + random(FRONTNO);
       colour = (peakspersec*10) % 255;                        // More peaks/s = higher the hue colour.
       step = 0;
       break;
@@ -74,7 +50,7 @@ void ripple() {
       break;
 
     case maxsteps:                                            // At the end of the ripples.
-      // step = -1;
+      step = -1;
       break;
 
     default:                                                  // Middle of the ripples.
@@ -86,37 +62,19 @@ void ripple() {
 
 } // ripple()
 
-
-
+int count = 0;
 
 void soundripple() {
-  while (true) {
-  EVERY_N_MILLISECONDS(1000) {
+  if (count == 5) {
     peakspersec = peakcount;                                  // Count the peaks per second. This value will become the foreground hue.
     peakcount = 0;                                            // Reset the counter every second.
+    count = 0;
   }
 
+  count++;
   getPeak();
-
-  EVERY_N_MILLISECONDS(20) {
-   ripple();
-  }
-
-   FastLED.show();
-
+  ripple();
+  return;
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif

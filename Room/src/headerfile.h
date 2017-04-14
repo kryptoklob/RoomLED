@@ -1,8 +1,6 @@
 #ifndef _HEADERFILE_H
 #define _HEADERFILE_H
 
-
-
 // Includes
 #include <stdint.h>
 #include "Arduino.h"
@@ -12,6 +10,7 @@
 
 void call_mode(int newMode, int mc);
 void readkeyboard();
+void fill_solid_HSV(uint8_t ahue, uint8_t asat, uint8_t abright);
 
 // Defines
 #define COLOR_ORDER GRB
@@ -24,7 +23,7 @@ void readkeyboard();
 #define RIGHTNO 89
 #define FRONTNO 115
 #define BACKNO 115
-#define NUM_LEDS (LEFTNO + RIGHTNO + FRONTNO + BACKNO)
+#define NUM_LEDS FRONTNO//(LEFTNO + RIGHTNO + FRONTNO + BACKNO)
 #define MIC_PIN 5
 #define DC_OFFSET 0
 #define SERIAL_BAUDRATE 57600
@@ -36,7 +35,7 @@ void readkeyboard();
 #include "variables.h"
 
 // LED display modes
-#include "matrix.h"
+/*#include "matrix.h"
 #include "noise16.h"
 #include "one_sin.h"
 #include "rainbow_march.h"
@@ -46,9 +45,10 @@ void readkeyboard();
 #include "confetti.h"
 #include "sinelon.h"
 #include "juggle.h"
-#include "lightnings.h"
+#include "lightnings.h"*/
 #include "soundmems.h"
-#include "soundamp.h"
-#include "soundripple.h"
+//#include "soundamp.h"
+//#include "soundripple.h"
+#include "soundfhtlog.h"
 
 #endif

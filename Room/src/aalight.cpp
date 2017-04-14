@@ -1,4 +1,5 @@
 #include "headerfile.h"
+#include "variables.h"
 
 /*
 
@@ -14,17 +15,25 @@ void setup() {
 
   LEDS.setBrightness(max_bright);
 
+/*
   LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, 0, LEFTNO);
   LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, LEFTNO, FRONTNO);
   LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, LEFTNO + FRONTNO, RIGHTNO);
   LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, LEFTNO + FRONTNO + RIGHTNO, BACKNO);
+  */
+
+  LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, LEFTNO);
+  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, LEFTNO);
+  LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, LEFTNO);
+  LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, LEFTNO);
+
 
   set_max_power_in_volts_and_milliamps(5, 500);
 
   random16_set_seed(4832);
   random16_add_entropy(analogRead(2));
 
-  Serial.println("---SETUP COMPLETE---");
+  Serial.println(F("---SETUP COMPLETE---"));
   call_mode(ledMode, 1);
 }
 
@@ -45,7 +54,7 @@ void call_mode(int newMode, int mc){
 
     case  0: if(mc) {fill_solid(leds,NUM_LEDS,CRGB(0,0,0)); LEDS.show();} LEDS.show(); break;              // All off, not animated.
     case  1: if(mc) {fill_solid(leds, NUM_LEDS,CHSV(thishue, thisbright, thissat)); LEDS.show();} LEDS.show(); break;              // All on, not animated.
-    case  2: if(mc) {thisdelay=20; twinkrate=NUM_LEDS; thishue=0; thissat=255; thisbright=255; thisfade=255; } twinkle(); break;
+    /*case  2: if(mc) {thisdelay=20; twinkrate=NUM_LEDS; thishue=0; thissat=255; thisbright=255; thisfade=255; } twinkle(); break;
     case  3: if(mc) {thisdelay=10; thisrot=1; thatrot=1;} two_sin(); break;
     case  4: if(mc) {thisdelay=10; thisrot=0; thisdir=1;} two_sin(); break;
     case  5: if(mc) {thisdelay=10; thatrot=0; thishue=255; thathue=255;} two_sin(); break;
@@ -79,10 +88,11 @@ void call_mode(int newMode, int mc){
     case 39: if(mc) {thisdelay=20; thishue = 20;} confetti(); break;
     case 40: if(mc) {thisdelay=20; thishue = 50;} sinelon(); break;
     case 41: if(mc) {thisdelay=10;} juggle(); break;
-    case 43: if(mc) {thisdelay=20;} lightnings(); break;
+    case 43: if(mc) {thisdelay=20;} lightnings(); break;*/
     case 44: if(mc) {thisdelay=0;} soundmems(); break;
-    case 45: if(mc) {thisdelay=0;} soundamp(); break;
-    //case 46: if(mc) {thisdelay=0;} soundripple(); break;
+    //case 45: if(mc) {thisdelay=0;} soundamp(); break;
+    //case 46: if(mc) {thisdelay=20;} soundripple(); break;
+    case 47: if(mc) {thisdelay=20;} soundfhtlog(); break;
 
     // DEMO MODE
     case 99: ; break;
@@ -99,12 +109,14 @@ void readkeyboard() {                                         // PROCESS HARDWAR
   while (Serial.available() > 0) {
 
     inbyte = Serial.read();                                   // READ SINGLE BYTE COMMAND
-    Serial.print("Serial read is: ");
+    Serial.print(F("Serial read is: "));
     Serial.println(inbyte);
     switch(inbyte) {
 
       case 97:                                                // "a" - SET ALL TO ONE COLOR BY HSV 0-255
         thisarg = Serial.parseInt();
+        Serial.println(F("Argument Received:"));
+        Serial.println(thisarg);
         thissat = 255;
         thisbright = 255;
         fill_solid_HSV(thisarg, thissat, thisbright);
@@ -112,16 +124,23 @@ void readkeyboard() {                                         // PROCESS HARDWAR
 
       case 98:                                                // "b" - SET MAX BRIGHTNESS to #
         max_bright = Serial.parseInt();
+        Serial.println(F("Argument Received:"));
+        Serial.println(max_bright);
         LEDS.setBrightness(max_bright);
         break;
 
       case 104:                                               // "h" - SET HUE VAR to #
         thisarg = Serial.parseInt();
+        Serial.println(F("Argument Received:"));
+        Serial.println(thisarg);
         thishue = thisarg;
         break;
 
-      case 109:                                               // "m" - SET MODE to #
+      case 109:
+        Serial.println(F("Mode change requested."));
         thisarg = Serial.parseInt();
+        Serial.println(F("Argument Received:"));
+        Serial.println(thisarg);
         call_mode(thisarg, 1);
         break;
 
@@ -136,3 +155,9 @@ int wrap(int step) {
   if(step > NUM_LEDS - 1) return step - NUM_LEDS;
   return step;
 }
+
+void fill_solid_HSV(uint8_t ahue, uint8_t asat, uint8_t abright) {  // Set all LED's to an HSV value.
+  for(int i = 0 ; i < NUM_LEDS; i++ ) {
+    leds[i] = CHSV(ahue, asat, abright);
+  }
+}  // fill_solid_HSV()

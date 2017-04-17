@@ -42,7 +42,7 @@ void soundfhtlog() {
 
 void display() {
     // Fade everything
-    fadeToBlackBy(leds, NUM_LEDS, 32);
+    fadeToBlackBy(leds, NUM_LEDS, 64);
 
     // --------- FIRST TWO OCTAVES --------
     uint8_t BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]-100)/5);//+fht_oct_out[2]-120)/8);
@@ -50,12 +50,15 @@ void display() {
       BASS_MAX = 1;
     }
 
-    uint8_t BASS_MID = LEFTNO/2;
+    uint8_t BASS_MID_SIDE   = LEFTNO/2;
+    uint8_t BASS_MID_FRONT  = LEFTNO + FRONTNO/2;
     CHSV bass_color = CHSV(130, 255, 255);
     // Show the lowest ocatve in the middle left/right strips
     for (int i = 0; (i < 25 && i < BASS_MAX); i++) {
-      leds[BASS_MID+i] = bass_color;
-      leds[BASS_MID-i] = bass_color;
+      leds[BASS_MID_SIDE+i] = bass_color;
+      leds[BASS_MID_SIDE-i] = bass_color;
+      leds[BASS_MID_FRONT+i] = bass_color;
+      leds[BASS_MID_FRONT-i] = bass_color;
       bass_color.hue += 7;
     }
 
@@ -66,7 +69,7 @@ void display() {
    }
 
    uint8_t MID_MID = LEFTNO + FRONTNO/2;
-   CHSV mid_color = CHSV(130, 255, 255);
+   CHSV mid_color = CHSV(210, 255, 255);
    // Show the lowest ocatve in the middle left/right strips
    for (int i = 0; (i < 25 && i < MID_MAX); i++) {
      leds[MID_MID+i] = mid_color;
@@ -74,6 +77,7 @@ void display() {
      mid_color.hue += 7;
    }
 
+   /*
    // -------- SIXTH AND SEVENTH OCTAVES ------
    // Normalize the first octave maximum.
    uint8_t HIGH_MAX = ((fht_oct_out[6]+fht_oct_out[7]-30));
@@ -92,6 +96,7 @@ void display() {
      leds[0 + i] = high_color;
      high_color.hue += 7;
    }
+   */
 }
 
 

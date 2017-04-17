@@ -68,12 +68,18 @@ void display() {
      MID_MAX = 1;
    }
 
-   uint8_t MID_MID = LEFTNO + FRONTNO/2;
+   uint8_t MID_START1_FORWARD   = LEFTNO;
+   uint8_t MID_START1_BACKWARD  = LEFTNO+FRONTNO-1;
+   uint8_t MID_START2_FORWARD   = 0;
+   uint8_t MID_START2_BACKWARD  = LEFTNO-1;
+
    CHSV mid_color = CHSV(210, 255, 255);
    // Show the lowest ocatve in the middle left/right strips
    for (int i = 0; (i < 25 && i < MID_MAX); i++) {
-     leds[MID_MID+i] = mid_color;
-     leds[MID_MID-i] = mid_color;
+     leds[MID_START1_FORWARD+i]   = mid_color;
+     leds[MID_START1_BACKWARD-i]  = mid_color;
+     leds[MID_START2_BACKWARD-i]  = mid_color;
+     leds[MID_START2_FORWARD+i]   = mid_color;
      mid_color.hue += 7;
    }
 

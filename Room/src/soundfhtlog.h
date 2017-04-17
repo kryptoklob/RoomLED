@@ -63,7 +63,7 @@ void display() {
     }
 
    // -------- THIRD AND FOURTH OCTAVES ------
-   uint8_t MID_MAX = ((fht_oct_out[4]+fht_oct_out[5]-30)/3);
+   uint8_t MID_MAX = ((fht_oct_out[4]+fht_oct_out[5]-30)/4);
    if (fht_oct_out[4]+fht_oct_out[5] < 50){
      MID_MAX = 1;
    }

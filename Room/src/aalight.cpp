@@ -15,17 +15,13 @@ void setup() {
 
   LEDS.setBrightness(max_bright);
 
-/*
-  LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, 0, LEFTNO);
-  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, LEFTNO, FRONTNO);
-  LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, LEFTNO + FRONTNO, RIGHTNO);
-  LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, LEFTNO + FRONTNO + RIGHTNO, BACKNO);
-  */
 
-  LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, LEFTNO);
-  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, LEFTNO);
-  LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, LEFTNO);
-  LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, LEFTNO);
+
+  LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, 0, LEFTNO);
+  LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, 0, LEFTNO);
+
+  LEDS.addLeds<LED_TYPE, LED_DT_FRONT, COLOR_ORDER>(leds, LEFTNO, FRONTNO);
+  LEDS.addLeds<LED_TYPE, LED_DT_BACK, COLOR_ORDER>(leds, LEFTNO, FRONTNO);
 
 
   set_max_power_in_volts_and_milliamps(5, 500);
@@ -41,7 +37,7 @@ void loop() {
   readkeyboard();
   call_mode(ledMode, 0);
   show_at_max_brightness_for_power();
-  delay_at_max_brightness_for_power(2.5*thisdelay);
+  //delay_at_max_brightness_for_power(2.5*thisdelay);
 }
 
 
@@ -54,7 +50,7 @@ void call_mode(int newMode, int mc){
 
     case  0: if(mc) {fill_solid(leds,NUM_LEDS,CRGB(0,0,0)); LEDS.show();} LEDS.show(); break;              // All off, not animated.
     case  1: if(mc) {fill_solid(leds, NUM_LEDS,CHSV(thishue, thisbright, thissat)); LEDS.show();} LEDS.show(); break;              // All on, not animated.
-    /*case  2: if(mc) {thisdelay=20; twinkrate=NUM_LEDS; thishue=0; thissat=255; thisbright=255; thisfade=255; } twinkle(); break;
+    case  2: if(mc) {thisdelay=20; twinkrate=NUM_LEDS; thishue=0; thissat=255; thisbright=255; thisfade=255; } twinkle(); break;
     case  3: if(mc) {thisdelay=10; thisrot=1; thatrot=1;} two_sin(); break;
     case  4: if(mc) {thisdelay=10; thisrot=0; thisdir=1;} two_sin(); break;
     case  5: if(mc) {thisdelay=10; thatrot=0; thishue=255; thathue=255;} two_sin(); break;
@@ -88,9 +84,9 @@ void call_mode(int newMode, int mc){
     case 39: if(mc) {thisdelay=20; thishue = 20;} confetti(); break;
     case 40: if(mc) {thisdelay=20; thishue = 50;} sinelon(); break;
     case 41: if(mc) {thisdelay=10;} juggle(); break;
-    case 43: if(mc) {thisdelay=20;} lightnings(); break;*/
+    case 43: if(mc) {thisdelay=20;} lightnings(); break;
     case 44: if(mc) {thisdelay=0;} soundmems(); break;
-    //case 45: if(mc) {thisdelay=0;} soundamp(); break;
+    case 45: if(mc) {thisdelay=0;} soundamp(); break;
     //case 46: if(mc) {thisdelay=20;} soundripple(); break;
     case 47: if(mc) {thisdelay=20;} soundfhtlog(); break;
 

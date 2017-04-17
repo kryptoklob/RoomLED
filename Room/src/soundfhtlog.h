@@ -7,21 +7,22 @@
 #define OCTAVE 1
 
 void isRipple();
-void ripple();
+void display();
 
 #include <FHT.h>
 
 // FHT Definitions
-#define FHT_N 256                                             // Set to 64 point fht.
+#define FHT_N 64                                             // Set to 64 point fht.
+#define OCT_NORM 0
 
 uint8_t micmult = 30;                                         // Bin values are very low, to let's crank 'em up.
-uint8_t noiseval = 25;                                        // Increase this to reduce sensitivity.
+uint8_t noiseval = 70;                                        // Increase this to reduce sensitivity.
 
 void GetFHT() {
 
   cli();
   for (int i = 0 ; i < 127 ; i++) {
-    fht_input[i] = analogRead(MIC_PIN) - 512;
+    fht_input[i] = (analogRead(MIC_PIN) - 512) << 2;
   }
   sei();
 
@@ -35,53 +36,64 @@ void GetFHT() {
 void soundfhtlog() {
 
   GetFHT();
-  isRipple();
-  ripple();
+  display();
 
 } // fhtsound()
 
-void isRipple() {
+void display() {
+    // Fade everything
+    fadeToBlackBy(leds, NUM_LEDS, 32);
 
-  currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {           // Wait for interval ms before allowing a new ripple to be generated.
-    previousMillis = currentMillis;
-    Serial.println(abs(fht_oct_out[3]));
-    if (abs(fht_oct_out[3]) - noiseval > 0) {
-      step = -1;        // If the sound > threshold then start a ripple.
-      //Serial.println(F("Generated ripple."));
+    // --------- FIRST TWO OCTAVES --------
+    uint8_t BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]-100)/5);//+fht_oct_out[2]-120)/8);
+    if (fht_oct_out[0]+fht_oct_out[1] < 100){
+      BASS_MAX = 1;
     }
-  }
+
+    uint8_t BASS_MID = LEFTNO/2;
+    CHSV bass_color = CHSV(130, 255, 255);
+    // Show the lowest ocatve in the middle left/right strips
+    for (int i = 0; (i < 25 && i < BASS_MAX); i++) {
+      leds[BASS_MID+i] = bass_color;
+      leds[BASS_MID-i] = bass_color;
+      bass_color.hue += 7;
+    }
+
+   // -------- THIRD AND FOURTH OCTAVES ------
+   uint8_t MID_MAX = ((fht_oct_out[4]+fht_oct_out[5]-30)/3);
+   if (fht_oct_out[4]+fht_oct_out[5] < 50){
+     MID_MAX = 1;
+   }
+
+   uint8_t MID_MID = LEFTNO + FRONTNO/2;
+   CHSV mid_color = CHSV(130, 255, 255);
+   // Show the lowest ocatve in the middle left/right strips
+   for (int i = 0; (i < 25 && i < MID_MAX); i++) {
+     leds[MID_MID+i] = mid_color;
+     leds[MID_MID-i] = mid_color;
+     mid_color.hue += 7;
+   }
+
+   // -------- SIXTH AND SEVENTH OCTAVES ------
+   // Normalize the first octave maximum.
+   uint8_t HIGH_MAX = ((fht_oct_out[6]+fht_oct_out[7]-30));
+   if (fht_oct_out[6]+fht_oct_out[7] < 30){
+     HIGH_MAX = 1;
+   }
+
+   uint8_t HIGH_START_FORWARD = LEFTNO;
+   uint8_t HIGH_START_BACKWARD = LEFTNO+FRONTNO-1;
+   CHSV high_color = CHSV(130, 255, 255);
+   // Show the lowest ocatve in the middle left/right strips
+   for (int i = 0; (i < 25 && i < MID_MAX); i++) {
+     leds[HIGH_START_FORWARD+i] = high_color;
+     leds[HIGH_START_BACKWARD-i] = high_color;
+     leds[LEFTNO-1-i] = high_color;
+     leds[0 + i] = high_color;
+     high_color.hue += 7;
+   }
 }
 
-void ripple() {
-  fadeToBlackBy(leds, NUM_LEDS, 64);
-
-  switch (step) {
-
-    case -1:                                                  // Initialize ripple variables.
-      center = random(NUM_LEDS);
-      step = 0;
-      break;
-
-    case 0:
-      leds[center] = CHSV(100, 255, 100);  // Display the first pixel of the ripple.
-      step ++;
-      break;
-
-    case maxsteps:                                            // At the end of the ripples.
-      //step = -1;
-      break;
-
-    default:                                                  // Middle of the ripples.
-      leds[(center + step + NUM_LEDS) % NUM_LEDS] += CHSV(100, 255, 100);
-      leds[(center - step + NUM_LEDS) % NUM_LEDS] += CHSV(100, 255, 100);
-
-      step ++;                                                // Next step.
-
-      break;
-
-  } // switch step
-}
 
 
 

@@ -2,3 +2,9 @@
 .piolibdeps
 .clang_complete
 .gcc-flags.json
+.log
+.db
+.tts
+.profile
+.bashrc
+.bash_logout

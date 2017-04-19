@@ -13,6 +13,14 @@ homeassistant:
   customize:
     input_boolean.lights:
       emulated_hue_name: "lights"
+    input_boolean.fft:
+      emulated_hue_name: "party mode"
+    input_boolean.rainbow:
+      emulated_hue_name: "rainbow"
+    input_boolean.confetti:
+      emulated_hue_name: "confetti"
+    input_boolean.juggle:
+      emulated_hue_name: "juggling"
 
 # Show links to resources in log and frontend
 introduction:
@@ -67,8 +75,6 @@ emulated_hue:
     - group
     - input_boolean
     - media_player
-    - fan
-    - input_select
 
 # Command to turn lights on
 rest_command:
@@ -76,59 +82,94 @@ rest_command:
     url: 'http://192.168.1.129:8081/api/AllOn'
   lights_off:
     url: 'http://192.168.1.129:8081/api/AllOff'
-  lights_fft:
+  lights_rave:
     url: 'http://192.168.1.129:8081/api/Sound-FHT'
   lights_rainbow:
     url: 'http://192.168.1.129:8081/api/Rainbow'
   lights_juggle:
     url: 'http://192.168.1.129:8081/api/Juggle'
   lights_confetti:
-    url: 'http://192.168.1.129:8081/api/Confetti'    
+    url: 'http://192.168.1.129:8081/api/Confetti'
 
 # Boolean for calling the above with Alexa
-#input_boolean:
-#  lights:
-#    name: LED Lights
-#    initial: off
-#    icon: mdi:lightbulb
-
-# Input select for light mode
-input_select:
-  light_mode:
-    name: LEDS lights
-    options:
-      - On
-      - Off
-      - Sound
-      - Rainbow
-      - Juggle
-      - Confetti
-    initial: Off
+input_boolean:
+  - lights_onoff:
+      name: LED Lights On/Off
+      initial: off
+  - lights_rave:
+      name: LED Lights Rave Mode
+      initial: off
+  - lights_rainbow:
+      name: LED Lights Rainbow Mode
+      initial: off
+  - lights_confetti:
+      name: LED Lights Confetti Mode
+      initial: off
+  - lights_juggle:
+      name: LED Lights Juggle Mode
+      initial: off
 
 # Automation for the above
 automation:
   - alias: Turn lights on
     trigger:
-      - platform: state
-        entity_id: input_select.light_mode
-        to: 'True'
+      platform: state
+      entity_id: input_boolean.lights_onoff
+      to: 'on'
     action:
-      service: rest_command.lights_on
+      - service: rest_command.lights_on
+      #- service: input_boolean.turn_off
+      #  data:
+      #    entity_id: input_boolean.lights_onoff
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rave
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rainbow
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_confetti
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_juggle
 
   - alias: Turn lights off
     trigger:
-      - platform: state
-        entity_id: input_select.light_mode
-        to: 'False'
+      platform: state
+      entity_id: input_boolean.lights_onoff
+      to: 'off'
     action:
       service: rest_command.lights_off
 
-#automation 2:
-#  - alias: Turn lights off
-#    trigger:
-#      - platform: state
-#        entity_id: input_boolean.lights
-#        from: 'on'
-#        to: 'off'
-#    action:
-#        service: rest_command.lights_off
+  - alias: Turn lights to rave mode
+    trigger:
+      platform: state
+      entity_id: input_boolean.lights_rave
+      to: 'on'
+    action:
+      service: rest_command.lights_rave
+
+  - alias: Turn lights to rainbow mode
+    trigger:
+      platform: state
+      entity_id: input_boolean.lights_rainbow
+      to: 'on'
+    action:
+      service: rest_command.lights_rainbow
+
+  - alias: Turn lights to confetti mode
+    trigger:
+      platform: state
+      entity_id: input_boolean.lights_confetti
+      to: 'on'
+    action:
+      service: rest_command.lights_confetti
+
+  - alias: Turn lights to juggle mode
+    trigger:
+      platform: state
+      entity_id: input_boolean.lights_juggle
+      to: 'on'
+    action:
+      service: rest_command.lights_juggle

@@ -1,0 +1,13 @@
+../multidict/_multidict_py.py
+../multidict/__init__.py
+../multidict/__init__.pyi
+../multidict/_multidict.c
+../multidict/_multidict.pyx
+../multidict/__pycache__/_multidict_py.cpython-34.pyc
+../multidict/__pycache__/__init__.cpython-34.pyc
+../multidict/_multidict.cpython-34m.so
+.
+SOURCES.txt
+top_level.txt
+PKG-INFO
+dependency_links.txt

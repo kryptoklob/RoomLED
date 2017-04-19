@@ -1,0 +1,134 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 33.7981
+  longitude: -84.3877
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 289
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  customize:
+    input_boolean.lights:
+      emulated_hue_name: "lights"
+
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Weather Prediction
+sensor:
+  platform: yr
+
+# Text to speech
+tts:
+  platform: google
+
+group: !include groups.yaml
+
+# Amazon Echo
+emulated_hue:
+  type: alexa
+  expose_by_default: true
+  exposed_domains:
+    - light
+    - switch
+    - group
+    - input_boolean
+    - media_player
+    - fan
+    - input_select
+
+# Command to turn lights on
+rest_command:
+  lights_on:
+    url: 'http://192.168.1.129:8081/api/AllOn'
+  lights_off:
+    url: 'http://192.168.1.129:8081/api/AllOff'
+  lights_fft:
+    url: 'http://192.168.1.129:8081/api/Sound-FHT'
+  lights_rainbow:
+    url: 'http://192.168.1.129:8081/api/Rainbow'
+  lights_juggle:
+    url: 'http://192.168.1.129:8081/api/Juggle'
+  lights_confetti:
+    url: 'http://192.168.1.129:8081/api/Confetti'    
+
+# Boolean for calling the above with Alexa
+#input_boolean:
+#  lights:
+#    name: LED Lights
+#    initial: off
+#    icon: mdi:lightbulb
+
+# Input select for light mode
+input_select:
+  light_mode:
+    name: LEDS lights
+    options:
+      - On
+      - Off
+      - Sound
+      - Rainbow
+      - Juggle
+      - Confetti
+    initial: Off
+
+# Automation for the above
+automation:
+  - alias: Turn lights on
+    trigger:
+      - platform: state
+        entity_id: input_select.light_mode
+        to: 'True'
+    action:
+      service: rest_command.lights_on
+
+  - alias: Turn lights off
+    trigger:
+      - platform: state
+        entity_id: input_select.light_mode
+        to: 'False'
+    action:
+      service: rest_command.lights_off
+
+#automation 2:
+#  - alias: Turn lights off
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.lights
+#        from: 'on'
+#        to: 'off'
+#    action:
+#        service: rest_command.lights_off

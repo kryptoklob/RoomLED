@@ -1,0 +1,7 @@
+../typing.py
+../__pycache__/typing.cpython-34.pyc
+.
+SOURCES.txt
+top_level.txt
+PKG-INFO
+dependency_links.txt

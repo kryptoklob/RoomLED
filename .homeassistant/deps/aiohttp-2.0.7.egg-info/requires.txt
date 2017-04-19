@@ -1,0 +1,4 @@
+chardet
+multidict>=2.1.4
+async_timeout>=1.2.0
+yarl>=0.10.0,<0.11

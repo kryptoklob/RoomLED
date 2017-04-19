@@ -26,7 +26,7 @@ and receives commands from clients using the control panel via sockets.io.
 
 ### Alexa and HomeAssistant.io
 
-The open-source home-assistant.io smart-home software is set up on the save server machine as the Node server. It emulates a Philips Hue bridge, which allows me to command the lights via natural-sounding commands, such as "~~Alexa~~ Computer, turn on the lights." or "~~Alexa~~ Computer, turn on party mode."
+The open-source home-assistant.io smart-home software is set up on a spare RasPi. It emulates a Philips Hue bridge, which allows me to command the lights via natural-sounding commands, such as "~~Alexa~~ Computer, turn on the lights." or "~~Alexa~~ Computer, turn on party mode."
 
 ## Attribution
 

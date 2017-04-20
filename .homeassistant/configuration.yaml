@@ -140,7 +140,22 @@ automation:
       entity_id: input_boolean.lights_onoff
       to: 'off'
     action:
-      service: rest_command.lights_off
+      - service: rest_command.lights_off
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_onoff
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rave
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rainbow
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_confetti
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_juggle
 
   - alias: Turn lights to rave mode
     trigger:
@@ -148,7 +163,22 @@ automation:
       entity_id: input_boolean.lights_rave
       to: 'on'
     action:
-      service: rest_command.lights_rave
+      - service: rest_command.lights_rave
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_onoff
+      #- service: input_boolean.turn_off
+      #  data:
+      #    entity_id: input_boolean.lights_rave
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rainbow
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_confetti
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_juggle
 
   - alias: Turn lights to rainbow mode
     trigger:
@@ -156,7 +186,22 @@ automation:
       entity_id: input_boolean.lights_rainbow
       to: 'on'
     action:
-      service: rest_command.lights_rainbow
+      - service: rest_command.lights_rainbow
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_onoff
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rave
+      #- service: input_boolean.turn_off
+      #  data:
+      #    entity_id: input_boolean.lights_rainbow
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_confetti
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_juggle
 
   - alias: Turn lights to confetti mode
     trigger:
@@ -164,7 +209,22 @@ automation:
       entity_id: input_boolean.lights_confetti
       to: 'on'
     action:
-      service: rest_command.lights_confetti
+      - service: rest_command.lights_confetti
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_onoff
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rave
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rainbow
+      #- service: input_boolean.turn_off
+      #  data:
+      #    entity_id: input_boolean.lights_confetti
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_juggle
 
   - alias: Turn lights to juggle mode
     trigger:
@@ -172,4 +232,19 @@ automation:
       entity_id: input_boolean.lights_juggle
       to: 'on'
     action:
-      service: rest_command.lights_juggle
+      - service: rest_command.lights_juggle
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_onoff
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rave
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_rainbow
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_confetti
+      #- service: input_boolean.turn_off
+      #  data:
+      #    entity_id: input_boolean.lights_juggle

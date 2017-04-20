@@ -93,21 +93,21 @@ rest_command:
 
 # Boolean for calling the above with Alexa
 input_boolean:
-  - lights_onoff:
-      name: LED Lights On/Off
-      initial: off
-  - lights_rave:
-      name: LED Lights Rave Mode
-      initial: off
-  - lights_rainbow:
-      name: LED Lights Rainbow Mode
-      initial: off
-  - lights_confetti:
-      name: LED Lights Confetti Mode
-      initial: off
-  - lights_juggle:
-      name: LED Lights Juggle Mode
-      initial: off
+  lights_onoff:
+    name: LED Lights On/Off
+    initial: off
+  lights_rave:
+    name: LED Lights Rave Mode
+    initial: off
+  lights_rainbow:
+    name: LED Lights Rainbow Mode
+    initial: off
+  lights_confetti:
+    name: LED Lights Confetti Mode
+    initial: off
+  lights_juggle:
+    name: LED Lights Juggle Mode
+    initial: off
 
 # Automation for the above
 automation:

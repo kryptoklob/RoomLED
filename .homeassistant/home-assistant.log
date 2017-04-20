@@ -1,8 +1,2 @@
-17-04-18 21:57:44 WARNING (Thread-3) [homeassistant.components.emulated_hue] Alexa type is deprecated and will be removed in a future version
-17-04-18 21:57:44 WARNING (Thread-3) [homeassistant.components.emulated_hue] Listen IP address not specified, auto-detected address is 192.168.1.119
-17-04-18 21:58:13 ERROR (MainThread) [homeassistant.components.emulated_hue.hue_api] Entity not found: input_boolean.lights
-17-04-18 21:58:16 ERROR (MainThread) [homeassistant.components.emulated_hue.hue_api] Entity not found: input_boolean.lights
-17-04-18 21:59:02 WARNING (MainThread) [homeassistant.core] Unable to find service input_select/turn_on
-17-04-18 21:59:46 WARNING (MainThread) [homeassistant.core] Unable to find service input_select/turn_on
-17-04-19 06:52:43 WARNING (Thread-13) [pychromecast.socket_client] Heartbeat timeout, resetting connection
-17-04-19 06:52:50 ERROR (Thread-13) [pychromecast.socket_client] Failed to connect, retrying in 5.0s
+17-04-19 23:17:18 WARNING (Thread-5) [homeassistant.components.emulated_hue] Alexa type is deprecated and will be removed in a future version
+17-04-19 23:17:18 WARNING (Thread-5) [homeassistant.components.emulated_hue] Listen IP address not specified, auto-detected address is 192.168.1.119

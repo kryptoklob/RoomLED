@@ -49,16 +49,34 @@ void display() {
     uint8_t MID_START2_FORWARD  = 0;
     uint8_t MID_START2_BACKWARD = LEFTNO-1;
 
-    // Fade everything
-    //fadeToBlackBy(leds, NUM_LEDS, thisfade);
+    // Fade each part of each segment at a different rate
+    fadeToBlackBy(leds, NUM_LEDS, FAST_FADE_RATE);
 
-    // Fade the bass slower than the mids
-    fadeToBlackBy(leds, NUM_LEDS, 64);
-    fadeToBlackBy(&(leds[MID_START1_FORWARD]), 25, 255);
-    fadeToBlackBy(&(leds[MID_START1_BACKWARD-25]), 25, 255);
-    fadeToBlackBy(&(leds[MID_START2_FORWARD]), 25, 255);
-    fadeToBlackBy(&(leds[MID_START2_BACKWARD-25]), 25, 255);
-
+    // First 5 leds fade instantly
+    fadeToBlackBy(&leds[MID_START1_FORWARD],        5,      INSTANT_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_FORWARD],        5,      INSTANT_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START1_BACKWARD-5],     5,      INSTANT_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_BACKWARD-5],     5,      INSTANT_FADE_RATE);
+    // Second 5 leds fade quickly
+    fadeToBlackBy(&leds[MID_START1_FORWARD+5],      5,      FAST_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_FORWARD+5],      5,      FAST_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START1_BACKWARD-10],    5,      FAST_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_BACKWARD-10],    5,      FAST_FADE_RATE);
+    // Third 5 leds fade at normally
+    fadeToBlackBy(&leds[MID_START1_FORWARD+10],     5,      MEDIUM_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_FORWARD+10],     5,      MEDIUM_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START1_BACKWARD-15],    5,      MEDIUM_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_BACKWARD-15],    5,      MEDIUM_FADE_RATE);
+    // Fourth 5 leds fade slowly
+    fadeToBlackBy(&leds[MID_START1_FORWARD+15],     5,      SLOW_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_FORWARD+15],     5,      SLOW_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START1_BACKWARD-20],    5,      SLOW_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_BACKWARD-20],    5,      SLOW_FADE_RATE);
+    // Fifth 5 leds fade very slowly
+    fadeToBlackBy(&leds[MID_START1_FORWARD+20],     5,      VERY_SLOW_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_FORWARD+20],     5,      VERY_SLOW_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START1_BACKWARD-25],    5,      VERY_SLOW_FADE_RATE);
+    fadeToBlackBy(&leds[MID_START2_BACKWARD-25],    5,      VERY_SLOW_FADE_RATE);
 
     // --------- FIRST TWO OCTAVES --------
     uint8_t BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]-100)/5);//+fht_oct_out[2]-120)/8);

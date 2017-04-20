@@ -24,7 +24,12 @@ uint8_t maxMode;                                                  // Maximum num
 uint8_t inbyte;                                                  // Serial input byte
 uint8_t thisarg;                                                  // Serial input argument
 
-
+// Some fade stuff
+uint8_t VERY_SLOW_FADE_RATE = 8;
+uint8_t SLOW_FADE_RATE      = 16;
+uint8_t MEDIUM_FADE_RATE    = 32;
+uint8_t FAST_FADE_RATE      = 64;
+uint8_t INSTANT_FADE_RATE   = 255;
 
 // Matrix variables
 

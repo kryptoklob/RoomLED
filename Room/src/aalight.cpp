@@ -15,8 +15,6 @@ void setup() {
 
   LEDS.setBrightness(max_bright);
 
-
-
   LEDS.addLeds<LED_TYPE, LED_DT_LEFT, COLOR_ORDER>(leds, 0, LEFTNO);
   LEDS.addLeds<LED_TYPE, LED_DT_RIGHT, COLOR_ORDER>(leds, 0, LEFTNO);
 
@@ -88,7 +86,8 @@ void call_mode(int newMode, int mc){
     case 44: if(mc) {thisdelay=0;} soundmems(); break;
     case 45: if(mc) {thisdelay=0;} soundamp(); break;
     //case 46: if(mc) {thisdelay=20;} soundripple(); break;
-    case 47: if(mc) {thisdelay=20;} soundfhtlog(); break;
+    case 47: if(mc) {thisdelay=82;} soundfhtlog(); break;
+    case 48: if(mc) {thisdelay=255;} soundfhtlog(); break;
 
     // DEMO MODE
     case 99: ; break;

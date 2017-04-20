@@ -29,7 +29,7 @@ var version = 1;
 var color = "#000000";
 
 // API!
-app.head("/api/:command",function(request, response){
+app.get("/api/:command",function(request, response){
     modeName = String(request.params.command);
     console.log("Command received via API: " + modeName);
 

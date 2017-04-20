@@ -41,8 +41,24 @@ void soundfhtlog() {
 } // fhtsound()
 
 void display() {
+    // Index vars
+    uint8_t BASS_MID_SIDE       = LEFTNO/2;
+    uint8_t BASS_MID_FRONT      = LEFTNO + FRONTNO/2;
+    uint8_t MID_START1_FORWARD  = LEFTNO;
+    uint8_t MID_START1_BACKWARD = LEFTNO+FRONTNO-1;
+    uint8_t MID_START2_FORWARD  = 0;
+    uint8_t MID_START2_BACKWARD = LEFTNO-1;
+
     // Fade everything
+    //fadeToBlackBy(leds, NUM_LEDS, thisfade);
+
+    // Fade the bass slower than the mids
     fadeToBlackBy(leds, NUM_LEDS, 64);
+    fadeToBlackBy(&(leds[MID_START1_FORWARD]), 25, 255);
+    fadeToBlackBy(&(leds[MID_START1_BACKWARD-25]), 25, 255);
+    fadeToBlackBy(&(leds[MID_START2_FORWARD]), 25, 255);
+    fadeToBlackBy(&(leds[MID_START2_BACKWARD-25]), 25, 255);
+
 
     // --------- FIRST TWO OCTAVES --------
     uint8_t BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]-100)/5);//+fht_oct_out[2]-120)/8);
@@ -50,8 +66,6 @@ void display() {
       BASS_MAX = 1;
     }
 
-    uint8_t BASS_MID_SIDE   = LEFTNO/2;
-    uint8_t BASS_MID_FRONT  = LEFTNO + FRONTNO/2;
     CHSV bass_color = CHSV(130, 255, 255);
     // Show the lowest ocatve in the middle left/right strips
     for (int i = 0; (i < 25 && i < BASS_MAX); i++) {
@@ -68,10 +82,6 @@ void display() {
      MID_MAX = 1;
    }
 
-   uint8_t MID_START1_FORWARD   = LEFTNO;
-   uint8_t MID_START1_BACKWARD  = LEFTNO+FRONTNO-1;
-   uint8_t MID_START2_FORWARD   = 0;
-   uint8_t MID_START2_BACKWARD  = LEFTNO-1;
 
    CHSV mid_color = CHSV(210, 255, 255);
    // Show the lowest ocatve in the middle left/right strips

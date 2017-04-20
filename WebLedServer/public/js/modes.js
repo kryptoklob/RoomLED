@@ -18,7 +18,7 @@ var modes = [
   { name: "Lightnings", baseID: 43, versions: 1 },
   { name: "Sound-Test", baseID: 44, versions: 1 },
   { name: "Sound-Amplitude", baseID: 45, versions: 1 },
-  { name: "Sound-FHT", baseID: 47, versions: 1 }
+  { name: "Sound-FHT", baseID: 47, versions: 2 }
 ]
 
 //module.exports.modes = modes;

@@ -11,16 +11,18 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/New_York
   customize:
-    input_boolean.lights:
-      emulated_hue_name: "lights"
-    input_boolean.fft:
-      emulated_hue_name: "party mode"
-    input_boolean.rainbow:
-      emulated_hue_name: "rainbow"
-    input_boolean.confetti:
-      emulated_hue_name: "confetti"
-    input_boolean.juggle:
-      emulated_hue_name: "juggling"
+    input_boolean.lights_on:
+      emulated_hue_name: "Lights"
+    input_boolean.lights_off:
+      emulated_hue_name: "Dark"
+    input_boolean.lights_rave:
+      emulated_hue_name: "The Party"
+    input_boolean.lights_rainbow:
+      emulated_hue_name: "Rainbow"
+    input_boolean.lights_confetti:
+      emulated_hue_name: "Confetti"
+    input_boolean.lights_juggle:
+      emulated_hue_name: "Juggling"
 
 # Show links to resources in log and frontend
 introduction:
@@ -93,20 +95,23 @@ rest_command:
 
 # Boolean for calling the above with Alexa
 input_boolean:
-  lights_onoff:
-    name: LED Lights On/Off
+  lights_on:
+    name: The Light
     initial: off
+  lights_off:
+    name: The Dark
+    initial: on
   lights_rave:
-    name: LED Lights Rave Mode
+    name: The Party
     initial: off
   lights_rainbow:
-    name: LED Lights Rainbow Mode
+    name: Rainbow
     initial: off
   lights_confetti:
-    name: LED Lights Confetti Mode
+    name: Confetti
     initial: off
   lights_juggle:
-    name: LED Lights Juggle Mode
+    name: Juggle
     initial: off
 
 # Automation for the above
@@ -114,13 +119,16 @@ automation:
   - alias: Turn lights on
     trigger:
       platform: state
-      entity_id: input_boolean.lights_onoff
+      entity_id: input_boolean.lights_on
       to: 'on'
     action:
       - service: rest_command.lights_on
       #- service: input_boolean.turn_off
       #  data:
-      #    entity_id: input_boolean.lights_onoff
+      #    entity_id: input_boolean.lights_on
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_off
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.lights_rave
@@ -137,13 +145,16 @@ automation:
   - alias: Turn lights off
     trigger:
       platform: state
-      entity_id: input_boolean.lights_onoff
-      to: 'off'
+      entity_id: input_boolean.lights_off
+      to: 'on'
     action:
       - service: rest_command.lights_off
       - service: input_boolean.turn_off
         data:
-          entity_id: input_boolean.lights_onoff
+          entity_id: input_boolean.lights_on
+      #- service: input_boolean.turn_off
+      #  data:
+      #    entity_id: input_boolean.lights_off
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.lights_rave
@@ -166,7 +177,10 @@ automation:
       - service: rest_command.lights_rave
       - service: input_boolean.turn_off
         data:
-          entity_id: input_boolean.lights_onoff
+          entity_id: input_boolean.lights_on
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_off
       #- service: input_boolean.turn_off
       #  data:
       #    entity_id: input_boolean.lights_rave
@@ -189,7 +203,10 @@ automation:
       - service: rest_command.lights_rainbow
       - service: input_boolean.turn_off
         data:
-          entity_id: input_boolean.lights_onoff
+          entity_id: input_boolean.lights_on
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_off
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.lights_rave
@@ -212,7 +229,10 @@ automation:
       - service: rest_command.lights_confetti
       - service: input_boolean.turn_off
         data:
-          entity_id: input_boolean.lights_onoff
+          entity_id: input_boolean.lights_on
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_off
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.lights_rave
@@ -235,7 +255,10 @@ automation:
       - service: rest_command.lights_juggle
       - service: input_boolean.turn_off
         data:
-          entity_id: input_boolean.lights_onoff
+          entity_id: input_boolean.lights_on
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lights_off
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.lights_rave

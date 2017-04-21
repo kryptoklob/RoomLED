@@ -1,7 +1,0 @@
-../phue.py
-../__pycache__/phue.cpython-34.pyc
-.
-SOURCES.txt
-top_level.txt
-PKG-INFO
-dependency_links.txt

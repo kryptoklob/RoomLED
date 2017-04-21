@@ -1,2 +1,0 @@
-17-04-19 23:17:18 WARNING (Thread-5) [homeassistant.components.emulated_hue] Alexa type is deprecated and will be removed in a future version
-17-04-19 23:17:18 WARNING (Thread-5) [homeassistant.components.emulated_hue] Listen IP address not specified, auto-detected address is 192.168.1.119

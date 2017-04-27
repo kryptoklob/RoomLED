@@ -9,7 +9,8 @@
 #define OCT_NORM 0                                            // Octave normalization
 
 // Vars
-int pot_modifier = 0;
+int bass_pot_modifier = 0;
+int mid_pot_modifier = 0;
 
 // This include must come after the defines to work properly.
 #include <FHT.h>
@@ -23,7 +24,8 @@ void getPot();
 // Functions
 void getPot() {
   int potRead = analogRead(POT_PIN);
-  pot_modifier = (potRead/20) - 25;
+  mid_pot_modifier = (potRead/128) - 4;
+  bass_pot_modifier = mid_pot_modifier * 2;
 }
 
 void GetFHT() {
@@ -104,12 +106,12 @@ void display() {
   fadeToBlackBy(&leds[MID_START1_BACKWARD-25],    5,      VERY_SLOW_FADE_RATE);
   fadeToBlackBy(&leds[MID_START2_BACKWARD-25],    5,      VERY_SLOW_FADE_RATE);
 
-  int BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]+fht_oct_out[2]-195)/8)+pot_modifier;
+  int BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]+fht_oct_out[2]-195)/(8-bass_pot_modifier);
   if (BASS_MAX <= 0){
     BASS_MAX = 1;
   }
 
-  int MID_MAX = ((fht_oct_out[3]+fht_oct_out[4]-87)/4)+pot_modifier;
+  int MID_MAX = ((fht_oct_out[3]+fht_oct_out[4]-87)/(4-mid_pot_modifier);
   if (MID_MAX <= 0){
     MID_MAX = 1;
   }

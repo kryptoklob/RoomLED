@@ -25,7 +25,7 @@ void getPot();
 void getPot() {
   int potRead = analogRead(POT_PIN);
   mid_pot_modifier = (potRead/128) - 4;
-  bass_pot_modifier = mid_pot_modifier * 2;
+  bass_pot_modifier = 0;
 }
 
 void GetFHT() {

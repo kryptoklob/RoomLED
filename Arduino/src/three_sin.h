@@ -1,6 +1,24 @@
 #ifndef THREE_SIN_H
 #define THREE_SIN_H
 
+// Vars
+int wave1=0;
+int wave2=0;
+int wave3=0;
+
+uint8_t inc1 = 2;
+uint8_t inc2 = 1;
+uint8_t inc3 = -3;
+
+uint8_t lvl1 = 80;
+uint8_t lvl2 = 80;
+uint8_t lvl3 = 80;
+
+uint8_t mul1 = 20;
+uint8_t mul2 = 25;
+uint8_t mul3 = 22;
+
+// Function
 void three_sin() {
   wave1 += inc1;
   wave2 += inc2;

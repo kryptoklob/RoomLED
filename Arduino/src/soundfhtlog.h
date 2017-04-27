@@ -1,23 +1,23 @@
 #ifndef SOUNDFHT_H
 #define SOUNDFHT_H
 
-#include "Arduino.h"
-#include "headerfile.h"
-#define LOG_OUT 1                                             // Use logarithmic based bins
-#define OCTAVE 1
+// Includes
+#include "FHT.h"
 
+// Defines
+#define LOG_OUT 1                                             // Use logarithmic based bins
+#define OCTAVE 1                                              // Use octave mode
+#define FHT_N 64                                              // Set to 64 point fht.
+#define OCT_NORM 0                                            // Octave normalization
+
+// Function prototypes
 void isRipple();
 void display();
 
-#include <FHT.h>
+// Vars
+unsigned long previousMillis = 0;
 
-// FHT Definitions
-#define FHT_N 64                                             // Set to 64 point fht.
-#define OCT_NORM 0
-
-uint8_t micmult = 30;                                         // Bin values are very low, to let's crank 'em up.
-uint8_t noiseval = 70;                                        // Increase this to reduce sensitivity.
-
+// Functions
 void GetFHT() {
 
   cli();
@@ -31,14 +31,14 @@ void GetFHT() {
   fht_run();                                                  // Process the data in the fht.
   fht_mag_octave();
 
-} // GetFHT()
+}
 
+// Main mode loop
 void soundfhtlog() {
-
   GetFHT();
   display();
 
-} // fhtsound()
+}
 
 void display() {
     // Index vars

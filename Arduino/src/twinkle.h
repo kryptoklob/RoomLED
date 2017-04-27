@@ -1,6 +1,10 @@
 #ifndef TWINKLE_H
 #define TWINKLE_H
 
+// Vars
+int twinkrate = 50;
+
+// Function
 void twinkle() {
   if (twinkrate < NUM_LEDS) twinkrate = NUM_LEDS;                 // Make sure the twinkrate will cover ALL of the LED's as it's used as the maximum LED index value.
   int i = random16(twinkrate);                                    // A random number based on twinkrate. Higher number => fewer twinkles.

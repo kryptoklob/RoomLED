@@ -16,16 +16,29 @@ uint8_t ledMode = 0;                                          // Starting mode i
 uint8_t maxMode;                                              // Maximum number of modes is set later.
 uint8_t colour;
 uint8_t deltahue = 1;                                         // Hue change between pixels.
+uint8_t thisrot = 0;                                          // You can change how quickly the hue rotates for this wave. Currently 0.
+uint8_t thatrot = 0;                                          // You can change how quickly the hue rotates for the other wave. Currently 0.
+uint8_t allsat = 255;                                         // I like 'em fully saturated with colour.
+uint8_t thathue = 140;                                        // You can change the starting hue for other wave.
+int8_t thisspeed = 4;                                         // You can change the speed, and can use negative values.
+int8_t thatspeed = 4;                                         // You can change the speed, and use negative values.
+uint8_t allfreq = 32;                                         // You can change the frequency, thus overall width of bars.
+uint8_t thisphase = 0;                                            // Phase change value gets calculated.
+uint8_t thatphase = 0;                                            // Phase change value gets calculated.
+uint8_t thiscutoff = 100;                                     // You can change the cutoff value to display this wave. Lower value = longer wave.
+uint8_t thatcutoff = 100;                                     // You can change the cutoff value to display that wave. Lower value = longer wave.
+uint8_t wavebright = 255;                                     // You can change the brightness of the waves/bars rolling across the screen. Best to make them not as bright as the sparkles.
+bool thisdir = 0;                                             // A direction variable that will work with inputs.
 
 // Serial vars
 uint8_t inbyte;                                               // Serial input byte
 uint8_t thisarg;                                              // Serial input argument
 
 // Fade rate definitions
-uint8_t VERY_SLOW_FADE_RATE = 8;
-uint8_t SLOW_FADE_RATE      = 16;
-uint8_t MEDIUM_FADE_RATE    = 32;
-uint8_t FAST_FADE_RATE      = 64;
+uint8_t VERY_SLOW_FADE_RATE = 16;
+uint8_t SLOW_FADE_RATE      = 32;
+uint8_t MEDIUM_FADE_RATE    = 64;
+uint8_t FAST_FADE_RATE      = 128;
 uint8_t INSTANT_FADE_RATE   = 255;
 
 // Matrix variables

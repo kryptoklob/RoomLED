@@ -106,12 +106,12 @@ void display() {
   fadeToBlackBy(&leds[MID_START1_BACKWARD-25],    5,      VERY_SLOW_FADE_RATE);
   fadeToBlackBy(&leds[MID_START2_BACKWARD-25],    5,      VERY_SLOW_FADE_RATE);
 
-  int BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]+fht_oct_out[2]-195)/(8-bass_pot_modifier);
+  int BASS_MAX = ((fht_oct_out[0]+fht_oct_out[1]+fht_oct_out[2]-195)/(8-bass_pot_modifier));
   if (BASS_MAX <= 0){
     BASS_MAX = 1;
   }
 
-  int MID_MAX = ((fht_oct_out[3]+fht_oct_out[4]-87)/(4-mid_pot_modifier);
+  int MID_MAX = ((fht_oct_out[3]+fht_oct_out[4]-87)/(4-mid_pot_modifier));
   if (MID_MAX <= 0){
     MID_MAX = 1;
   }

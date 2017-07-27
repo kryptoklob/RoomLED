@@ -16,9 +16,5 @@ var modes = [
   { name: "Matrix", baseID: 13, versions: 3 },
   { name: "Twinkle", baseID: 2, versions: 1 },
   { name: "Lightnings", baseID: 43, versions: 1 },
-  { name: "Sound-Test", baseID: 44, versions: 1 },
-  { name: "Sound-Amplitude", baseID: 45, versions: 1 },
   { name: "Sound-FHT", baseID: 47, versions: 2 }
 ]
-
-//module.exports.modes = modes;

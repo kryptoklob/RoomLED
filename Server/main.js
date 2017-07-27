@@ -1,7 +1,4 @@
-// Server framework.
 express = require('express');
-
-// Color utililties.
 tinycolor = require('tinycolor2');
 
 // Create the server.
@@ -16,10 +13,16 @@ eval(fs.readFileSync('./public/js/modes.js')+'');
 // Server setup.
 server.listen(8081);
 app.use(express.static('public'));
+console.log("Server starting on port 8081...");
 
 // Connects to the Arduino Serial port via USB.
 var SerialPort = require("serialport");
-var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 57600 });
+var serialPort = new SerialPort("/dev/ttyACM0");
+
+serialPort.on('error', function(err) {
+    console.log(err.message);
+    process.exit();
+});
 
 // Global var initial assignments.
 var modeNumber = 1;
@@ -28,7 +31,7 @@ var modeObject;
 var version = 1;
 var color = "#000000";
 
-// API!
+// API
 app.get("/api/:command",function(request, response){
     modeName = String(request.params.command);
     console.log("Command received via API: " + modeName);
@@ -38,10 +41,7 @@ app.get("/api/:command",function(request, response){
     response.writeHead(200, {"Content-Type": "application/json"});
     response.end();
 
-
     setMode();
-
-
 });
 
 function setMode(){
@@ -113,5 +113,3 @@ io.sockets.on('connection', function (socket) {
         setMode();
     });
 });
-
-console.log("Running...\n");

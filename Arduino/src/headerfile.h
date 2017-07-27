@@ -14,19 +14,13 @@ void fill_solid_HSV(uint8_t ahue, uint8_t asat, uint8_t abright);
 // LED Metadata
 #define COLOR_ORDER GRB
 #define LED_TYPE WS2812B
-#define LEFTNO 89
-#define RIGHTNO 89
-#define FRONTNO 115
-#define BACKNO 115
-#define NUM_LEDS LEFTNO + FRONTNO
+#define NUM_LEDS 150
 
 // Pin assignments
-#define LED_DT_FRONT 5
-#define LED_DT_RIGHT 4
-#define LED_DT_LEFT 3
-#define LED_DT_BACK 2
+#define LED_PIN_1 2
+#define LED_PIN_2 3
 #define POT_PIN 0
-#define MIC_PIN 5
+#define MIC_PIN 8
 
 // Serial arguments
 #define SERIAL_BAUDRATE 57600

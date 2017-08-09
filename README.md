@@ -1,32 +1,35 @@
 # RoomLEDControl
 
-RoomLEDControl is a personal project I started on several months ago. I've always been intrigued by addressable LED strips, and the fact that you can "program" the lights in real-time. So I bought a bunch of LED strips off of Alibaba, and got to work.
+RoomLEDControl - control LED strips with cool effects, dynamic color pallets, dynamic effects, with event-driven or programmatic control.
 
-## The Set-Up
+## Set-Up
 
-The project consists of ~~3~~ 5 major components:
-1. [LED strips](#ws2801b-led-strips)
-2. [Arduino Microcontroller](#arduino-uno-microcontroller)
+You will need:
+1. [LED strips](#led-strips)
+2. [Arduino Microcontroller](#arduino-microcontroller)
 3. [Node Server](#node-server)
 4. [Alexa](#alexa-and-homeassistant.io)
 5. [Home-Assistant.io Server](#alexa-and-homeassistant.io)
 
-### WS2801b LED Strips
+### LED Strips
 
-40 feet of WS2801B led strips are attached to the border of my ceiling, wrapping all the way around the room. Power and ground are hooked up at every wall intersection, with power, ground, and signal wires snaking behind furniture. Power is hooked up to an old PC power supply on the 5V rail, since 500+ LED's pull a good 20A or so of power - far too much for a simple wall-plug, and certainly too much for the Arduino itself.
+You can use any supported LED strip that works with the [FastLED.io](http://fastled.io) framework.
+I use WS2812B for my projects.
+
+Make sure you read up on how to properly power and ground the strips, or you will have issues.
 
 ### Arduino Uno Microcontroller
 
-Signal wires (and ground, for a common ground) from the LED strips are hooked into 4 separate digital pins of an Arduino Uno sitting near the power supply. The Uno runs code found in this repo, under `/Room/`. This code has files for 15+ different lighting effects, and listens for commands on the serial port. The main code loop can be found in `/Room/src/aalight.ino`
+Connect the signal / data wires from the LED strips to PWM outputs on the Arduino.
+If you want to control the effects from a computer, power the Arduino itself via USB cable to the computer.
 
 ### Node Server
 
-I'm running Node with Express on my server machine for the Control Panel. It communicates with the Arduino via Serial over USB,
-and receives commands from clients using the control panel via sockets.io.
+The old command-and-control server is defunct. New version coming soon!
 
 ### Alexa and HomeAssistant.io
 
-The open-source home-assistant.io smart-home software is set up on a spare RasPi. It emulates a Philips Hue bridge, which allows me to command the lights via natural-sounding commands, such as "~~Alexa~~ Computer, turn on the lights." or "~~Alexa~~ Computer, turn on party mode."
+The old voice-control system is defunct. New version coming soon!
 
 ## Attribution
 

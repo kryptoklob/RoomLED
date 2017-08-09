@@ -9,7 +9,7 @@ void setup() {
 
   // Set up LEDS
 	LEDS.setBrightness(max_bright);
-  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER, >(leds, NUM_LEDS_PER_STRIP); 
+  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER>(leds, NUM_LEDS_PER_STRIP); 
   set_max_power_in_volts_and_milliamps(5, 1000);
   
   // Set up variables

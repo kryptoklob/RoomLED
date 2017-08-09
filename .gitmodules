@@ -1,0 +1,3 @@
+[submodule "Arduino/lib/FastLED"]
+	path = Arduino/lib/FastLED
+	url = https://github.com/FastLED/FastLED

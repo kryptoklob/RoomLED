@@ -1,3 +1,6 @@
+// Variables
+#include "variables.h"
+
 // Support functions
 #include "addglitter.h"
 #include "make_palettes.h"
@@ -10,7 +13,7 @@
 #include "confetti_pal.h"
 #include "gradient_palettes.h"
 #include "juggle_pal.h"
-#include "matrix_palh.h"
+#include "matrix_pal.h"
 #include "noise16_pal.h"
 #include "noise8_pal.h"
 #include "one_sin_pal.h"

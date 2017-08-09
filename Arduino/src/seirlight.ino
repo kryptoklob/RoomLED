@@ -1,3 +1,5 @@
+#include "includes.h"
+
 void setup() {
 
   // Set up serial connection
@@ -8,7 +10,8 @@ void setup() {
 
   // Set up LEDS
   LEDS.setBrightness(max_bright);
-  LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER >(leds, MAX_LEDS);
+  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER >(leds, NUM_LEDS);
+  LEDS.addLeds<LED_TYPE, LED_PIN_TWO, COLOR_ORDER >(leds, NUM_LEDS);
   set_max_power_in_volts_and_milliamps(5, 1000);
 
   // Set up variables
@@ -20,7 +23,6 @@ void setup() {
  
   // Load starting mode and number of leds
   ledMode = EEPROM.read(STARTMODE);   
-  NUM_LEDS = EEPROM.read(STRANDLEN); if(NUM_LEDS >MAX_LEDS) NUM_LEDS = MAX_LEDS;s
 
   // Set up palettes
   currentPalette  = CRGBPalette16(CRGB::Black);
@@ -177,136 +179,27 @@ void strobe_mode(uint8_t newMode, bool mc){
   }
 }
 
-
-
-void demo_check(){
-  
-  if(demorun) {                                                   // Is the demo flag set? If so, let's cycle through them.
-    uint8_t secondHand = (millis() / 1000) % (maxMode*demotime);        // Adjust for total time of the loop, based on total number of available modes.
-    static uint8_t lastSecond = 99;                               // Static variable, means it's only defined once. This is our 'debounce' variable.
-    if (lastSecond != secondHand) {                               // Debounce to make sure we're not repeating an assignment.
-      lastSecond = secondHand;
-        if(secondHand%demotime==0) {                                     // Every 10 seconds.
-          if(demorun == 2) ledMode = random8(0,maxMode); else {
-            ledMode = secondHand/demotime;
-          }
-          strobe_mode(ledMode,1);                            // Does NOT reset to 0.
-      } // if secondHand
-    } // if lastSecond
-  } // if demorun
-  
-} // demo_check()
-// Turtles all the way down.
-
-
-
 //----------------- IR Receiver, Keyboard and Button Command Processing ---------------------------------------------
-
-void getirl() {                                                   // This is the IR function that gets the value and selects/performs command.
-  
-  if (IRProtocol) {
-
-    if(IRCommand == 64260 || strandFlag == 1) {set_strand();}
-    
-    if (strandActive==1 || IRCommand == 63495) {
-    
-      Serial.print("Command: ");
-      Serial.println(IRCommand);
-      switch(IRCommand) {
-        case 65280:  max_bright=min(max_bright*2,255); LEDS.setBrightness(max_bright); break;                                       //a1 - Increase max bright
-        case 65025:  max_bright=max(max_bright/2,1); LEDS.setBrightness(max_bright); break;                                         //a2 - Decrease max bright
-        case 64770:  demorun = 0; ledMode = 0; strobe_mode(ledMode,1); break;                                                                          //a3 - Change to mode 0
-        case 64515:  demorun = !demorun; if(demorun) {Serial.println("Demo mode");} else {Serial.println("Not demo mode");} break;  //a4 - Toggle demo mode
-  
-//        case 64260:  set_strand(); break;                                                                                                                                                  //b1 - Write the current # of LED's
-        case 64005:  demorun = 0; ledMode = 0; NUM_LEDS--; Serial.print("NUM_LEDS: "); Serial.println(NUM_LEDS); fill_solid(leds,MAX_LEDS,CRGB(0,0,0)); fill_solid(leds,NUM_LEDS,CRGB(255,255,255)); break;          //b2 - Decrease # of LED's
-        case 63750:  demorun = 0; ledMode = 0; NUM_LEDS++; Serial.print("NUM_LEDS: "); Serial.println(NUM_LEDS);  fill_solid(leds,MAX_LEDS,CRGB(0,0,0)); fill_solid(leds,NUM_LEDS,CRGB(255,255,255)); break;         //b3 - Increase # of LED's
-        case 63495:  EEPROM.write(STRANDLEN,NUM_LEDS); Serial.print("Writing IR: "); Serial.print(NUM_LEDS); Serial.println(" LEDs"); break;                                                  //b4 - Here is where we enable or disable a strand from receiving commands
-  
-        case 63240:  strobe_mode(9,1);    break;                //c1 - 
-        case 62985:  thisdelay++;         break;                //c2 - thisdelay++;
-        case 62730:  thisdelay--;         break;                //c3 - thisdelay--;
-        case 62475:  strobe_mode(12,1);   break;                //c4
-  
-        case 62220:  glitter = !glitter; Serial.println("Glitter baby!");   break;                                    //d1 - Glitter
-        case 61965:  demorun = 0; ledMode=(ledMode-1); if (ledMode==255) ledMode=maxMode; strobe_mode(ledMode,1); break;            //d2 - strobe_mode(ledMode--);
-        case 61710:  demorun = 0; ledMode=(ledMode+1)%(maxMode+1); strobe_mode(ledMode,1); break;                                   //d3 - strobe_mode(ledMode++);
-        case 61455:  EEPROM.write(STARTMODE,ledMode); Serial.print("Writing IR: "); Serial.println(ledMode);  break;     //d4 - Save startup mode
-  
-        case 61200:  strobe_mode(17,1);   break;                //e1 -
-        case 60945:  thisdir = 1;         break;                //e2 - thisdir = 1;
-        case 60690:  thisdir = 0;         break;                //e3 - thisdir = 0;
-        case 60435:  strobe_mode(20,1);   break;                //e4
-  
-        case 60180:  palchg = 0; Serial.println("Fixed Palette");            break;                 //f1 - No palette change
-        case 59925:  palchg = 1; Serial.println("Similar 4 Palette");        break;                 //f2 - Similar 4 palette
-        case 59670:  palchg = 2; Serial.println("Random 4 Palette");         break;                 //f3 - Random 4 palette
-        case 59415:  palchg = 3; Serial.println("Random 16 Palette");        break;                 //f4 - Random 16 palette
-  
-        default:                          break;                // We could do something by default
-      } // switch
-    } // strandActive
-    IRProtocol = 0;                                             // reset IRProtocol variable to not read the same value twice.
-  } // if IRLavailable()
-  
-} // getirl()
-
-
-
-void IREvent(uint8_t protocol, uint16_t address, uint32_t command) {
-  
-  if (IRL_BLOCKING && !IRProtocol) {
-    IRProtocol = protocol;                                        // update the values to the newest valid input
-    IRAddress = address;
-    IRCommand = command;
-  }
-  
-} // IREvent()
-
-
-
-void set_strand() {                                           // Setting the active strand.
-
-  if(IRCommand == 64260) IRProtocol = 0;                      // Command is to set strand to let's clear the Protocol flag.
-
-  strandFlag = 1;                                             // We need this state flag in order to be able to continue to run the routine while changing active/inactive.
-  Serial.print("Strand is: ");
-
-  if (IRProtocol) {                                           // We have a command and the strandFlag is 1 and it's not the Set Active flag command.
-    Serial.println(IRCommand);
-    strandFlag = 0;                                           // We know we're finally setting the strand to be ACTIVE/INACTIVE, so we'll clear that state flag.
-    if (IRCommand == STRANDID)  {
-      strandActive = 1; Serial.println("ACTIVE");
-    } else {
-      strandActive = 0; Serial.println("INACTIVE");
-    }
-    IRProtocol = 0;                                             // Let's clear the the IRProtocol flag and be ready for another command.
-  }
-
-} // set_strand()
-
-
 
 void readkeyboard() {                                         // Process serial commands
   while (Serial.available() > 0) {
   
-    inbyte = Serial.read();                                   // Read the command
+    in_byte = Serial.read();                                   // Read the command
 
-    if (inbyte != 10) {                                       // Don't print out the separate carriage return.
+    if (in_byte != 10) {                                       // Don't print out the separate carriage return.
       Serial.print("# ");
-      Serial.print(char(inbyte));
+      Serial.print(char(in_byte));
       Serial.print(" ");
     }
     
-    switch(inbyte) {
+    switch(in_byte) {
 
       case 97:                                                // "a" - SET ALL TO ONE colour BY hue = 0 - 255
-        demorun = 0;
         ledMode = 0;
-        thisarg = Serial.parseInt();
-        thisarg = constrain(thisarg,0,255);
-        Serial.println(thisarg);
-        fill_solid(leds, NUM_LEDS, CHSV(thisarg, 255, 255));
+        this_arg = Serial.parseInt();
+        this_arg = constrain(this_arg,0,255);
+        Serial.println(this_arg);
+        fill_solid(leds, NUM_LEDS, CHSV(this_arg, 255, 255));
         break;
 
       case 98:                                                // "b" - SET MAX BRIGHTNESS to #
@@ -318,21 +211,20 @@ void readkeyboard() {                                         // Process serial 
 
       case 99:                                                // "c" - CLEAR STRIP
         Serial.println(" ");
-        demorun = 0;
         ledMode = 0;
         strobe_mode(ledMode, 1);
         break;
 
       case 100:                                               // "d" - SET DELAY VAR to #
-        thisarg = Serial.parseInt();
-        thisdelay = constrain(thisarg,0,255);
+        this_arg = Serial.parseInt();
+        thisdelay = constrain(this_arg,0,255);
         Serial.println(thisdelay);
         break;
 
       case 101:                                              // "e" - SET PREVIOUS / NEXT mode
 
-        thisarg = Serial.parseInt();
-        if (thisarg) {
+        this_arg = Serial.parseInt();
+        if (this_arg) {
           demorun = 0; ledMode=(ledMode+1)%(maxMode+1);
         } else {
          demorun = 0; ledMode=(ledMode-1); if (ledMode==255) ledMode=maxMode; 
@@ -343,8 +235,8 @@ void readkeyboard() {                                         // Process serial 
       case 102:                                               // "f - Set a fixed palette
         demorun = 0;
         palchg = 0;
-        thisarg = Serial.parseInt();
-        gCurrentPaletteNumber = thisarg % gGradientPaletteCount;
+        this_arg = Serial.parseInt();
+        gCurrentPaletteNumber = this_arg % gGradientPaletteCount;
         targetPalette = gGradientPalettes[gCurrentPaletteNumber];
         Serial.println(gCurrentPaletteNumber);
         break;
@@ -355,28 +247,20 @@ void readkeyboard() {                                         // Process serial 
         break;
 
       case 104:                                               // "h" - SET HUE VAR to #
-        thisarg = Serial.parseInt();
-        thishue = constrain(thisarg,0,255);
+        this_arg = Serial.parseInt();
+        thishue = constrain(this_arg,0,255);
         Serial.println(thishue);
         break;
 
       case 105:                                               // "i" - Set Similar Palette with hue selection
         palchg = 0;
-        thisarg = Serial.parseInt();
-        thishue = constrain(thisarg,0,255);
+        this_arg = Serial.parseInt();
+        thishue = constrain(this_arg,0,255);
         Serial.println(thishue);
         SetupMySimilar4Palette();
         break;
 
-      case 108:                                               // "l" - Set strip length & save
-        thisarg = Serial.parseInt();
-        NUM_LEDS = constrain(thisarg,1,MAX_LEDS);
-        Serial.println(NUM_LEDS);
-        EEPROM.write(STRANDLEN, NUM_LEDS);
-        break;
-
       case 109:                                               // "m" - SET MODE to #
-        demorun = 0;
         ledMode = Serial.parseInt();
         ledMode = constrain(ledMode,0,maxMode);
         Serial.println(ledMode);
@@ -394,26 +278,16 @@ void readkeyboard() {                                         // Process serial 
         Serial.println(demorun);        
         break;      
       
-      case 113:                                               // "q" - Get version number
-        Serial.println(SEIRLIGHT_VERSION);
-        break;
-
       case 115:                                               // "s"  SET SATURATION VAR to #
-        thisarg = Serial.parseInt();
-        thissat = constrain(thisarg,0,255);
+        this_arg = Serial.parseInt();
+        thissat = constrain(this_arg,0,255);
         Serial.println(thissat);
         break;
 
       case 116:                                               // "t" - Select Palette mode
-        thisarg = Serial.parseInt();
-        palchg = constrain(thisarg,0,3);
+        this_arg = Serial.parseInt();
+        palchg = constrain(this_arg,0,3);
         Serial.println(palchg);
-        break;
-
-      case 117:                                               // "u" - Sequence duration
-        thisarg = Serial.parseInt();
-        demotime = constrain(thisarg,1,255);
-        Serial.println(demotime);
         break;
 
       case 119:                                               // "w" - Write current mode to EEPROM
@@ -426,37 +300,3 @@ void readkeyboard() {                                         // Process serial 
   } // while Serial.available
   
 } // readkeyboard()
-
-
-
-void readbutton() {                                           // Read the button and perform action
-
-  uint8_t b = checkButton();
-
-  if (b == 1) {                                               // Just a click event to advance the mode
-    demorun = 0;
-    ledMode=(ledMode+1)%(maxMode+1);
-    strobe_mode(ledMode,1);
-    Serial.print("Advance ");
-    Serial.println(ledMode);
-  }
-
-  if (b == 2) {                                               // A double-click event to reset to 0
-    demorun = 0;
-    ledMode = 0;
-    strobe_mode(ledMode, 1);
-    Serial.println("Reset");
-  }
-
-  if (b == 3) {                                               // A hold event to write current mode to EEPROM
-    demorun = 0;
-    EEPROM.write(STARTMODE,ledMode);
-    Serial.print("Writing Button: ");
-    Serial.println(ledMode);
-  }
-
-} // readbutton()
-
-
-
-

@@ -13,16 +13,15 @@
 #define SERIAL_TIMEOUT 5
 
 // Arduino pin setup
-#define LED_PIN_TOP_LEFT 2
-#define LED_PIN_TOP_RIGHT 3
-#define LED_PIN_BOT_LEFT 4
-#define LED_PIN_BOT_RIGHT 5
+#define LED_PIN_ONE 2
+#define LED_PIN_TWO 3
 
 // LED Meta Defines
 #define COLOR_ORDER BGR
 #define LED_TYPE WS2812B
-#define LEDS_PER_STRIP 150
+#define NUM_LEDS 150
 #define STARTMODE 0
+#define STRANDLEN 150
 
 // ---------- RUNTIME VARS ---------- //
 
@@ -31,7 +30,7 @@ byte in_byte;
 int this_arg;
 
 // LED Meta Variables
-struct CRGB leds[MAX_LEDS];
+struct CRGB leds[NUM_LEDS];
 CRGBPalette16 currentPalette;         // Current palette we're using
 CRGBPalette16 targetPalette;          // Next palette to transition to
 TBlendType currentBlending;           // Linear vs No-Blending
@@ -45,6 +44,7 @@ uint8_t currentPatternIndex   = 0;                                // Index of cu
 uint8_t max_bright = 255;
 uint8_t ledMode;
 uint8_t maxMode = 100;
+uint8_t demorun = 0;
 
 // LED Routine/Shared Variables
 uint8_t allfreq     = 32;             // Frequency (width of bars)
@@ -58,7 +58,7 @@ uint8_t thisbright  = 0;              // Starndard brightness
 uint8_t thiscutoff  = 192;            // Cuttoff value; lower = longer wave
 int     thisdelay   = 0;              // Standard delay
 uint8_t thisdiff    = 1;              // Standard palette index jump
-uint8_t thidir      = 0;              // Standard direction
+uint8_t thisdir      = 0;              // Standard direction
 uint8_t thisfade    = 224;            // Standard fate rate
 uint8_t thishue     = 0;              // Standard hue
 uint8_t thisindex   = 0;              // Standard pallete index
@@ -68,6 +68,6 @@ uint8_t thisrot     = 1;              // Standard hue rotation rate
 uint8_t thissat     = 255;            // Standard saturdation
 uint8_t thisspeed   = 4;              // Standard speed change
 uint8_t wavebright  = 255;            // Brightness of the waves/bars
-uint8_t xd[MAX_LEDS];                 // X-array for 2d coordinates of leds
-uint8_t yd[MAX_LEDS];                 // Y-array for 2d coordinates of leds
+uint8_t xd[NUM_LEDS];                 // X-array for 2d coordinates of leds
+uint8_t yd[NUM_LEDS];                 // Y-array for 2d coordinates of leds
 long    sum         = 0;              // ???                                  #fixme

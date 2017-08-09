@@ -10,7 +10,7 @@
 
 // Serial vars
 #define SERIAL_BAUDRATE 57600
-#define SERIAL_TIMEOUT 5
+#define SERIAL_TIMEOUT 750
 
 // Arduino pin setup
 #define LED_PIN_ONE 2

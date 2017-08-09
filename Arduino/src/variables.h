@@ -16,8 +16,10 @@
 #define SERIAL_TIMEOUT 750
 
 // Arduino pin setup
-#define LED_PIN_ONE 2
-#define LED_PIN_TWO 3
+
+  // @CHANGEME
+  // #define LED_PIN_ONE 2
+  // #define LED_PIN_TWO 3 
 
 // LED Meta Defines
 #define COLOR_ORDER BGR

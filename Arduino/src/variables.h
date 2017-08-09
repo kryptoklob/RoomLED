@@ -19,7 +19,7 @@
 // LED Meta Defines
 #define COLOR_ORDER BGR
 #define LED_TYPE WS2812B
-#define NUM_LEDS 150
+#define NUM_LEDS_PER_STRIP 150
 #define STARTMODE 0
 #define STRANDLEN 150
 
@@ -30,7 +30,7 @@ byte in_byte;
 int this_arg;
 
 // LED Meta Variables
-struct CRGB leds[NUM_LEDS];
+struct CRGB leds[NUM_LEDS_PER_STRIP];
 CRGBPalette16 current_palette;         // Current palette we're using
 CRGBPalette16 target_palette;          // Next palette to transition to
 TBlendType current_blending;           // Linear vs No-Blending
@@ -68,5 +68,5 @@ uint8_t this_rot        = 1;      // Standard hue rotation rate
 uint8_t this_sat        = 255;    // Standard saturdation
 uint8_t this_speed      = 4;      // Standard speed change
 uint8_t wave_brightness = 255;    // Brightness of the waves/bars
-uint8_t xd[NUM_LEDS];             // X-array for 2d coordinates of leds
-uint8_t yd[NUM_LEDS];             // Y-array for 2d coordinates of leds
+uint8_t xd[NUM_LEDS_PER_STRIP];             // X-array for 2d coordinates of leds
+uint8_t yd[NUM_LEDS_PER_STRIP];             // Y-array for 2d coordinates of leds

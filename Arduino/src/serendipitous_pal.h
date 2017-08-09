@@ -33,8 +33,8 @@ void serendipitous_pal() {
   X = Xn;
   Y = Yn;
   this_index = (sin8(X)+cos8(Y))/2;
-  leds[X%(NUM_LEDS-1)] = ColorFromPalette(current_palette, this_index, 255, LINEARBLEND);
-  fadeToBlackBy(leds, NUM_LEDS, 16);                     // 8 bit, 1 = slow, 255 = fast
+  leds[X%(NUM_LEDS_PER_STRIP-1)] = ColorFromPalette(current_palette, this_index, 255, LINEARBLEND);
+  fadeToBlackBy(leds, NUM_LEDS_PER_STRIP, 16);                     // 8 bit, 1 = slow, 255 = fast
   
 } // serendipitous_pal()
 

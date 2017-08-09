@@ -13,7 +13,7 @@ void circnoise_pal_4() {
 
   uint8_t scale = 1000;                               // the "zoom factor" for the noise
 
-  for (uint16_t i = 0; i < NUM_LEDS; i++) {
+  for (uint16_t i = 0; i < NUM_LEDS_PER_STRIP; i++) {
 
     uint16_t shift_x = beatsin8(15);                          // x as a function of time
     uint16_t shift_y = beatsin8(17);                          // y as a function of time

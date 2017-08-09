@@ -24,18 +24,18 @@ void matrix_pal() {                                           // One line matrix
     if (this_dir == 0)
       leds[0] = ColorFromPalette(current_palette, this_index, this_bright, current_blending); 
     else
-      leds[NUM_LEDS-1] = ColorFromPalette( current_palette, this_index, this_bright, current_blending);
+      leds[NUM_LEDS_PER_STRIP-1] = ColorFromPalette( current_palette, this_index, this_bright, current_blending);
   } else {
     if (this_dir == 0)
       leds[0] = CHSV(bg_clr, this_sat, bg_bri); 
     else
-      leds[NUM_LEDS-1] = CHSV(bg_clr, this_sat, bg_bri);
+      leds[NUM_LEDS_PER_STRIP-1] = CHSV(bg_clr, this_sat, bg_bri);
   }
 
   if (this_dir == 0) {
-    for (int i = NUM_LEDS-1; i >0 ; i-- ) leds[i] = leds[i-1];
+    for (int i = NUM_LEDS_PER_STRIP-1; i >0 ; i-- ) leds[i] = leds[i-1];
   } else {
-    for (int i = 0; i < NUM_LEDS-1 ; i++ ) leds[i] = leds[i+1];
+    for (int i = 0; i < NUM_LEDS_PER_STRIP-1 ; i++ ) leds[i] = leds[i+1];
   }
 
 } // matrix_pal()

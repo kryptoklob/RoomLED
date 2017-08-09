@@ -15,10 +15,10 @@ int8_t hxyinc = 3;       //3
 
 
 void noise16_pal() {
-  fill_noise16(leds, NUM_LEDS, octaves, x, xscale, hue_octaves, hxy, hue_scale, hue_time);
+  fill_noise16(leds, NUM_LEDS_PER_STRIP, octaves, x, xscale, hue_octaves, hxy, hue_scale, hue_time);
   if (this_dir == 0) {hxy+=hxyinc; x += x_speed; hue_time+= hue_speed;} else { hxy-=hxyinc; x -= x_speed; hue_time -= hue_speed;}
 
-//  for (int i=0; i<NUM_LEDS; i++) {                            // We can filter, we can invert, we can do all sorts of things.
+//  for (int i=0; i<NUM_LEDS_PER_STRIP; i++) {                            // We can filter, we can invert, we can do all sorts of things.
 //    leds[i].r = 0;                                            // Filter out red
 //    leds[i].g = 0;                                            // Filter out green
 //    leds[i].b = 0;                                            // Filter out blue

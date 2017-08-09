@@ -18,7 +18,7 @@ void three_sin_pal() {
   wave2 += beatsin8(15,-2,2);
   wave3 += beatsin8(12,-3, 3);
 
-  for (int k=0; k<NUM_LEDS; k++) {
+  for (int k=0; k<NUM_LEDS_PER_STRIP; k++) {
     uint8_t tmp = sin8(mul1*k + wave1) + sin8(mul1*k + wave2) + sin8(mul1*k + wave3);
     leds[k] = ColorFromPalette( current_palette, tmp, 255);
   }

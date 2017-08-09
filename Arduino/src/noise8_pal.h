@@ -12,7 +12,7 @@ uint16_t scale = 30;          // Wouldn't recommend changing this_ on the fly, o
 
 void noise8_pal() {
  
-  for(int i = 0; i < NUM_LEDS; i++) {                                      // Just ONE loop to fill up the LED array as all of the pixels change.
+  for(int i = 0; i < NUM_LEDS_PER_STRIP; i++) {                                      // Just ONE loop to fill up the LED array as all of the pixels change.
     uint8_t index = inoise8(i*scale, dist+i*scale) % 255;                  // Get a value from the noise function. I'm using both x and y axis.
     leds[i] = ColorFromPalette(current_palette, index, 255, LINEARBLEND);   // With that value, look up the 8 bit colour palette value and assign it to the current LED.
   }

@@ -9,8 +9,8 @@ void setup() {
 
   // Set up LEDS
   LEDS.setBrightness(max_bright);
-  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER >(leds, NUM_LEDS);
-  LEDS.addLeds<LED_TYPE, LED_PIN_TWO, COLOR_ORDER >(leds, NUM_LEDS);
+  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER >(leds, NUM_LEDS_PER_STRIP);
+  LEDS.addLeds<LED_TYPE, LED_PIN_TWO, COLOR_ORDER >(leds, NUM_LEDS_PER_STRIP);
   set_max_power_in_volts_and_milliamps(5, 1000);
 
   // Set up variables
@@ -29,8 +29,8 @@ void setup() {
   current_blending = LINEARBLEND;
 
   // Set up circ_noise variables
-  for (uint8_t i = 0; i < NUM_LEDS; i++) {  
-    uint8_t angle = (i * 256) / NUM_LEDS;  
+  for (uint8_t i = 0; i < NUM_LEDS_PER_STRIP; i++) {  
+    uint8_t angle = (i * 256) / NUM_LEDS_PER_STRIP;  
     xd[i] = cos8( angle );                
     yd[i] = sin8( angle );               
   }
@@ -77,7 +77,7 @@ void strobe_mode(uint8_t newMode, bool mc){
 
   // If this_ is a *new* mode, clear out LED array.
   if(mc) {
-    fill_solid(leds, NUM_LEDS, CRGB( 0, 0, 0));
+    fill_solid(leds, NUM_LEDS_PER_STRIP, CRGB( 0, 0, 0));
     Serial.print("Mode: "); 
     Serial.println(led_mode);
   }
@@ -86,12 +86,12 @@ void strobe_mode(uint8_t newMode, bool mc){
 
     // 0 - all of
     case  0: 
-      if(mc) { fill_solid(leds, NUM_LEDS, CRGB( 0, 0, 0 )); } 
+      if(mc) { fill_solid(leds, NUM_LEDS_PER_STRIP, CRGB( 0, 0, 0 )); } 
       break;
 
     // 1 - all on
     case  1: 
-      if(mc) { fill_solid(leds, NUM_LEDS, CRGB( 255, 255, 255 )); } 
+      if(mc) { fill_solid(leds, NUM_LEDS_PER_STRIP, CRGB( 255, 255, 255 )); } 
       break;
 
     // 2 - two-sin
@@ -345,7 +345,7 @@ void readkeyboard() {
         this_arg = Serial.parseInt();
         this_arg = constrain(this_arg, 0, 255);
         Serial.println(this_arg);
-        fill_solid(leds, NUM_LEDS, CHSV(this_arg, 255, 255));
+        fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(this_arg, 255, 255));
         break;
 
       // Command: b {brightness} - set entire strip to {brightness} (0-255)

@@ -29,7 +29,7 @@ void one_sin_pal() {
   this_index = start_index;
   this_phase += this_speed;                                                                     // You can change direction and speed individually.
 
-  for (int k=0; k<NUM_LEDS; k++) {                                                            // For each of the LED's in the strand, set a brightness based on a wave as follows:
+  for (int k=0; k<NUM_LEDS_PER_STRIP; k++) {                                                            // For each of the LED's in the strand, set a brightness based on a wave as follows:
     int this_bright = qsubd(cubicwave8((k*all_freq)+this_phase), this_cutoff);                    // qsub sets a minimum value called this_cutoff. If < this_cutoff, then bright = 0. Otherwise, bright = 128 (as defined in qsub)..
     leds[k] = CHSV(bg_clr, 255, bg_bri);                                                        // First set a background colour, but fully saturated.
     leds[k] += ColorFromPalette(current_palette, this_index + k*this_inc, this_bright, current_blending);

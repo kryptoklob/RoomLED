@@ -8,9 +8,4 @@
 .profile
 .bashrc
 .bash_logout
-.homeassistant/home-assistant_v2.db
-.homeasisstant/home-assistant.log
 .cache*
-.homeassistant/deps*
-.homeassistant/tts*
-.homeassistant/.*

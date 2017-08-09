@@ -20,7 +20,7 @@
 
 // LED Meta Defines
 #define COLOR_ORDER BGR
-#define LED_TYPE WS2812B, APA102, etc
+#define LED_TYPE WS2812B
 #define NUM_LEDS_PER_STRIP 75
 #define STARTMODE 0
 #define STRANDLEN 75

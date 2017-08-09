@@ -5,13 +5,13 @@
 
 /*  Usage - confetti_pal();
  *   
- *  thisfade
- *  thisdelay
- *  currentPalette and targetPalette
- *  thisdiff
- *  thisindex
- *  thisinc
- *  thisbright
+ *  this_fade
+ *  this_delay
+ *  current_palette and target_palette
+ *  this_diff
+ *  this_index
+ *  this_inc
+ *  this_bright
  */
 
 
@@ -21,10 +21,10 @@ void confetti_pal() {                                                           
 //    SetupSimilar4Palette();
 //  }
 
-  fadeToBlackBy(leds, NUM_LEDS, thisfade);                                                                      
+  fadeToBlackBy(leds, NUM_LEDS, this_fade);                                                                      
   int pos = random8(NUM_LEDS);                                                                                      // Pick an LED at random.
-  leds[pos] = ColorFromPalette(currentPalette, thisindex + random8(thisdiff)/4 , thisbright, currentBlending);      // Munge the values and pick a colour from the palette
-  thisindex = thisindex + thisinc;                                                                                  // base palette counter increments here.
+  leds[pos] = ColorFromPalette(current_palette, this_index + random8(this_diff)/4 , this_bright, current_blending);      // Munge the values and pick a colour from the palette
+  this_index = this_index + this_inc;                                                                                  // base palette counter increments here.
 } // confetti_pal()
 
 #endif

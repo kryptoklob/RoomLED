@@ -5,22 +5,22 @@
 
 /*  Usage - juggle_pal();
  *  
- *  thishue
- *  thisfade
+ *  this_hue
+ *  this_fade
  *  numdots
- *  thisbeat
- *  thisbright
- *  thisdiff
+ *  this_beat
+ *  this_bright
+ *  this_diff
  */
 
 uint8_t numdots;
 
 void juggle_pal() {                                            // Several colored dots, weaving in and out of sync with each other
-  thisindex = 0;                                           // Reset the hue values.
-  fadeToBlackBy(leds, NUM_LEDS, thisfade);
+  this_index = 0;                                           // Reset the hue values.
+  fadeToBlackBy(leds, NUM_LEDS, this_fade);
   for( int i = 0; i < numdots; i++) {
-    leds[beatsin16(thisbeat+i+numdots,0,NUM_LEDS)] += ColorFromPalette(currentPalette, thisindex , thisbright, currentBlending);    // Munge the values and pick a colour from the palette
-    thisindex += thisdiff;
+    leds[beatsin16(this_beat+i+numdots,0,NUM_LEDS)] += ColorFromPalette(current_palette, this_index , this_bright, current_blending);    // Munge the values and pick a colour from the palette
+    this_index += this_diff;
   }
 } // juggle_pal()
 

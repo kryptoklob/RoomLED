@@ -7,32 +7,32 @@
  *  This is one of the few routines I have with pixel counting.
  *  
  *  
- * currentPalette, targetPalette
- * thisrot
- * thisindex
- * bgclr
- * bgbri
- * thisdir
- * thisbright
+ * current_palette, target_palette
+ * this_rot
+ * this_index
+ * bg_clr
+ * bg_bri
+ * this_dir
+ * this_bright
  */
 
 void matrix_pal() {                                           // One line matrix
 
-  if (thisrot) thisindex++;                                   // Increase palette index to change colours on the fly
+  if (this_rot) this_index++;                                   // Increase palette index to change colours on the fly
   
   if (random8(90) > 80) {
-    if (thisdir == 0)
-      leds[0] = ColorFromPalette(currentPalette, thisindex, thisbright, currentBlending); 
+    if (this_dir == 0)
+      leds[0] = ColorFromPalette(current_palette, this_index, this_bright, current_blending); 
     else
-      leds[NUM_LEDS-1] = ColorFromPalette( currentPalette, thisindex, thisbright, currentBlending);
+      leds[NUM_LEDS-1] = ColorFromPalette( current_palette, this_index, this_bright, current_blending);
   } else {
-    if (thisdir == 0)
-      leds[0] = CHSV(bgclr, thissat, bgbri); 
+    if (this_dir == 0)
+      leds[0] = CHSV(bg_clr, this_sat, bg_bri); 
     else
-      leds[NUM_LEDS-1] = CHSV(bgclr, thissat, bgbri);
+      leds[NUM_LEDS-1] = CHSV(bg_clr, this_sat, bg_bri);
   }
 
-  if (thisdir == 0) {
+  if (this_dir == 0) {
     for (int i = NUM_LEDS-1; i >0 ; i-- ) leds[i] = leds[i-1];
   } else {
     for (int i = 0; i < NUM_LEDS-1 ; i++ ) leds[i] = leds[i+1];

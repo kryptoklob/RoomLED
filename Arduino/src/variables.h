@@ -5,7 +5,7 @@
 #include "EEPROM.h"
 
 // Unsigned subtraction magic
-#define qsubd(x, b) ((x>b)?wavebright:0)
+#define qsubd(x, b) ((x>b)?wave_brightness:0)
 #define qsuba(x, b) ((x>b)?x-b:0)
 
 // Serial vars
@@ -31,43 +31,42 @@ int this_arg;
 
 // LED Meta Variables
 struct CRGB leds[NUM_LEDS];
-CRGBPalette16 currentPalette;         // Current palette we're using
-CRGBPalette16 targetPalette;          // Next palette to transition to
-TBlendType currentBlending;           // Linear vs No-Blending
-extern const TProgmemRGBGradientPalettePtr gGradientPalettes[];   // from gradient_palettes.h
-extern const uint8_t gGradientPaletteCount;                       // # of fixed palettes
-uint8_t gCurrentPaletteNumber = 0;                                // Current palette number
-uint8_t currentPatternIndex   = 0;                                // Index of current pattern
+CRGBPalette16 current_palette;         // Current palette we're using
+CRGBPalette16 target_palette;          // Next palette to transition to
+TBlendType current_blending;           // Linear vs No-Blending
+extern const TProgmemRGBGradientPalettePtr g_gradient_palettes[];   // from gradient_palettes.h
+extern const uint8_t g_gradient_palette_count;                      // # of fixed palettes
+uint8_t g_current_palette_number  = 0;                               // Current palette number
+uint8_t current_pattern_index     = 0;                                // Index of current pattern
 
 
 // LED Overall Variables
-uint8_t max_bright = 255;
-uint8_t ledMode;
-uint8_t maxMode = 100;
-uint8_t demorun = 0;
+uint8_t max_bright  = 255;
+uint8_t max_mode    = 100;
+uint8_t demo_run    = 0;
+uint8_t led_mode;
 
 // LED Routine/Shared Variables
-uint8_t allfreq     = 32;             // Frequency (width of bars)
-uint8_t bgclr       = 0;              // Background color
-uint8_t bgbri       = 0;              // Background brightness
-bool    glitter     = 0;              // Glitter flag
-uint8_t palchg;                       // ???                                  #fixme
-uint8_t startindex  = 0;              // ???                                  #fixme
-uint8_t thisbeat;                     // Standard beat                        #fixme
-uint8_t thisbright  = 0;              // Starndard brightness
-uint8_t thiscutoff  = 192;            // Cuttoff value; lower = longer wave
-int     thisdelay   = 0;              // Standard delay
-uint8_t thisdiff    = 1;              // Standard palette index jump
-uint8_t thisdir      = 0;              // Standard direction
-uint8_t thisfade    = 224;            // Standard fate rate
-uint8_t thishue     = 0;              // Standard hue
-uint8_t thisindex   = 0;              // Standard pallete index
-uint8_t thisinc     = 1;              // Standard incrementer                 #fixme
-int     thisphase   = 0;              // Standard phase change
-uint8_t thisrot     = 1;              // Standard hue rotation rate
-uint8_t thissat     = 255;            // Standard saturdation
-uint8_t thisspeed   = 4;              // Standard speed change
-uint8_t wavebright  = 255;            // Brightness of the waves/bars
-uint8_t xd[NUM_LEDS];                 // X-array for 2d coordinates of leds
-uint8_t yd[NUM_LEDS];                 // Y-array for 2d coordinates of leds
-long    sum         = 0;              // ???                                  #fixme
+uint8_t all_freq        = 32;     // Frequency (width of bars) (sine-routines)
+uint8_t bg_clr          = 0;      // Background color
+uint8_t bg_bri          = 0;      // Background brightness
+bool    glitter         = 0;      // Glitter flag
+uint8_t palette_change;           // 1 = similiar pallete, 2 = random4 palette, 3 = random16 palette
+uint8_t start_index     = 0;      // Foreground hue to start with (sine-routines)
+uint8_t this_beat;                // Beat tracker (juggle routine)
+uint8_t this_bright     = 0;      // Starndard brightness
+uint8_t this_cutoff     = 192;    // Cuttoff value; lower = longer wave
+int     this_delay      = 0;      // Standard delay
+uint8_t this_diff       = 1;      // Standard palette index jump
+uint8_t this_dir        = 0;      // Standard direction
+uint8_t this_fade       = 224;    // Standard fate rate
+uint8_t this_hue        = 0;      // Standard hue
+uint8_t this_index      = 0;      // Standard pallete index
+uint8_t this_inc        = 1;      // Changes starting color for each pass (sine-routines)
+int     this_phase      = 0;      // Standard phase change
+uint8_t this_rot        = 1;      // Standard hue rotation rate
+uint8_t this_sat        = 255;    // Standard saturdation
+uint8_t this_speed      = 4;      // Standard speed change
+uint8_t wave_brightness = 255;    // Brightness of the waves/bars
+uint8_t xd[NUM_LEDS];             // X-array for 2d coordinates of leds
+uint8_t yd[NUM_LEDS];             // Y-array for 2d coordinates of leds

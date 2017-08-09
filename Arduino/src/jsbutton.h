@@ -6,7 +6,7 @@
  * 
  * Oct. 13, 2009
  *
- * To keep a physical interface as simple as possible, this sketch demonstrates generating four output events from a single push-button.
+ * To keep a physical interface as simple as possible, this_ sketch demonstrates generating four output events from a single push-button.
  * 
  * 1) Click:  rapid press and release
  * 2) Double-Click:  two clicks in quick succession

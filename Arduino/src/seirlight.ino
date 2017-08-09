@@ -9,20 +9,13 @@ void setup() {
 
   // Set up LEDS
   LEDS.setBrightness(max_bright);
-
-  // -- @CHANGEME - ADD STRIPS HERE -------------------------------------------------------- //
-  
-     // Format:
-     // LEDS.addLeds<LED_TYPE, {led_pin_define}, COLOR_ORDER, >(leds, NUM_LEDS_PER_STRIP); 
-
-  // --------------------------------------------------------------------------------------- //
-
+  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER >(leds, NUM_LEDS_PER_STRIP);
+  LEDS.addLeds<LED_TYPE, LED_PIN_TWO, COLOR_ORDER >(leds, NUM_LEDS_PER_STRIP);
   set_max_power_in_volts_and_milliamps(5, 1000);
 
   // Set up variables
   random16_set_seed(4832);
   random16_add_entropy(analogRead(2));
-  int ranstart = random16();
 
   Serial.println("---SETUP COMPLETE---");
  
@@ -35,7 +28,7 @@ void setup() {
   current_blending = LINEARBLEND;
 
   // Set up circ_noise variables
-  for (uint8_t i = 0; i < NUM_LEDS_PER_STRIP; i++) {  
+  for (long i = 0; i < NUM_LEDS_PER_STRIP; i++) {  
     uint8_t angle = (i * 256) / NUM_LEDS_PER_STRIP;  
     xd[i] = cos8( angle );                
     yd[i] = sin8( angle );               

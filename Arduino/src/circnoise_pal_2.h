@@ -11,7 +11,7 @@
 // just moving along one axis = "lavalamp effect"
 void circnoise_pal_2() {
 
-  uint8_t scale = 1000;                               // the "zoom factor" for the noise
+  int scale = 1000;                               // the "zoom factor" for the noise
 
   for (uint16_t i = 0; i < NUM_LEDS_PER_STRIP; i++) {
 

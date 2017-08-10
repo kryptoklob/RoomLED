@@ -10,10 +10,9 @@ void setup() {
   // Set up LEDS
 	LEDS.setBrightness(max_bright);
 
-  // -- @CHANGEME - ADD STRIPS HERE -------------------------------------------------------- //
+  // -- Single strip of 150 LEDS set for development testing ------------------------------- //
   
-     // Format:
-     // LEDS.addLeds<LED_TYPE, {led_pin_define}, COLOR_ORDER, >(leds, NUM_LEDS_PER_STRIP); 
+  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER>(leds, NUM_LEDS_PER_STRIP); 
 
   // --------------------------------------------------------------------------------------- // 
 

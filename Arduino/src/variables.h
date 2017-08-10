@@ -17,16 +17,19 @@
 
 // Arduino pin setup
 
-  // @CHANGEME
-  // #define LED_PIN_ONE 2
-  // #define LED_PIN_TWO 3 
+// Single pin (2) defined for development testing
+#define LED_PIN_ONE 2
 
 // LED Meta Defines
 #define COLOR_ORDER BGR
-#define LED_TYPE @CHANGEME (WS2812B, APA102, etc)
-#define NUM_LEDS_PER_STRIP @CHANGEME
+
+// WS2812B used for development testing
+#define LED_TYPE WS2812B
+
+// 150 Length LED strip used for development testing
+#define NUM_LEDS_PER_STRIP 150
 #define STARTMODE 0
-#define STRANDLEN @CHANGEME
+#define STRANDLEN 150
 
 // ---------- RUNTIME VARS ---------- //
 

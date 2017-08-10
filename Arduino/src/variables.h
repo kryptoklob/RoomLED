@@ -44,9 +44,9 @@ CRGBPalette16 target_palette;          // Next palette to transition to
 TBlendType current_blending;           // Linear vs No-Blending
 extern const TProgmemRGBGradientPalettePtr g_gradient_palettes[];   // from gradient_palettes.h
 extern const uint8_t g_gradient_palette_count;                      // # of fixed palettes
-uint8_t g_current_palette_number  = 0;                               // Current palette number
-uint8_t current_pattern_index     = 0;                                // Index of current pattern
-
+uint8_t g_current_palette_number  = 0;                              // Current palette number
+uint8_t current_pattern_index     = 0;                              // Index of current pattern
+uint8_t default_mode              = 34;                             // Default mode to go to
 
 // LED Overall Variables
 uint8_t max_bright  = 255;
@@ -57,7 +57,7 @@ uint8_t led_mode;
 // LED Routine/Shared Variables
 uint8_t all_freq        = 32;     // Frequency (width of bars) (sine-routines)
 uint8_t bg_clr          = 0;      // Background color
-uint8_t bg_bri          = 0;      // Background brightness
+uint8_t bg_bri          = 20;      // Background brightness
 bool    glitter         = 0;      // Glitter flag
 uint8_t palette_change;           // 1 = similiar pallete, 2 = random4 palette, 3 = random16 palette
 uint8_t start_index     = 0;      // Foreground hue to start with (sine-routines)

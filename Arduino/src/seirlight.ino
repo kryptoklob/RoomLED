@@ -319,6 +319,12 @@ void strobe_mode(uint8_t newMode, bool mc){
  			if(mc) { this_delay = 10; target_palette = LavaColors_p; palette_change = 0; }
 			noise8_pal(); 
 			break;
+
+    // 39 - loading bar, then return to default mode
+    case 39:
+      if(mc) { this_delay = 10; target_palette = OceanColors_p; palette_change = 0; this_bright = 50; this_cutoff = 0; this_rot = 1; bg_clr = 64; }
+      loading_bar_pal();
+      break;
   }
 }
 

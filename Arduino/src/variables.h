@@ -21,7 +21,7 @@
 #define LED_PIN_ONE 2
 
 // LED Meta Defines
-#define COLOR_ORDER BGR
+#define COLOR_ORDER GRB
 
 // WS2812B used for development testing
 #define LED_TYPE WS2812B

@@ -322,7 +322,7 @@ void strobe_mode(uint8_t newMode, bool mc){
 
     // 39 - loading bar, then return to default mode
     case 39:
-      if(mc) { this_delay = 10; target_palette = OceanColors_p; palette_change = 0; this_bright = 50; this_cutoff = 0; this_rot = 1; bg_clr = 64; }
+      if(mc) { this_delay = 50; this_hue = 100; this_bright = 180;}
       loading_bar_pal();
       break;
   }
@@ -428,6 +428,7 @@ void readkeyboard() {
 
       // Command: m {mode} - select mode {mode} (0-255)
       case 109:
+	old_mode = led_mode;
         led_mode = Serial.parseInt();
         led_mode = constrain(led_mode, 0, max_mode);
         Serial.println(led_mode);

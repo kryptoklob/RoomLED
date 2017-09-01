@@ -14,21 +14,23 @@
  *  - bg_clr
  */
 
-uint8_t loading_index;
+uint8_t loading_index = 0;
+uint8_t old_mode;
 
 void loading_bar_pal() {
 
   // Fill up to loading_bar_index with gradient  
-  
   for (int k = 0; k < loading_index; k++) {
-    int this_bright = qsubd(cubicwave8(( k * all_freq ) + this_phase ), this_cutoff);
-    leds[k] = CHSV( bg_clr, 255, bg_bri);
-    leds[k] += ColorFromPalette(current_palette, this_index, this_bright, current_blending);
-    this_index += this_rot;
+    leds[k] 		    = CHSV(this_hue, this_sat, this_bright);
+    leds[STRANDLEN - k - 1] = CHSV(this_hue, this_sat, this_bright); 	
   }
- 
+
   loading_index++;
-  if ( loading_index == STRANDLEN ) { led_mode = default_mode; }
+
+  if ( loading_index == (STRANDLEN/2 + 20) ) { 
+   led_mode = old_mode;
+   if ( led_mode == 39 ) { led_mode = 0; }
+  }
 }
 
 #endif

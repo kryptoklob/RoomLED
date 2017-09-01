@@ -17,16 +17,19 @@
 
 // Arduino pin setup
 
-  // @CHANGEME
-  // #define LED_PIN_ONE 2
-  // #define LED_PIN_TWO 3 
+// Single pin (2) defined for development testing
+#define LED_PIN_ONE 2
 
 // LED Meta Defines
-#define COLOR_ORDER BGR
-#define LED_TYPE @CHANGEME (WS2812B, APA102, etc)
-#define NUM_LEDS_PER_STRIP @CHANGEME
+#define COLOR_ORDER GRB
+
+// WS2812B used for development testing
+#define LED_TYPE WS2812B
+
+// 150 Length LED strip used for development testing
+#define NUM_LEDS_PER_STRIP 150
 #define STARTMODE 0
-#define STRANDLEN @CHANGEME
+#define STRANDLEN 150
 
 // ---------- RUNTIME VARS ---------- //
 
@@ -41,9 +44,9 @@ CRGBPalette16 target_palette;          // Next palette to transition to
 TBlendType current_blending;           // Linear vs No-Blending
 extern const TProgmemRGBGradientPalettePtr g_gradient_palettes[];   // from gradient_palettes.h
 extern const uint8_t g_gradient_palette_count;                      // # of fixed palettes
-uint8_t g_current_palette_number  = 0;                               // Current palette number
-uint8_t current_pattern_index     = 0;                                // Index of current pattern
-
+uint8_t g_current_palette_number  = 0;                              // Current palette number
+uint8_t current_pattern_index     = 0;                              // Index of current pattern
+uint8_t default_mode              = 34;                             // Default mode to go to
 
 // LED Overall Variables
 uint8_t max_bright  = 255;
@@ -54,7 +57,7 @@ uint8_t led_mode;
 // LED Routine/Shared Variables
 uint8_t all_freq        = 32;     // Frequency (width of bars) (sine-routines)
 uint8_t bg_clr          = 0;      // Background color
-uint8_t bg_bri          = 0;      // Background brightness
+uint8_t bg_bri          = 20;      // Background brightness
 bool    glitter         = 0;      // Glitter flag
 uint8_t palette_change;           // 1 = similiar pallete, 2 = random4 palette, 3 = random16 palette
 uint8_t start_index     = 0;      // Foreground hue to start with (sine-routines)

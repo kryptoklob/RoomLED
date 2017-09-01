@@ -10,10 +10,9 @@ void setup() {
   // Set up LEDS
 	LEDS.setBrightness(max_bright);
 
-  // -- @CHANGEME - ADD STRIPS HERE -------------------------------------------------------- //
+  // -- Single strip of 150 LEDS set for development testing ------------------------------- //
   
-     // Format:
-     // LEDS.addLeds<LED_TYPE, {led_pin_define}, COLOR_ORDER, >(leds, NUM_LEDS_PER_STRIP); 
+  LEDS.addLeds<LED_TYPE, LED_PIN_ONE, COLOR_ORDER>(leds, NUM_LEDS_PER_STRIP); 
 
   // --------------------------------------------------------------------------------------- // 
 
@@ -320,6 +319,12 @@ void strobe_mode(uint8_t newMode, bool mc){
  			if(mc) { this_delay = 10; target_palette = LavaColors_p; palette_change = 0; }
 			noise8_pal(); 
 			break;
+
+    // 39 - loading bar, then return to default mode
+    case 39:
+      if(mc) { this_delay = 50; this_hue = 100; this_bright = 180;}
+      loading_bar_pal();
+      break;
   }
 }
 
@@ -423,6 +428,7 @@ void readkeyboard() {
 
       // Command: m {mode} - select mode {mode} (0-255)
       case 109:
+	old_mode = led_mode;
         led_mode = Serial.parseInt();
         led_mode = constrain(led_mode, 0, max_mode);
         Serial.println(led_mode);

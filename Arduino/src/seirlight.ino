@@ -318,7 +318,7 @@ void strobe_mode(uint8_t newMode, bool mc){
 
     // 39 - loading bar, then return to default mode
     case 39:
-      if(mc) { this_delay = 50; this_hue = 100; this_bright = 180;}
+      if(mc) { this_delay = 50; this_hue = 100; this_bright = 100;}
       loading_bar_pal();
       break;
   }

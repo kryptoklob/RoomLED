@@ -318,8 +318,13 @@ void strobe_mode(uint8_t newMode, bool mc){
 
     // 39 - loading bar, then return to default mode
     case 39:
-      if(mc) { this_delay = 50; this_hue = 100; this_bright = 100;}
+      if(mc) { this_delay = 75; this_hue = 100; this_bright = 220;}
       loading_bar_pal();
+      break;
+
+    // 40 - one color, for Drue
+    case 40:
+      fill_solid(leds, NUM_LEDS_PER_STRIP, this_hue); 
       break;
   }
 }

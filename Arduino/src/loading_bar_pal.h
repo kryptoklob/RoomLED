@@ -29,6 +29,7 @@ void loading_bar_pal() {
 
   if ( loading_index == (STRANDLEN/2 + 20) ) { 
    led_mode = old_mode;
+   loading_index = 0;
    if ( led_mode == 39 ) { led_mode = 0; }
   }
 }

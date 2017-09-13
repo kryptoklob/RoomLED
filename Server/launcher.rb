@@ -24,14 +24,22 @@ class Launcher
     @serial_port   = SerialPort.new(@port, @baud, @data, @stop, @parity)
     sleep(5)
 
+    puts("Setting default hue...")
+    @serial_port.putc("h")
+    @serial_port.putc("1")
+    @serial_port.putc("1")
+    @serial_port.putc("5")
+
+    sleep(5)
+
     puts("Setting default mode...")
     @serial_port.putc("m")
-    @serial_port.putc("3")
     @serial_port.putc("4")
+    @serial_port.putc("0")
   end
 
   def get_latest_commit
-    cmd = "curl --user cditchfield:#{@KEY} https://api.bitbucket.org/2.0/repositories/neadwerx/xerp"
+    cmd = "curl -s --user cditchfield:#{@KEY} https://api.bitbucket.org/2.0/repositories/neadwerx/xerp"
     result = `#{cmd}`
 
     @latest_commit = JSON.parse(result)["updated_on"]
@@ -40,7 +48,11 @@ class Launcher
   end
 
   def run_loading_bar
+    puts("----------------------")
+    puts(" ")
     puts("Running loading bar...")
+    puts(" ")
+    puts("----------------------")
     @serial_port.putc("m")
     @serial_port.putc("3")
     @serial_port.putc("9")  

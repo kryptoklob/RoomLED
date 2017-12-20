@@ -4,6 +4,7 @@ require "serialport"
 require "pry-byebug"
 require "airborne"
 require "json"
+require "ping"
 
 # Basic server that will make some API calls and change the LED mode.
 
@@ -91,5 +92,8 @@ launcher = Launcher.new
 
 loop do
   sleep(20)
-  launcher.exec
+	begin
+  	launcher.exec
+	rescue Json::ParserError
+	end
 end

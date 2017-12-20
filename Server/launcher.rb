@@ -27,8 +27,8 @@ class Launcher
     puts("Setting default hue...")
     @serial_port.putc("h")
     @serial_port.putc("1")
-    @serial_port.putc("1")
-    @serial_port.putc("5")
+    @serial_port.putc("6")
+    @serial_port.putc("0")
 
     sleep(5)
 

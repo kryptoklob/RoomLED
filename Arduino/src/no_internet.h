@@ -15,7 +15,7 @@ void no_internet() {
 	uint8_t i;
 
 	// Pulse the sides
-	for(i = 0; i < 5; i++){
+	for(i = 0; i < 8; i++){
 		leds[i] = CHSV(0, 255, flashing_index);
 		leds[NUM_LEDS_PER_STRIP-1-i] = CHSV(0, 255, flashing_index);
 	}

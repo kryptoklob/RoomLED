@@ -4,7 +4,7 @@ require "serialport"
 require "pry-byebug"
 require "airborne"
 require "json"
-require "ping"
+require "open-uri"
 
 # Basic server that will make some API calls and change the LED mode.
 
@@ -70,7 +70,11 @@ class Launcher
 	end
 
 	def internet_connection?
-		Ping.pingecho "google.com", 1, 80
+		begin
+			true if open("http://www.google.com/")
+		rescue
+			false
+		end
 	end
 
   def exec

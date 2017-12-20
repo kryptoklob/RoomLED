@@ -34,8 +34,8 @@ class Launcher
 
     puts("Setting default mode...")
     @serial_port.putc("m")
-    @serial_port.putc("4")
-    @serial_port.putc("0")
+    @serial_port.putc("3")
+    @serial_port.putc("9")
   end
 
   def get_latest_commit

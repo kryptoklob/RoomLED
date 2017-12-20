@@ -10,7 +10,7 @@ uint8_t modifier = 1;
 
 void no_internet() {
 	// Fill up the entire strip red
-	fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(160, 255, 255));
+	fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(160, 255, 128));
 
 	uint8_t i;
 

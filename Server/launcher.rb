@@ -94,6 +94,6 @@ loop do
   sleep(20)
 	begin
   	launcher.exec
-	rescue Json::ParserError
+	rescue JSON::ParserError
 	end
 end

@@ -95,7 +95,7 @@ void strobe_mode(uint8_t newMode, bool mc){
 
     // 1 - all on
     case  1:
-      if(mc) { fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(this_hue, this_sat, this_bright)); }
+      if(mc) { fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(160, 255, 255)); }
       break;
 
     // 2 - two-sin

@@ -33,10 +33,8 @@ class Launcher
     sleep(5)
 
     puts("Setting default mode...")
-    @serial_port.putc("a")
+    @serial_port.putc("m")
     @serial_port.putc("1")
-    @serial_port.putc("6")
-		@serial_port.putc("0")
   end
 
   def get_latest_commit
@@ -93,8 +91,5 @@ launcher = Launcher.new
 
 loop do
   sleep(20)
-	begin
-  	launcher.exec
-	rescue
-	end
+  launcher.exec
 end

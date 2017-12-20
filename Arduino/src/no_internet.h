@@ -10,14 +10,14 @@ uint8_t modifier = 1;
 
 void no_internet() {
 	// Fill up the entire strip red
-	fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(160, 255, 255))
+	fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(160, 255, 255));
 
 	uint8_t i;
 
 	// Pulse the sides
 	for(i = 0; i < 5; i++){
-		leds[i] = CHSV(0, 255, flashing_index)
-		leds[NUM_LEDS_PER_STRIP-1-i] = CHSV(0, 255, flashing_index)
+		leds[i] = CHSV(0, 255, flashing_index);
+		leds[NUM_LEDS_PER_STRIP-1-i] = CHSV(0, 255, flashing_index);
 	}
 
 	flashing_index = flashing_index + modifier;

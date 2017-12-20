@@ -17,7 +17,7 @@ class Launcher
     @stop = 1
     @parity = SerialPort::NONE
 
-    puts("Getting latest commit...")    
+    puts("Getting latest commit...")
     get_latest_commit
 
     puts("Connecting to serial port...")
@@ -43,7 +43,7 @@ class Launcher
     result = `#{cmd}`
 
     @latest_commit = JSON.parse(result)["updated_on"]
-	
+
     puts("Latest commit: #{@latest_commit}")
   end
 
@@ -55,8 +55,8 @@ class Launcher
     puts("----------------------")
     @serial_port.putc("m")
     @serial_port.putc("3")
-    @serial_port.putc("9")  
-  end 
+    @serial_port.putc("9")
+  end
 
   def exec
     current_commit = @latest_commit
@@ -64,14 +64,17 @@ class Launcher
 
     if current_commit != @latest_commit
       run_loading_bar
-      latest_commit = current_commit 
-    end    
+      latest_commit = current_commit
+    end
   end
 end
 
 launcher = Launcher.new
 
 loop do
-  sleep(10)
-  launcher.exec
+  sleep(20)
+	begin
+  	launcher.exec
+	rescue
+	end
 end

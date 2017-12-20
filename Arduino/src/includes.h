@@ -22,3 +22,4 @@
 #include "three_sin_pal.h"
 #include "two_sin.h"
 #include "loading_bar_pal.h"
+#include "no_internet.h"

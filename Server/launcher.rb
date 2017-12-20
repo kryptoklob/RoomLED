@@ -58,14 +58,33 @@ class Launcher
     @serial_port.putc("9")
   end
 
-  def exec
-    current_commit = @latest_commit
-    get_latest_commit
+	def run_no_internet
+		puts("----------------------")
+		puts(" ")
+		puts("No internet connection detected...")
+		puts(" ")
+		puts("----------------------")
+		@serial_port.putc("m")
+		@serial_port.putc("4")
+		@serial_port.putc("0")
+	end
 
-    if current_commit != @latest_commit
-      run_loading_bar
-      latest_commit = current_commit
-    end
+	def internet_connection?
+		Ping.pingecho "google.com", 1, 80
+	end
+
+  def exec
+		if !internet_connection?
+			run_no_internet
+		else
+			current_commit = @latest_commit
+			get_latest_commit
+
+    	if current_commit != @latest_commit
+      	run_loading_bar
+      	latest_commit = current_commit
+    	end
+		end
   end
 end
 

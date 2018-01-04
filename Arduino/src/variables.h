@@ -35,7 +35,7 @@ const char* mqtt_server = "192.168.1.187";
 const int mqtt_port = 1883;
 const char* mqtt_user = "homeassistant";
 const char* mqtt_password = "password";
-const char* mqtt_config_topic = "homeassistant/light/led/config";
+const char* mqtt_set_topic = "homeassistant/light/led/command";
 const char* mqtt_state_topic = "homeassistant/light/led/state";
 const char* mqtt_clientid = "arduino";
 const int BUFFER_SIZE = JSON_OBJECT_SIZE(10);
@@ -47,7 +47,6 @@ uint8_t default_mode              = 34;
 // LED Overall Variables
 uint8_t max_bright  = 255;
 uint8_t max_mode    = 100;
-uint8_t led_mode		= 1;
 
 // LED Routine/Shared Variables
 uint8_t global_diff       = 0;
@@ -58,3 +57,6 @@ uint8_t global_delay			= 10;
 uint8_t global_red				= 0;
 uint8_t global_green			= 255;
 uint8_t global_blue				= 255;
+String global_mode_string = "solid";
+bool global_state_on			= false;
+const char * mode 				= "solid";

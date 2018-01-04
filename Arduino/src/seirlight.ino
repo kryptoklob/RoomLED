@@ -1,14 +1,24 @@
 #include "includes.h"
 
+IPAddress ip(192, 168, 1, 177);
+IPAddress myDns(192, 168, 1, 1);
+IPAddress gateway(192, 168, 1, 1);
+IPAddress subnet(255, 255, 255, 0);
+
+EthernetClient ethClient;
+PubSubClient client(ethClient);
+
 void setup() {
   // Set up serial connection
+  delay(2500);
+
   Serial.begin(SERIAL_BAUDRATE); 
   Serial.setTimeout(SERIAL_TIMEOUT);
   
   delay(1000);  
 
   // Set up LEDS
-	LEDS.setBrightness(max_bright);
+  LEDS.setBrightness(max_bright);
 
   // -- Single strip of 150 LEDS set for development testing ------------------------------- //
   
@@ -22,8 +32,6 @@ void setup() {
   random16_set_seed(4832);
   random16_add_entropy(analogRead(2));
 
-  Serial.println("---SETUP COMPLETE---");
- 
   // Load starting mode and number of leds
   led_mode = EEPROM.read(STARTMODE);   
 
@@ -38,14 +46,25 @@ void setup() {
     xd[i] = cos8( angle );                
     yd[i] = sin8( angle );               
   }
+
+  client.setServer(mqtt_server, mqtt_port);
+  Serial.println("MQTT SERVER SET");
+  delay(2000);
+
+
+  client.setCallback(callback);
+  Serial.println("CALLBACK SET");
+  delay(2000);
  
   // Init first mode
   strobe_mode(led_mode, 1);
 }
 
 void loop() {
-  // Get keyboard input
-  readkeyboard();
+  if (!client.connected()) {
+    Serial.println("Reconnecting MQTT..."); 
+    reconnectMqtt();
+  }
  
   // Palette transitions - always running
   EVERY_N_MILLISECONDS(50) {
@@ -69,6 +88,32 @@ void loop() {
   if(glitter) addglitter(10); 
 
   FastLED.show(); 
+}
+
+// Callback used when an MQTT message is received
+void callback(char* topic, byte* payload, unsigned int length) {
+  char tmp[length+1];
+  strncpy(tmp, (char*)payload, length);
+  tmp[length] = '\0';
+  String data(tmp);
+
+  Serial.print("Received Data from Topic: ");
+  Serial.println(data);
+
+  if (data.length() > 0) {
+    String command = getValue(data, ':', 0);
+    Serial.print("Command: ");
+    Serial.println(command);
+    String value = getValue(data, ':', 1);
+    Serial.print("Value: ");
+    Serial.println(value);
+	
+    if (command.length() > 0) {
+      if (command.equals("mode")) {
+        strobe_mode(value.toInt(), 1);
+      }
+    }
+  }
 }
 
 /*
@@ -322,152 +367,40 @@ void strobe_mode(uint8_t newMode, bool mc){
 
     // 39 - loading bar, then return to default mode
     case 39:
-      if(mc) { this_delay = 50; this_hue = 100; this_bright = 180;}
+      if(mc) { this_delay = 10; target_palette = OceanColors_p; palette_change = 0; this_bright = 50; this_cutoff = 0; this_rot = 1; bg_clr = 64; }
       loading_bar_pal();
       break;
   }
 }
 
-/*
- * Takes in keyboard input and executes commands.
- *
- * Serial timeout value here is important.
- * We should make sure it's set high enough
- * to type the entire command within the timeout.
- */
-void readkeyboard() { 
-  while (Serial.available() > 0) {
-  
-    in_byte = Serial.read();
+String getValue(String data, char separator, int index)
+{
+  int found = 0;
+  int strIndex[] = { 0, -1 };
+  int maxIndex = data.length() - 1;
 
-    // Don't print carriage return
-    if (in_byte != 10) {
-      Serial.print("# ");
-      Serial.print(char(in_byte));
-      Serial.print(" ");
+  for (int i = 0; i <= maxIndex && found <= index; i++) {
+    if (data.charAt(i) == separator || i == maxIndex) {
+      found++;
+      strIndex[0] = strIndex[1] + 1;
+      strIndex[1] = (i == maxIndex) ? i + 1 : i;
     }
-    
-    switch(in_byte) {
+  }
+  return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
 
-      // Command: a {hue} - set entire strip to {hue} (0-255)
-      case 97:
-        led_mode = 0;
-        this_arg = Serial.parseInt();
-        this_arg = constrain(this_arg, 0, 255);
-        Serial.println(this_arg);
-        fill_solid(leds, NUM_LEDS_PER_STRIP, CHSV(this_arg, 255, 255));
-        break;
-
-      // Command: b {brightness} - set entire strip to {brightness} (0-255)
-      case 98:
-        max_bright = Serial.parseInt();
-        max_bright = constrain(max_bright, 0, 255);        
-        Serial.println(max_bright);
-        LEDS.setBrightness(max_bright);
-        break;
-
-      // Command: c - clear strip
-      case 99:
-        Serial.println(" ");
-        led_mode = 0;
-        strobe_mode(led_mode, 1);
-        break;
-
-      // Command: d {delay} - set the delay amount to {delay} (0-255)
-      case 100:
-        this_arg = Serial.parseInt();
-        this_delay = constrain(this_arg, 0, 255);
-        Serial.println(this_delay);
-        break;
-
-      // Command: e {0/1} - increment or decrement the mode
-      case 101:
-        this_arg = Serial.parseInt();
-        if (this_arg) {
-          demo_run = 0;
-          led_mode = (led_mode + 1)%(max_mode + 1);
-        } else {
-          demo_run = 0; 
-          led_mode = (led_mode - 1);
-          if (led_mode == 255) led_mode = max_mode; 
-        }
-        strobe_mode(led_mode, 1);
-        break;
-
-      // Command: f {palette_number} - set the current palette
-      case 102:
-        demo_run = 0;
-        palette_change = 0;
-        this_arg = Serial.parseInt();
-        g_current_palette_number = this_arg % g_gradient_palette_count;
-        target_palette = g_gradient_palettes[g_current_palette_number];
-        Serial.println(g_current_palette_number);
-        break;
-
-      // Command: g - toggle glitter
-      case 103:
-        glitter = !glitter;
-        Serial.println(" ");
-        break;
-
-      // Command: h {hue} - set hue variable to {hue} (0-255)
-      case 104:
-        this_arg = Serial.parseInt();
-        this_hue = constrain(this_arg, 0, 255);
-        Serial.println(this_hue);
-        break;
-
-      // Command: i {hue} - set similar pallete with selected hue {hue} (0-255)
-      case 105:
-        palette_change = 0;
-        this_arg = Serial.parseInt();
-        this_hue = constrain(this_arg, 0, 255);
-        Serial.println(this_hue);
-        SetupMySimilar4Palette();
-        break;
-
-      // Command: m {mode} - select mode {mode} (0-255)
-      case 109:
-	old_mode = led_mode;
-        led_mode = Serial.parseInt();
-        led_mode = constrain(led_mode, 0, max_mode);
-        Serial.println(led_mode);
-        strobe_mode(led_mode, 1);
-        break;
-
-      // Command: n - toggle direction
-      case 110:
-        Serial.println(" ");
-        this_dir = !this_dir;
-        break;
-
-      // Command: p {0/1/2} - set demo mode (fixed/sequential/shuffle)
-      case 112:
-        demo_run = Serial.parseInt();
-        demo_run = constrain(demo_run, 0, 2);
-        Serial.println(demo_run);        
-        break;      
-     
-      // Command: s {saturation} - set saturation to {saturation} (0-255)
-      case 115:
-        this_arg = Serial.parseInt();
-        this_sat = constrain(this_arg, 0, 255);
-        Serial.println(this_sat);
-        break;
-
-      // Command: t {0/1/2/3} - set palette mode (fixed/4similar/random4/random16)
-      case 116:
-        this_arg = Serial.parseInt();
-        palette_change = constrain(this_arg, 0, 3);
-        Serial.println(palette_change);
-        break;
-
-      // Command: w - write current mode to EEPROM
-      case 119:
-        EEPROM.write(STARTMODE, led_mode);
-        Serial.print("Writing keyboard: ");
-        Serial.println(led_mode);
-        break;   
+void reconnectMqtt() {
+  while (!client.connected()) {
+    Serial.println("Attempting MQTT connection...");
+    if (client.connect(mqtt_clientid, mqtt_user, mqtt_password)) {
+      Serial.println("Connected");
+      client.subscribe(mqtt_topic);
+    } else {
+      Serial.print("Failed, rc=");
+      Serial.println(client.state());
+      Serial.println(" Try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
     }
   }
 }

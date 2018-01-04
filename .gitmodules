@@ -1,3 +1,6 @@
 [submodule "Arduino/lib/FastLED"]
 	path = Arduino/lib/FastLED
 	url = https://github.com/FastLED/FastLED
+[submodule "Arduino/lib/pubsubclient"]
+	path = Arduino/lib/pubsubclient
+	url = https://github.com/knolleary/pubsubclient

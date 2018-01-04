@@ -1,5 +1,8 @@
 // ---------- COMPILE VARS ---------- //
 
+// Fixes flickering
+// #define FASTLED_ALLOW_INTERRUPTS 0
+
 // Disables Version "errors" on compile
 #define FASTLED_INTERNAL
 
@@ -32,6 +35,19 @@
 #define STRANDLEN 150
 
 // ---------- RUNTIME VARS ---------- //
+
+// Ethernet variables
+byte mac[] = {
+	0xDE, 0xAD, 0xBE, 0xEF, 0x00
+};
+
+// MQTT variables
+const char* mqtt_server = "192.168.1.187";
+const int mqtt_port = 1883;
+const char* mqtt_user = "homeassistant";
+const char* mqtt_password = "password";
+const char* mqtt_topic = "led";
+const char* mqtt_clientid = "arduino";
 
 // Serial Variables
 byte in_byte;

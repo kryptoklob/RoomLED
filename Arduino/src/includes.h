@@ -22,3 +22,8 @@
 #include "three_sin_pal.h"
 #include "two_sin.h"
 #include "loading_bar_pal.h"
+
+// MQTT & Ethernet
+#include <Ethernet.h>
+#include <PubSubClient.h>
+#include <SPI.h>

@@ -9,4 +9,6 @@
 .bashrc
 .bash_logout
 .cache*
-.swp
+*.swp
+*.swo
+*~

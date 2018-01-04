@@ -1,10 +1,18 @@
-// Variables
-#include "variables.h"
+// Order of the includes is important, since some vars use libraries
 
-// Display routines
-#include "rainbow_march.h"
-
-// MQTT & Ethernet
+// Libraries
 #include <Ethernet.h>
 #include <PubSubClient.h>
 #include <SPI.h>
+#include "FastLED.h"
+
+// Variables
+#include "variables.h"
+
+// Mode Functions
+#include "rainbow_march.h"
+
+// Utility Functions
+#include "call_mode.h"
+#include "mqtt_functions.h"
+#include "inits.h"

@@ -3,29 +3,14 @@
 // Fixes flickering
 // #define FASTLED_ALLOW_INTERRUPTS 0
 
-// Disables Version "errors" on compile
-#define FASTLED_INTERNAL
-
-// Libraries
-#include "FastLED.h"
-#include "EEPROM.h"
-
-// Serial vars
+// Serial Defines
 #define SERIAL_BAUDRATE 57600
 #define SERIAL_TIMEOUT 750
 
-// Arduino pin setup
-
-// Single pin (2) defined for development testing
+// Led Defines
 #define LED_PIN_ONE 2
-
-// LED Meta Defines
 #define COLOR_ORDER GRB
-
-// WS2812B used for development testing
 #define LED_TYPE WS2812B
-
-// 150 Length LED strip used for development testing
 #define NUM_LEDS_PER_STRIP 150
 #define STARTMODE 0
 #define STRANDLEN 150
@@ -60,11 +45,13 @@ uint8_t default_mode              = 34;
 // LED Overall Variables
 uint8_t max_bright  = 255;
 uint8_t max_mode    = 100;
-uint8_t led_mode;
+uint8_t led_mode		= 1;
 
 // LED Routine/Shared Variables
 uint8_t global_diff       = 0;
+uint8_t global_dir				= 1;
 uint8_t global_index      = 1;
+uint8_t global_rot				= 1;
 uint8_t global_delay			= 10;
 uint8_t global_red				= 0;
 uint8_t global_green			= 255;

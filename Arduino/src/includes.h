@@ -4,6 +4,7 @@
 #include <Ethernet.h>
 #include <PubSubClient.h>
 #include <SPI.h>
+#include <ArduinoJson.h>
 #include "FastLED.h"
 
 // Variables

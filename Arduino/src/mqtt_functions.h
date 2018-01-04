@@ -14,13 +14,35 @@ String get_value(String data, char separator, int index){
   return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
 
+// todo send MQTT Config
+
+// Send MQTT State
+void sendState() {
+	Serial.println("Sending state...");
+  StaticJsonBuffer<BUFFER_SIZE> json_buffer;
+  JsonObject& root = json_buffer.createObject();
+
+  root["state"] = (led_mode != 0) ? "ON" : "OFF";
+  root["red"] = global_red;
+  root["green"] = global_green;
+  root["blue"] = global_blue;
+  root["mode"] = led_mode;
+
+  char buffer[root.measureLength() + 1];
+  root.printTo(buffer, sizeof(buffer));
+
+  client.publish(mqtt_state_topic, buffer, true);
+	Serial.println("State sent.");
+}
+
 // Try to reconnect to the mqtt server
 void reconnect_mqtt() {
   while (!client.connected()) {
     Serial.println("Attempting MQTT connection...");
     if (client.connect(mqtt_clientid, mqtt_user, mqtt_password)) {
       Serial.println("Connected");
-      client.subscribe(mqtt_topic);
+      client.subscribe(mqtt_state_topic);
+			sendState();
     } else {
       Serial.print("Failed, client state: ");
       Serial.println(client.state());
@@ -59,5 +81,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
       }
     }
   }
+
+	sendState();
 }
 

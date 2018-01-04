@@ -35,8 +35,10 @@ const char* mqtt_server = "192.168.1.187";
 const int mqtt_port = 1883;
 const char* mqtt_user = "homeassistant";
 const char* mqtt_password = "password";
-const char* mqtt_topic = "led";
+const char* mqtt_config_topic = "homeassistant/light/led/config";
+const char* mqtt_state_topic = "homeassistant/light/led/state";
 const char* mqtt_clientid = "arduino";
+const int BUFFER_SIZE = JSON_OBJECT_SIZE(10);
 
 // LED Meta Variables
 struct CRGB leds[NUM_LEDS_PER_STRIP];

@@ -12,6 +12,7 @@ void init_leds() {
 }
 
 void init_mqtt() {
+	Ethernet.begin(mac, ip);
 	client.setServer(mqtt_server, mqtt_port);
 	client.setCallback(callback);
 }

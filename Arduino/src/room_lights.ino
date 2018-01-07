@@ -7,19 +7,21 @@ void setup() {
 	init_mqtt();
 
   // Start default mode
-  call_mode(global_mode_string, 1);
+  call_mode(mode, 1);
 }
 
 void loop() {
   if (!client.connected()) {
-    Serial.println("Reconnecting MQTT...");
+    Serial.println(F("Reconnecting MQTT..."));
     reconnect_mqtt();
   }
+
+  client.loop();
 
   // Dynamic delay adjustment
   EVERY_N_MILLIS_I(global_timer, global_delay) {
     global_timer.setPeriod(global_delay);
-    call_mode(global_mode_string, 0);
+    call_mode(mode, 0);
   }
 
   FastLED.show();

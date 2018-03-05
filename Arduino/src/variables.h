@@ -12,6 +12,8 @@
 
 // Led Defines
 #define LED_PIN_ONE 2
+#define MIC_PIN 3
+#define POT_PIN 4
 #define COLOR_ORDER GRB
 #define LED_TYPE WS2812B
 #define NUM_LEDS_PER_STRIP 150
@@ -62,3 +64,10 @@ uint8_t global_green			= 255;
 uint8_t global_blue				= 255;
 String mode = "solid";
 bool global_state_on			= false;
+
+// Sound variables
+uint8_t VERY_SLOW_FADE_RATE = 16;
+uint8_t SLOW_FADE_RATE      = 32;
+uint8_t MEDIUM_FADE_RATE    = 64;
+uint8_t FAST_FADE_RATE      = 128;
+uint8_t INSTANT_FADE_RATE   = 255;

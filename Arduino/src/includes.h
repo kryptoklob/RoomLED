@@ -12,6 +12,7 @@
 
 // Mode Functions
 #include "rainbow_march.h"
+#include "soundfhtlog.h"
 
 // Utility Functions
 #include "call_mode.h"

@@ -1,10 +1,10 @@
 #include "includes.h"
 
 void setup() {
-	// Serial, led, and mqtt setup
-	init_serial();
-	init_leds();
-	init_mqtt();
+  // Serial, led, and mqtt setup
+  init_serial();
+  init_leds();
+  init_mqtt();
 
   // Start default mode
   call_mode(mode, 1);

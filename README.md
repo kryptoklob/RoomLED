@@ -1,6 +1,6 @@
 # RoomLEDControl
 
-RoomLEDControl - control LED strips with cool effects, dynamic color pallets, dynamic effects, with event-driven or programmatic control.
+RoomLEDControl - control LED strips with cool effects, dynamic color palletes, dynamic effects, with event-driven or programmatic control.
 
 ## Set-Up
 
